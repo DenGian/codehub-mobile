@@ -38,3 +38,5 @@ Desktop.ini
 
 # JetBrains IDEs
 *.iml
+
+.env
