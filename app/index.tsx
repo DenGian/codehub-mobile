@@ -1,17 +1,20 @@
-import { Text, View } from "react-native";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 
-const Index = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+const App = () => {
+    return (
+        <View style={styles.container}>
+            <Text>Home Screen</Text>
+        </View>
+    )
 }
 
-export default Index;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    }
+})
+
+export default App;
