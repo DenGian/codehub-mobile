@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet, TextInput, Button, Pressable, Text, Alert} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-const Login = () => {
+const login = () => {
     const {signIn, setActive, isLoaded} = useSignIn();
 
     const [emailAddress, setEmailAddress] = useState('');
@@ -19,7 +19,7 @@ const Login = () => {
         try {
             const completeSignIn = await signIn.create({
                 identifier: emailAddress,
-                password,
+                password
             });
 
             // This indicates the user is signed in
@@ -35,10 +35,20 @@ const Login = () => {
         <View style={styles.container}>
             <Spinner visible={loading}/>
 
-            <TextInput autoCapitalize="none" placeholder="code@hub.com" value={emailAddress}
-                       onChangeText={setEmailAddress} style={styles.inputField}/>
-            <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry
-                       style={styles.inputField}/>
+            <TextInput
+                autoCapitalize="none"
+                placeholder="code@hub.dev"
+                value={emailAddress}
+                onChangeText={setEmailAddress}
+                style={styles.inputField}
+            />
+            <TextInput
+                placeholder="password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                style={styles.inputField}
+            />
 
             <Button onPress={onSignInPress} title="Login" color={'#6c47ff'}></Button>
 
@@ -56,11 +66,13 @@ const Login = () => {
     );
 };
 
+export default login;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        padding: 20,
+        padding: 20
     },
     inputField: {
         marginVertical: 4,
@@ -69,12 +81,10 @@ const styles = StyleSheet.create({
         borderColor: '#6c47ff',
         borderRadius: 4,
         padding: 10,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     button: {
         margin: 8,
-        alignItems: 'center',
-    },
+        alignItems: 'center'
+    }
 });
-
-export default Login;
