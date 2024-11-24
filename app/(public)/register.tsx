@@ -1,19 +1,18 @@
-import React, {useState} from 'react';
 import {Button, TextInput, View, StyleSheet} from 'react-native';
 import {useSignUp} from '@clerk/clerk-expo';
+import React, {useState} from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Stack} from 'expo-router';
 
 const Register = () => {
     const {isLoaded, signUp, setActive} = useSignUp();
-
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [pendingVerification, setPendingVerification] = useState(false);
     const [code, setCode] = useState('');
     const [loading, setLoading] = useState(false);
 
-    // Create the user and send the verification email
     const onSignUpPress = async () => {
         if (!isLoaded) {
             return;
@@ -21,16 +20,17 @@ const Register = () => {
         setLoading(true);
 
         try {
-            // Create the user on Clerk
+            // Create the user on Clerk with all required fields
             await signUp.create({
                 emailAddress,
                 password,
+                username,
             });
 
-            // Send verification Email
+            // Send verification email
             await signUp.prepareEmailAddressVerification({strategy: 'email_code'});
 
-            // change the UI to verify the email address
+            // Change the UI to verify the email address
             setPendingVerification(true);
         } catch (err: any) {
             alert(err.errors[0].message);
@@ -39,7 +39,6 @@ const Register = () => {
         }
     };
 
-    // Verify the email address
     const onPressVerify = async () => {
         if (!isLoaded) {
             return;
@@ -47,10 +46,7 @@ const Register = () => {
         setLoading(true);
 
         try {
-            const completeSignUp = await signUp.attemptEmailAddressVerification({
-                code,
-            });
-
+            const completeSignUp = await signUp.attemptEmailAddressVerification({code});
             await setActive({session: completeSignUp.createdSessionId});
         } catch (err: any) {
             alert(err.errors[0].message);
@@ -68,9 +64,15 @@ const Register = () => {
                 <>
                     <TextInput
                         autoCapitalize="none"
-                        placeholder="code@hub.com"
+                        placeholder="email@example.com"
                         value={emailAddress}
                         onChangeText={setEmailAddress}
+                        style={styles.inputField}
+                    />
+                    <TextInput
+                        placeholder="username"
+                        value={username}
+                        onChangeText={setUsername}
                         style={styles.inputField}
                     />
                     <TextInput
@@ -81,7 +83,7 @@ const Register = () => {
                         style={styles.inputField}
                     />
 
-                    <Button onPress={onSignUpPress} title="Sign up" color={'#6c47ff'}/>
+                    <Button onPress={onSignUpPress} title="Sign up" color="#6c47ff"/>
                 </>
             )}
 
@@ -95,12 +97,14 @@ const Register = () => {
                             onChangeText={setCode}
                         />
                     </View>
-                    <Button onPress={onPressVerify} title="Verify Email" color={'#6c47ff'}/>
+                    <Button onPress={onPressVerify} title="Verify Email" color="#6c47ff"/>
                 </>
             )}
         </View>
     );
 };
+
+export default Register;
 
 const styles = StyleSheet.create({
     container: {
@@ -117,10 +121,4 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#fff',
     },
-    button: {
-        margin: 8,
-        alignItems: 'center',
-    },
 });
-
-export default Register;
