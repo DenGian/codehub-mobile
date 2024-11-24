@@ -2,56 +2,52 @@ import {View, Text, Button, TextInput, StyleSheet} from 'react-native';
 import {useState} from 'react';
 import {useUser} from '@clerk/clerk-expo';
 
-const Profile = () => {
+const profile = () => {
     const {user} = useUser();
-    const [firstName, setFirstName] = useState(user?.firstName || '');
-    const [lastName, setLastName] = useState(user?.lastName || '');
+    const [firstName, setFirstName] = useState(user?.firstName);
+    const [lastName, setLastName] = useState(user?.lastName);
 
     const onSaveUser = async () => {
-        if (!user) return;
         try {
-            const result = await user.update({
-                firstName: firstName,
-                lastName: lastName,
+            await user?.update({
+                firstName: firstName!,
+                lastName: lastName!
             });
-            console.log('🚀 ~ file: profile.tsx:16 ~ onSaveUser ~ result:', result);
-        } catch (e) {
-            console.log('🚀 ~ file: profile.tsx:18 ~ onSaveUser ~ e', JSON.stringify(e));
+        } catch (error) {
+            console.log(error);
         }
     };
-
-    if (!user) {
-        return <Text>Loading...</Text>;
-    }
 
     return (
         <View style={styles.container}>
             <Text style={{textAlign: 'center'}}>
-                Good morning {user.firstName} {user.lastName}!
+                Good morning {user?.firstName} {user?.lastName}!
             </Text>
 
             <TextInput
                 placeholder="First Name"
-                value={firstName}
+                value={firstName || ''}
                 onChangeText={setFirstName}
                 style={styles.inputField}
             />
             <TextInput
                 placeholder="Last Name"
-                value={lastName}
+                value={lastName || ''}
                 onChangeText={setLastName}
                 style={styles.inputField}
             />
-            <Button onPress={onSaveUser} title="Update account" color={'#6c47ff'}/>
+            <Button onPress={onSaveUser} title="Update account" color={'#6c47ff'}></Button>
         </View>
     );
 };
+
+export default profile;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        padding: 40,
+        padding: 40
     },
     inputField: {
         marginVertical: 4,
@@ -60,8 +56,6 @@ const styles = StyleSheet.create({
         borderColor: '#6c47ff',
         borderRadius: 4,
         padding: 10,
-        backgroundColor: '#fff',
-    },
+        backgroundColor: '#fff'
+    }
 });
-
-export default Profile;
