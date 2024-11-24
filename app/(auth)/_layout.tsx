@@ -24,16 +24,19 @@ const TabsPage = () => {
         <Tabs
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: '#6c47ff',
+                    backgroundColor: '#6c47ff'
                 },
-                headerTintColor: '#fff',
-            }}>
+                headerTintColor: '#fff'
+            }}
+        >
             <Tabs.Screen
                 name="home"
                 options={{
                     headerTitle: 'Home',
-                    tabBarIcon: ({color, size}) => <Ionicons name="home-outline" size={size} color={color}/>,
-                    tabBarLabel: 'Home',
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name="home-outline" size={size} color={color}/>
+                    ),
+                    tabBarLabel: 'Home'
                 }}
                 redirect={!isSignedIn}
             />
@@ -41,9 +44,11 @@ const TabsPage = () => {
                 name="profile"
                 options={{
                     headerTitle: 'My Profile',
-                    tabBarIcon: ({color, size}) => <Ionicons name="person-outline" size={size} color={color}/>,
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name="person-outline" size={size} color={color}/>
+                    ),
                     tabBarLabel: 'My Profile',
-                    headerRight: () => <LogoutButton/>,
+                    headerRight: () => <LogoutButton/>
                 }}
                 redirect={!isSignedIn}
             />
