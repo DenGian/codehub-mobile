@@ -12,11 +12,10 @@ const PwReset = () => {
 
     // Request a password reset code by email
     const onRequestReset = async () => {
-        if (!signIn) return;
         try {
-            await signIn.create({
+            await signIn!.create({
                 strategy: 'reset_password_email_code',
-                identifier: emailAddress,
+                identifier: emailAddress
             });
             setSuccessfulCreation(true);
         } catch (err: any) {
@@ -26,18 +25,17 @@ const PwReset = () => {
 
     // Reset the password with the code and the new password
     const onReset = async () => {
-        if (!signIn || !setActive) return;
         try {
-            const result = await signIn.attemptFirstFactor({
+            const result = await signIn!.attemptFirstFactor({
                 strategy: 'reset_password_email_code',
                 code,
-                password,
+                password
             });
             console.log(result);
             alert('Password reset successfully');
 
             // Set the user session active, which will log in the user automatically
-            await setActive({session: result.createdSessionId});
+            await setActive!({session: result.createdSessionId});
         } catch (err: any) {
             alert(err.errors[0].message);
         }
@@ -51,13 +49,13 @@ const PwReset = () => {
                 <>
                     <TextInput
                         autoCapitalize="none"
-                        placeholder="simon@galaxies.dev"
+                        placeholder="code@hub.dev"
                         value={emailAddress}
                         onChangeText={setEmailAddress}
                         style={styles.inputField}
                     />
 
-                    <Button onPress={onRequestReset} title="Send Reset Email" color={'#6c47ff'}/>
+                    <Button onPress={onRequestReset} title="Send Reset Email" color={'#6c47ff'}></Button>
                 </>
             )}
 
@@ -78,7 +76,7 @@ const PwReset = () => {
                             style={styles.inputField}
                         />
                     </View>
-                    <Button onPress={onReset} title="Set new Password" color={'#6c47ff'}/>
+                    <Button onPress={onReset} title="Set new Password" color={'#6c47ff'}></Button>
                 </>
             )}
         </View>
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        padding: 20,
+        padding: 20
     },
     inputField: {
         marginVertical: 4,
@@ -98,12 +96,12 @@ const styles = StyleSheet.create({
         borderColor: '#6c47ff',
         borderRadius: 4,
         padding: 10,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     button: {
         margin: 8,
-        alignItems: 'center',
-    },
+        alignItems: 'center'
+    }
 });
 
 export default PwReset;
