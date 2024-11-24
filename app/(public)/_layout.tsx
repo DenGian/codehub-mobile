@@ -6,26 +6,30 @@ const PublicLayout = () => {
         <Stack
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: '#6c47ff',
+                    backgroundColor: '#6c47ff'
                 },
                 headerTintColor: '#fff',
-                headerBackTitle: 'Back',
-            }}>
+                headerBackTitle: 'Back'
+            }}
+        >
             <Stack.Screen
                 name="login"
                 options={{
-                    headerTitle: 'CodeHub',
-                }}></Stack.Screen>
+                    headerTitle: 'Code-Hub'
+                }}
+            ></Stack.Screen>
             <Stack.Screen
                 name="register"
                 options={{
-                    headerTitle: 'Create Account',
-                }}></Stack.Screen>
+                    headerTitle: 'Create Account'
+                }}
+            ></Stack.Screen>
             <Stack.Screen
                 name="reset"
                 options={{
-                    headerTitle: 'Reset Password',
-                }}></Stack.Screen>
+                    headerTitle: 'Reset Password'
+                }}
+            ></Stack.Screen>
         </Stack>
     );
 };
