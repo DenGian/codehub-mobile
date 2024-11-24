@@ -1,38 +1,11 @@
-import {ClerkProvider, useAuth} from '@clerk/clerk-expo';
-import {Slot, useRouter, useSegments} from 'expo-router';
 import {useEffect} from 'react';
 import * as SecureStore from 'expo-secure-store';
+import {ClerkProvider, useAuth} from '@clerk/clerk-expo';
+import {Slot, useRouter, useSegments} from 'expo-router';
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-if (!CLERK_PUBLISHABLE_KEY) {
-    throw new Error(
-        "Missing publishable key. Set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in .env"
-    )
-}
-
-const InitialLayout = () => {
-    const {isLoaded, isSignedIn} = useAuth();
-    const segments = useSegments();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (!isLoaded) return;
-
-        const inTabsGroup = segments[0] === '(auth)';
-
-        console.log('User changed: ', isSignedIn);
-
-        if (isSignedIn && !inTabsGroup) {
-            router.replace('/home');
-        } else if (!isSignedIn) {
-            router.replace('/login');
-        }
-    }, [isSignedIn]);
-
-    return <Slot/>;
-};
-
+// Cache the Clerk JWT
 const tokenCache = {
     async getToken(key: string) {
         try {
@@ -47,10 +20,32 @@ const tokenCache = {
         } catch (err) {
             return;
         }
-    },
+    }
 };
 
-const RootLayout = () => {
+const InitialLayout = () => {
+    const {isLoaded, isSignedIn} = useAuth();
+    const segments = useSegments();
+    const router = useRouter();
+
+    // If the user is signed in, redirect them to the home page
+    // If the user is not signed in, redirect them to the login page
+    useEffect(() => {
+        if (!isLoaded) return;
+
+        const inTabsGroup = segments[0] === '(auth)';
+
+        if (isSignedIn && !inTabsGroup) {
+            router.replace('/home');
+        } else if (!isSignedIn) {
+            router.replace('/login');
+        }
+    }, [isSignedIn]);
+
+    return <Slot/>;
+};
+
+const RootLayoutNav = () => {
     return (
         <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
             <InitialLayout/>
@@ -58,4 +53,4 @@ const RootLayout = () => {
     );
 };
 
-export default RootLayout;
+export default RootLayoutNav;
