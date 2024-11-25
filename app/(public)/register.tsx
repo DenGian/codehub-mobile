@@ -64,6 +64,7 @@ const Register = () => {
                 <>
                     <TextInput
                         autoCapitalize="none"
+                        placeholderTextColor="black"
                         placeholder="email@example.com"
                         value={emailAddress}
                         onChangeText={setEmailAddress}
@@ -71,12 +72,14 @@ const Register = () => {
                     />
                     <TextInput
                         placeholder="username"
+                        placeholderTextColor="black"
                         value={username}
                         onChangeText={setUsername}
                         style={styles.inputField}
                     />
                     <TextInput
                         placeholder="password"
+                        placeholderTextColor="black"
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry
