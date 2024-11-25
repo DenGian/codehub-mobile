@@ -5,6 +5,10 @@ import {Slot, useRouter, useSegments} from 'expo-router';
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
+if (!CLERK_PUBLISHABLE_KEY) {
+    throw new Error("Set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in .env");
+}
+
 // Cache the Clerk JWT
 const tokenCache = {
     async getToken(key: string) {
