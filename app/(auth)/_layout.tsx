@@ -1,7 +1,7 @@
 import React from 'react';
 import {Stack} from 'expo-router';
 
-const PublicLayout = () => {
+const AuthLayout = () => {
     return (
         <Stack
             screenOptions={{
@@ -17,21 +17,21 @@ const PublicLayout = () => {
                 options={{
                     headerTitle: 'Code-Hub'
                 }}
-            ></Stack.Screen>
+            />
             <Stack.Screen
                 name="register"
                 options={{
                     headerTitle: 'Create Account'
                 }}
-            ></Stack.Screen>
+            />
             <Stack.Screen
                 name="reset"
                 options={{
                     headerTitle: 'Reset Password'
                 }}
-            ></Stack.Screen>
+            />
         </Stack>
     );
 };
 
-export default PublicLayout;
+export default AuthLayout;
