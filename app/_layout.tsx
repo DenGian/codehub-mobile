@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import * as SecureStore from 'expo-secure-store';
 import {ClerkProvider, useAuth} from '@clerk/clerk-expo';
 import {Slot, useRouter, useSegments} from 'expo-router';
+import {TokenCache} from "@/types/TokenCache";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -10,7 +11,7 @@ if (!CLERK_PUBLISHABLE_KEY) {
 }
 
 // Cache the Clerk JWT
-const tokenCache = {
+const tokenCache: TokenCache = {
     async getToken(key: string) {
         try {
             return SecureStore.getItemAsync(key);
@@ -37,12 +38,12 @@ const InitialLayout = () => {
     useEffect(() => {
         if (!isLoaded) return;
 
-        const inTabsGroup = segments[0] === '(auth)';
+        const inAuthGroup = segments[0] === '(auth)';
 
-        if (isSignedIn && !inTabsGroup) {
-            router.replace('/home');
-        } else if (!isSignedIn) {
-            router.replace('/login');
+        if (isSignedIn && inAuthGroup) {
+            router.replace("/(routes)/(tabs)/home");
+        } else if (!isSignedIn && !inAuthGroup) {
+            router.replace('/(auth)/login');
         }
     }, [isSignedIn]);
 
