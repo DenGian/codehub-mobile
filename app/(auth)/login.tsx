@@ -1,7 +1,7 @@
 import {useSignIn} from '@clerk/clerk-expo';
 import {Link} from 'expo-router';
 import React, {useState} from 'react';
-import {View, StyleSheet, TextInput, Button, Pressable, Text, Alert} from 'react-native';
+import {View, StyleSheet, TextInput, Button, Pressable, Text} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const login = () => {
