@@ -7,7 +7,8 @@ export const LogoutButton = () => {
     const {signOut} = useAuth();
 
     const doLogout = () => {
-        signOut();
+        signOut().then(() => {
+        });
     };
 
     return (
