@@ -26,12 +26,14 @@ const profile = () => {
 
             <TextInput
                 placeholder="First Name"
+                placeholderTextColor="black"
                 value={firstName || ''}
                 onChangeText={setFirstName}
                 style={styles.inputField}
             />
             <TextInput
                 placeholder="Last Name"
+                placeholderTextColor="black"
                 value={lastName || ''}
                 onChangeText={setLastName}
                 style={styles.inputField}
