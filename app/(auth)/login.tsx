@@ -2,9 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import loginStyles from '@/styles/auth/loginStyles';
 import useLoginForm from '@/hooks/auth/useLoginForm';
-import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import LoginForm from '@/components/auth/LoginForm';
-import LoginButtons from '@/components/auth/LoginButtons';
+import LoginContent from '@/components/auth/LoginContent';
 
 const login = () => {
     const {
@@ -18,17 +16,14 @@ const login = () => {
 
     return (
         <View style={loginStyles.container}>
-            <LoadingSpinner visible={loading}/>
-
-            <LoginForm
+            <LoginContent
+                loading={loading}
                 emailAddress={emailAddress}
                 setEmailAddress={setEmailAddress}
                 password={password}
                 setPassword={setPassword}
                 onSignInPress={onSignInPress}
             />
-
-            <LoginButtons/>
         </View>
     );
 };
