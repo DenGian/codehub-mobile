@@ -1,0 +1,46 @@
+import React from 'react';
+import {Tabs} from 'expo-router';
+import {Ionicons} from '@expo/vector-icons';
+import {useAuth} from '@clerk/clerk-expo';
+import LogoutButton from "@/components/auth/LogoutButton";
+
+const TabsPage = () => {
+    const {isSignedIn} = useAuth();
+
+    return (
+        <Tabs
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#6c47ff'
+                },
+                headerTintColor: '#fff'
+            }}
+        >
+            <Tabs.Screen
+                name="home/index"
+                options={{
+                    headerTitle: 'Home',
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name="home-outline" size={size} color={color}/>
+                    ),
+                    tabBarLabel: 'Home'
+                }}
+                redirect={!isSignedIn}
+            />
+            <Tabs.Screen
+                name="profile/index"
+                options={{
+                    headerTitle: 'My Profile',
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name="person-outline" size={size} color={color}/>
+                    ),
+                    tabBarLabel: 'My Profile',
+                    headerRight: () => <LogoutButton/>
+                }}
+                redirect={!isSignedIn}
+            />
+        </Tabs>
+    );
+};
+
+export default TabsPage;
