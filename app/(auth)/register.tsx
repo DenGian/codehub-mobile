@@ -1,8 +1,9 @@
-import {Button, TextInput, View, StyleSheet} from 'react-native';
+import {Button, TextInput, View} from 'react-native';
 import {useSignUp} from '@clerk/clerk-expo';
 import React, {useState} from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Stack} from 'expo-router';
+import registerStyles from '@/styles/auth/registerStyles';
 
 const Register = () => {
     const {isLoaded, signUp, setActive} = useSignUp();
@@ -20,17 +21,14 @@ const Register = () => {
         setLoading(true);
 
         try {
-            // Create the user on Clerk with all required fields
             await signUp.create({
                 emailAddress,
                 password,
                 username,
             });
 
-            // Send verification email
             await signUp.prepareEmailAddressVerification({strategy: 'email_code'});
 
-            // Change the UI to verify the email address
             setPendingVerification(true);
         } catch (err: any) {
             alert(err.errors[0].message);
@@ -56,7 +54,7 @@ const Register = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={registerStyles.container}>
             <Stack.Screen options={{headerBackVisible: !pendingVerification}}/>
             <Spinner visible={loading}/>
 
@@ -68,14 +66,14 @@ const Register = () => {
                         placeholder="email@example.com"
                         value={emailAddress}
                         onChangeText={setEmailAddress}
-                        style={styles.inputField}
+                        style={registerStyles.inputField}
                     />
                     <TextInput
                         placeholder="username"
                         placeholderTextColor="black"
                         value={username}
                         onChangeText={setUsername}
-                        style={styles.inputField}
+                        style={registerStyles.inputField}
                     />
                     <TextInput
                         placeholder="password"
@@ -83,7 +81,7 @@ const Register = () => {
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry
-                        style={styles.inputField}
+                        style={registerStyles.inputField}
                     />
 
                     <Button onPress={onSignUpPress} title="Sign up" color="#6c47ff"/>
@@ -96,7 +94,7 @@ const Register = () => {
                         <TextInput
                             value={code}
                             placeholder="Code..."
-                            style={styles.inputField}
+                            style={registerStyles.inputField}
                             onChangeText={setCode}
                         />
                     </View>
@@ -108,20 +106,3 @@ const Register = () => {
 };
 
 export default Register;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 20,
-    },
-    inputField: {
-        marginVertical: 4,
-        height: 50,
-        borderWidth: 1,
-        borderColor: '#6c47ff',
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff',
-    },
-});
