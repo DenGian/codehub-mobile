@@ -11,8 +11,10 @@ export const useCodingResources = () => {
         const getResources = async () => {
             try {
                 const data = await fetchCodingResources();
+                console.log('Fetched coding resources:', data);
                 setResources(data);
             } catch (err: any) {
+                console.error('Error fetching coding resources:', err.message || 'Failed to fetch data');
                 setError(err.message || 'Failed to fetch data');
             } finally {
                 setLoading(false);
