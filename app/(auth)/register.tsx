@@ -1,11 +1,11 @@
 import {View} from 'react-native';
 import React from 'react';
-import Spinner from 'react-native-loading-spinner-overlay';
-import {Stack} from 'expo-router';
 import registerStyles from '@/styles/auth/registerStyles';
 import useRegisterForm from '@/hooks/auth/useRegisterForm';
 import VerificationForm from '@/components/auth/VerificationForm';
 import RegisterForm from '@/components/auth/RegisterForm';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import HeaderBack from '@/components/ui/HeaderBack';
 
 const Register = () => {
     const {
@@ -25,8 +25,8 @@ const Register = () => {
 
     return (
         <View style={registerStyles.container}>
-            <Stack.Screen options={{headerBackVisible: !pendingVerification}}/>
-            <Spinner visible={loading}/>
+            <HeaderBack visible={!pendingVerification}/>
+            <LoadingSpinner visible={loading}/>
 
             {!pendingVerification && (
                 <RegisterForm
