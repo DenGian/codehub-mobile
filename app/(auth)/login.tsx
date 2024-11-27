@@ -1,10 +1,10 @@
-import {Link} from 'expo-router';
 import React from 'react';
-import {View, Button, Pressable, Text} from 'react-native';
+import {View, Button} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import loginStyles from '@/styles/auth/loginStyles';
 import useLoginForm from '@/hooks/auth/useLoginForm';
 import LoginInput from '@/components/auth/LoginInput';
+import LoginButton from '@/components/auth/LoginButton';
 
 const login = () => {
     const {
@@ -34,16 +34,8 @@ const login = () => {
 
             <Button onPress={onSignInPress} title="Login" color={'#6c47ff'}></Button>
 
-            <Link href="/reset" asChild>
-                <Pressable style={loginStyles.button}>
-                    <Text>Forgot password?</Text>
-                </Pressable>
-            </Link>
-            <Link href="/register" asChild>
-                <Pressable style={loginStyles.button}>
-                    <Text>Create Account</Text>
-                </Pressable>
-            </Link>
+            <LoginButton href="/reset" text="Forgot password?"/>
+            <LoginButton href="/register" text="Create Account"/>
         </View>
     );
 };
