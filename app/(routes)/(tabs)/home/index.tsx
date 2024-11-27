@@ -1,15 +1,29 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import {useUser} from '@clerk/clerk-expo';
+import {useCodingResources} from '@/hooks/api/useCodingResources';
 
-const Home = () => {
-    const {user} = useUser();
+const HomeScreen: React.FC = () => {
+    const {resources, loading, error} = useCodingResources();
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Welcome, {user?.username} 🎉</Text>
-        </View>
+        <div>
+            <h1>Coding Resources</h1>
+            <ul>
+                {resources?.map(resource => (
+                    <li key={resource.id}>
+                        <a href={resource.url}>{resource.description}</a>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 };
 
-export default Home;
+export default HomeScreen;
