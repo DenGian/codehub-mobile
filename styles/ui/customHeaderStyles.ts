@@ -4,7 +4,7 @@ const customHeaderStyles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        padding: 10,
+        padding: 13,
         backgroundColor: '#6c47ff',
     },
     headerText: {
