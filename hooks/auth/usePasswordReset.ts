@@ -6,9 +6,11 @@ const usePasswordReset = () => {
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
     const [successfulCreation, setSuccessfulCreation] = useState(false);
+    const [loading, setLoading] = useState(false);
     const {signIn, setActive} = useSignIn();
 
     const onRequestReset = async () => {
+        setLoading(true);
         try {
             await signIn!.create({
                 strategy: 'reset_password_email_code',
@@ -17,10 +19,13 @@ const usePasswordReset = () => {
             setSuccessfulCreation(true);
         } catch (err: any) {
             alert(err.errors[0].message);
+        } finally {
+            setLoading(false);
         }
     };
 
     const onReset = async () => {
+        setLoading(true);
         try {
             const result = await signIn!.attemptFirstFactor({
                 strategy: 'reset_password_email_code',
@@ -32,6 +37,8 @@ const usePasswordReset = () => {
             await setActive!({session: result.createdSessionId});
         } catch (err: any) {
             alert(err.errors[0].message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -45,6 +52,7 @@ const usePasswordReset = () => {
         successfulCreation,
         onRequestReset,
         onReset,
+        loading,
     };
 };
 
