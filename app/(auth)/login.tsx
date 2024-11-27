@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Button} from 'react-native';
+import {View} from 'react-native';
 import loginStyles from '@/styles/auth/loginStyles';
 import useLoginForm from '@/hooks/auth/useLoginForm';
 import LoginInput from '@/components/auth/LoginInput';
 import LoginButton from '@/components/auth/LoginButton';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import PrimaryButton from '@/components/ui/PrimaryButton';
 
 const login = () => {
     const {
@@ -32,7 +33,7 @@ const login = () => {
                 secureTextEntry
             />
 
-            <Button onPress={onSignInPress} title="Login" color={'#6c47ff'}></Button>
+            <PrimaryButton onPress={onSignInPress} title="Login"/>
 
             <LoginButton href="/reset" text="Forgot password?"/>
             <LoginButton href="/register" text="Create Account"/>
