@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import useUpdateUser from '@/hooks/route/tabs/useUpdateUser';
-import ProfileContent from "@/components/route/tabs/ProfileContent";
+import useUpdateUser from '@/hooks/route/tabs/profile/useUpdateUser';
+import ProfileContent from "@/components/route/tabs/profile/ProfileContent";
 
 const index = () => {
     const {firstName, setFirstName, lastName, setLastName, loading, onSaveUser} = useUpdateUser();
