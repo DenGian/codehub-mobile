@@ -1,15 +1,18 @@
-import {View, Text, Button} from 'react-native';
+import {View, Text} from 'react-native';
 import {useState} from 'react';
 import {useUser} from '@clerk/clerk-expo';
 import profileStyles from '@/styles/routes/tabs/profileStyles';
 import InputField from '@/components/ui/InputField';
+import PrimaryButton from '@/components/ui/PrimaryButton';
 
 const index = () => {
     const {user} = useUser();
     const [firstName, setFirstName] = useState(user?.firstName);
     const [lastName, setLastName] = useState(user?.lastName);
+    const [loading, setLoading] = useState(false);
 
     const onSaveUser = async () => {
+        setLoading(true);
         try {
             await user?.update({
                 firstName: firstName!,
@@ -17,6 +20,8 @@ const index = () => {
             });
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -36,7 +41,7 @@ const index = () => {
                 value={lastName || ''}
                 onChangeText={setLastName}
             />
-            <Button onPress={onSaveUser} title="Update account" color={'#6c47ff'}/>
+            <PrimaryButton onPress={onSaveUser} title="Update account" color="#6c47ff" loading={loading}/>
         </View>
     );
 };
