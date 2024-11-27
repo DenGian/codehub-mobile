@@ -2,9 +2,9 @@ import React from 'react';
 import {View} from 'react-native';
 import loginStyles from '@/styles/auth/loginStyles';
 import useLoginForm from '@/hooks/auth/useLoginForm';
-import LoginButton from '@/components/auth/LoginButton';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import LoginForm from '@/components/auth/LoginForm';
+import LoginButtons from '@/components/auth/LoginButtons';
 
 const login = () => {
     const {
@@ -28,8 +28,7 @@ const login = () => {
                 onSignInPress={onSignInPress}
             />
 
-            <LoginButton href="/reset" text="Forgot password?"/>
-            <LoginButton href="/register" text="Create Account"/>
+            <LoginButtons/>
         </View>
     );
 };
