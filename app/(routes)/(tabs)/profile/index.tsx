@@ -1,7 +1,8 @@
-import {View, Text, Button, TextInput} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {useState} from 'react';
 import {useUser} from '@clerk/clerk-expo';
-import profileStyles from "@/styles/routes/tabs/profileStyles";
+import profileStyles from '@/styles/routes/tabs/profileStyles';
+import InputField from '@/components/ui/InputField';
 
 const index = () => {
     const {user} = useUser();
@@ -25,19 +26,15 @@ const index = () => {
                 Good morning {user?.firstName} {user?.lastName}!
             </Text>
 
-            <TextInput
+            <InputField
                 placeholder="First Name"
-                placeholderTextColor="black"
                 value={firstName || ''}
                 onChangeText={setFirstName}
-                style={profileStyles.inputField}
             />
-            <TextInput
+            <InputField
                 placeholder="Last Name"
-                placeholderTextColor="black"
                 value={lastName || ''}
                 onChangeText={setLastName}
-                style={profileStyles.inputField}
             />
             <Button onPress={onSaveUser} title="Update account" color={'#6c47ff'}/>
         </View>
