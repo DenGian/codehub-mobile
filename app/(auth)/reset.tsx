@@ -1,10 +1,10 @@
 import {View} from 'react-native';
 import React from 'react';
-import {Stack} from 'expo-router';
 import resetStyles from '@/styles/auth/resetStyles';
 import ResetForm from '@/components/auth/ResetForm';
 import ResetVerificationForm from '@/components/auth/ResetVerificationForm';
 import usePasswordReset from '@/hooks/auth/usePasswordReset';
+import HeaderBack from '@/components/ui/HeaderBack';
 
 const PwReset = () => {
     const {
@@ -21,7 +21,7 @@ const PwReset = () => {
 
     return (
         <View style={resetStyles.container}>
-            <Stack.Screen options={{headerBackVisible: !successfulCreation}}/>
+            <HeaderBack visible={!successfulCreation}/>
 
             {!successfulCreation && (
                 <ResetForm
