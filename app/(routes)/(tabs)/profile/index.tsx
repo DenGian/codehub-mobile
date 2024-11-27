@@ -1,9 +1,10 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {useState} from 'react';
 import {useUser} from '@clerk/clerk-expo';
 import profileStyles from '@/styles/routes/tabs/profileStyles';
 import InputField from '@/components/ui/InputField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
+import GreetingText from '@/components/ui/GreetingText';
 
 const index = () => {
     const {user} = useUser();
@@ -27,10 +28,7 @@ const index = () => {
 
     return (
         <View style={profileStyles.container}>
-            <Text style={{textAlign: 'center'}}>
-                Good morning {user?.firstName} {user?.lastName}!
-            </Text>
-
+            <GreetingText firstName={user?.firstName || ''} lastName={user?.lastName || ''}/>
             <InputField
                 placeholder="First Name"
                 value={firstName || ''}
