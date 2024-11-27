@@ -1,8 +1,10 @@
-import {View, TextInput, Button} from 'react-native';
+import {View} from 'react-native';
 import React, {useState} from 'react';
 import {Stack} from 'expo-router';
 import {useSignIn} from '@clerk/clerk-expo';
 import resetStyles from '@/styles/auth/resetStyles';
+import ResetForm from '@/components/auth/ResetForm';
+import ResetVerificationForm from '@/components/auth/ResetVerificationForm';
 
 const PwReset = () => {
     const [emailAddress, setEmailAddress] = useState('');
@@ -43,41 +45,21 @@ const PwReset = () => {
             <Stack.Screen options={{headerBackVisible: !successfulCreation}}/>
 
             {!successfulCreation && (
-                <>
-                    <TextInput
-                        autoCapitalize="none"
-                        placeholder="code@hub.dev"
-                        placeholderTextColor="black"
-                        value={emailAddress}
-                        onChangeText={setEmailAddress}
-                        style={resetStyles.inputField}
-                    />
-
-                    <Button onPress={onRequestReset} title="Send Reset Email" color={'#6c47ff'}/>
-                </>
+                <ResetForm
+                    emailAddress={emailAddress}
+                    setEmailAddress={setEmailAddress}
+                    onRequestReset={onRequestReset}
+                />
             )}
 
             {successfulCreation && (
-                <>
-                    <View>
-                        <TextInput
-                            value={code}
-                            placeholder="Code..."
-                            placeholderTextColor="black"
-                            style={resetStyles.inputField}
-                            onChangeText={setCode}
-                        />
-                        <TextInput
-                            placeholder="New password"
-                            placeholderTextColor="black"
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
-                            style={resetStyles.inputField}
-                        />
-                    </View>
-                    <Button onPress={onReset} title="Set new Password" color={'#6c47ff'}/>
-                </>
+                <ResetVerificationForm
+                    code={code}
+                    setCode={setCode}
+                    password={password}
+                    setPassword={setPassword}
+                    onReset={onReset}
+                />
             )}
         </View>
     );
