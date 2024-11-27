@@ -1,8 +1,9 @@
 import {useSignIn} from '@clerk/clerk-expo';
 import {Link} from 'expo-router';
 import React, {useState} from 'react';
-import {View, StyleSheet, TextInput, Button, Pressable, Text} from 'react-native';
+import {View, TextInput, Button, Pressable, Text} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import loginStyles from '@/styles/auth/loginStyles';
 
 const login = () => {
     const {signIn, setActive, isLoaded} = useSignIn();
@@ -32,7 +33,7 @@ const login = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={loginStyles.container}>
             <Spinner visible={loading}/>
 
             <TextInput
@@ -41,7 +42,7 @@ const login = () => {
                 placeholderTextColor="black"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
-                style={styles.inputField}
+                style={loginStyles.inputField}
             />
             <TextInput
                 placeholder="password"
@@ -49,18 +50,18 @@ const login = () => {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
-                style={styles.inputField}
+                style={loginStyles.inputField}
             />
 
             <Button onPress={onSignInPress} title="Login" color={'#6c47ff'}></Button>
 
             <Link href="/reset" asChild>
-                <Pressable style={styles.button}>
+                <Pressable style={loginStyles.button}>
                     <Text>Forgot password?</Text>
                 </Pressable>
             </Link>
             <Link href="/register" asChild>
-                <Pressable style={styles.button}>
+                <Pressable style={loginStyles.button}>
                     <Text>Create Account</Text>
                 </Pressable>
             </Link>
@@ -69,24 +70,3 @@ const login = () => {
 };
 
 export default login;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 20
-    },
-    inputField: {
-        marginVertical: 4,
-        height: 50,
-        borderWidth: 1,
-        borderColor: '#6c47ff',
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff'
-    },
-    button: {
-        margin: 8,
-        alignItems: 'center'
-    }
-});
