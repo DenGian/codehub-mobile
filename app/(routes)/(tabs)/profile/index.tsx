@@ -1,6 +1,7 @@
-import {View, Text, Button, TextInput, StyleSheet} from 'react-native';
+import {View, Text, Button, TextInput} from 'react-native';
 import {useState} from 'react';
 import {useUser} from '@clerk/clerk-expo';
+import profileStyles from "@/styles/routes/tabs/profileStyles";
 
 const index = () => {
     const {user} = useUser();
@@ -11,7 +12,7 @@ const index = () => {
         try {
             await user?.update({
                 firstName: firstName!,
-                lastName: lastName!
+                lastName: lastName!,
             });
         } catch (error) {
             console.log(error);
@@ -19,7 +20,7 @@ const index = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={profileStyles.container}>
             <Text style={{textAlign: 'center'}}>
                 Good morning {user?.firstName} {user?.lastName}!
             </Text>
@@ -29,35 +30,18 @@ const index = () => {
                 placeholderTextColor="black"
                 value={firstName || ''}
                 onChangeText={setFirstName}
-                style={styles.inputField}
+                style={profileStyles.inputField}
             />
             <TextInput
                 placeholder="Last Name"
                 placeholderTextColor="black"
                 value={lastName || ''}
                 onChangeText={setLastName}
-                style={styles.inputField}
+                style={profileStyles.inputField}
             />
-            <Button onPress={onSaveUser} title="Update account" color={'#6c47ff'}></Button>
+            <Button onPress={onSaveUser} title="Update account" color={'#6c47ff'}/>
         </View>
     );
 };
 
 export default index;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 40
-    },
-    inputField: {
-        marginVertical: 4,
-        height: 50,
-        borderWidth: 1,
-        borderColor: '#6c47ff',
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff'
-    }
-});
