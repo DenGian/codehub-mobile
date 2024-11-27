@@ -40,7 +40,7 @@ const RegisterForm: React.FC<RegisterFormProps> = (
                 secureTextEntry
                 style={registerStyles.inputField}
             />
-            <PrimaryButton onPress={onSignUpPress} title="Sign up"/>
+            <PrimaryButton onPress={onSignUpPress} title="Sign up" color={'#6c47ff'}/>
         </View>
     );
 };
