@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Button} from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
 import loginStyles from '@/styles/auth/loginStyles';
 import useLoginForm from '@/hooks/auth/useLoginForm';
 import LoginInput from '@/components/auth/LoginInput';
 import LoginButton from '@/components/auth/LoginButton';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 const login = () => {
     const {
@@ -18,7 +18,7 @@ const login = () => {
 
     return (
         <View style={loginStyles.container}>
-            <Spinner visible={loading}/>
+            <LoadingSpinner visible={loading}/>
 
             <LoginInput
                 placeholder="code@hub.dev"
