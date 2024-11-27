@@ -1,9 +1,10 @@
 import {Link} from 'expo-router';
 import React from 'react';
-import {View, TextInput, Button, Pressable, Text} from 'react-native';
+import {View, Button, Pressable, Text} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import loginStyles from '@/styles/auth/loginStyles';
 import useLoginForm from '@/hooks/auth/useLoginForm';
+import LoginInput from '@/components/auth/LoginInput';
 
 const login = () => {
     const {
@@ -19,21 +20,16 @@ const login = () => {
         <View style={loginStyles.container}>
             <Spinner visible={loading}/>
 
-            <TextInput
-                autoCapitalize="none"
+            <LoginInput
                 placeholder="code@hub.dev"
-                placeholderTextColor="black"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
-                style={loginStyles.inputField}
             />
-            <TextInput
+            <LoginInput
                 placeholder="password"
-                placeholderTextColor="black"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
-                style={loginStyles.inputField}
             />
 
             <Button onPress={onSignInPress} title="Login" color={'#6c47ff'}></Button>
