@@ -1,16 +1,21 @@
 import React from 'react';
-import {Button, StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, View, ActivityIndicator} from 'react-native';
 
 interface PrimaryButtonProps {
     onPress: () => void;
     title: string;
     color: string;
+    loading?: boolean;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress, title, color}) => {
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress, title, color, loading = false}) => {
     return (
         <View style={styles.buttonContainer}>
-            <Button onPress={onPress} title={title} color={color}/>
+            {loading ? (
+                <ActivityIndicator size="small" color={color}/>
+            ) : (
+                <Button onPress={onPress} title={title} color={color}/>
+            )}
         </View>
     );
 };
