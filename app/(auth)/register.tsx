@@ -1,9 +1,11 @@
-import {Button, TextInput, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 import React from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Stack} from 'expo-router';
 import registerStyles from '@/styles/auth/registerStyles';
 import useRegisterForm from '@/hooks/auth/useRegisterForm';
+import PrimaryButton from '@/components/ui/PrimaryButton';
+import VerificationForm from '@/components/auth/VerificationForm';
 
 const Register = () => {
     const {
@@ -52,22 +54,16 @@ const Register = () => {
                         style={registerStyles.inputField}
                     />
 
-                    <Button onPress={onSignUpPress} title="Sign up" color="#6c47ff"/>
+                    <PrimaryButton onPress={onSignUpPress} title="Sign up"/>
                 </>
             )}
 
             {pendingVerification && (
-                <>
-                    <View>
-                        <TextInput
-                            value={code}
-                            placeholder="Code..."
-                            style={registerStyles.inputField}
-                            onChangeText={setCode}
-                        />
-                    </View>
-                    <Button onPress={onPressVerify} title="Verify Email" color="#6c47ff"/>
-                </>
+                <VerificationForm
+                    code={code}
+                    setCode={setCode}
+                    onPressVerify={onPressVerify}
+                />
             )}
         </View>
     );
