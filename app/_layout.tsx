@@ -1,23 +1,8 @@
-import {ClerkProvider} from '@clerk/clerk-expo';
-import {Slot} from 'expo-router';
-import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
-import useTokenCache from '@/hooks/auth/useTokenCache';
-import getClerkPublishableKey from '@/utils/getClerkPublishableKey';
+import React from 'react';
+import RootLayoutNav from '@/components/layout/RootLayoutNav';
 
-const InitialLayout = () => {
-    useAuthRedirect();
-    return <Slot/>;
+const AppLayout = () => {
+    return <RootLayoutNav/>;
 };
 
-const RootLayoutNav = () => {
-    const tokenCache = useTokenCache();
-    const CLERK_PUBLISHABLE_KEY = getClerkPublishableKey();
-
-    return (
-        <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-            <InitialLayout/>
-        </ClerkProvider>
-    );
-};
-
-export default RootLayoutNav;
+export default AppLayout;
