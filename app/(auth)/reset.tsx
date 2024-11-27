@@ -17,6 +17,7 @@ const PwReset = () => {
         successfulCreation,
         onRequestReset,
         onReset,
+        loading,
     } = usePasswordReset();
 
     return (
@@ -28,6 +29,7 @@ const PwReset = () => {
                     emailAddress={emailAddress}
                     setEmailAddress={setEmailAddress}
                     onRequestReset={onRequestReset}
+                    loading={loading}
                 />
             )}
 
@@ -38,6 +40,7 @@ const PwReset = () => {
                     password={password}
                     setPassword={setPassword}
                     onReset={onReset}
+                    loading={loading}
                 />
             )}
         </View>
