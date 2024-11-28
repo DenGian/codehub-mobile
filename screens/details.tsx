@@ -1,11 +1,6 @@
+// screens/details.tsx
 import React, {useState, useEffect} from 'react';
-import {
-    View,
-    Text,
-    ScrollView,
-    TouchableOpacity,
-    Linking,
-} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
 import {useFavorites} from '@/hooks/storage/useFavorites';
@@ -15,6 +10,7 @@ import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 import MapView, {Marker} from 'react-native-maps';
 import mapStyles from "@/styles/routes/tabs/home/mapStyles";
+import {handleOpenURL} from '@/utils/urlUtils';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -48,15 +44,6 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
         );
 
     const isFavorite = favorites.includes(resource.id);
-
-    const handleOpenURL = async (url: string) => {
-        const supported = await Linking.canOpenURL(url);
-        if (supported) {
-            await Linking.openURL(url);
-        } else {
-            alert('URL not supported');
-        }
-    };
 
     const hasEventMetadata = resource.metaData && resource.metaData.date && resource.metaData.location;
 
@@ -119,7 +106,6 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                             </MapView>
                         </>
                     )}
-
 
                     <TouchableOpacity
                         style={resourceDetailsStyles.sourceButton}
