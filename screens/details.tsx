@@ -142,10 +142,14 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     title: {
-        fontSize: 22,
+        fontSize: 26,  // Increased font size
         fontWeight: 'bold',
         color: '#333',
         flex: 1,
+        textTransform: 'uppercase', // Optional: Adds a more modern look
+        textShadowColor: '#aaa',  // Subtle shadow for effect
+        textShadowOffset: {width: 0, height: 2}, // Adds depth
+        textShadowRadius: 4,  // Adjusts shadow intensity
     },
     details: {
         marginBottom: 16,
