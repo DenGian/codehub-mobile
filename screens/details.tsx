@@ -11,6 +11,7 @@ import MapView, {Marker} from 'react-native-maps';
 import mapStyles from "@/styles/routes/tabs/home/mapStyles";
 import {handleOpenURL} from '@/utils/urlUtils';
 import ResourceHeader from '@/components/ui/ResourceHeader';
+import ResourceDetails from '@/components/ui/ResourceDetails';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -57,23 +58,11 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                         onToggleFavorite={() => toggleFavorite(resource.id)}
                     />
 
-                    <View style={resourceDetailsStyles.details}>
-                        <Text style={resourceDetailsStyles.detailText}>
-                            <Text style={resourceDetailsStyles.label}>Types: </Text>
-                            {resource.types.join(', ')}
-                        </Text>
-                        <Text style={resourceDetailsStyles.detailText}>
-                            <Text style={resourceDetailsStyles.label}>Topics: </Text>
-                            {resource.topics.join(', ')}
-                        </Text>
-                    </View>
-
-                    <View style={resourceDetailsStyles.levels}>
-                        <Text style={resourceDetailsStyles.detailText}>
-                            <Text style={resourceDetailsStyles.label}>Levels: </Text>
-                            {resource.levels.join(', ')}
-                        </Text>
-                    </View>
+                    <ResourceDetails
+                        types={resource.types}
+                        topics={resource.topics}
+                        levels={resource.levels}
+                    />
 
                     {hasEventMetadata && (
                         <>
