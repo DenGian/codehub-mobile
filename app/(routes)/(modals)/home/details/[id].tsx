@@ -1,18 +1,18 @@
 import React from 'react';
-import {Stack} from 'expo-router';
+import {useLocalSearchParams, useRouter} from 'expo-router';
+import {Button, View} from 'react-native';
 import ResourceDetailsScreen from "@/screens/details";
 
-export default function ModalDetailsPage() {
+const ResourceDetailsPage: React.FC = () => {
+    const {id} = useLocalSearchParams<{ id: string }>();  // Get the dynamic parameter
+    const router = useRouter();
+
     return (
-        <>
-            <Stack.Screen
-                options={{
-                    presentation: 'modal',
-                    headerTitle: 'Resource Details',
-                    headerBackTitle: 'Back'
-                }}
-            />
-            <ResourceDetailsScreen/>
-        </>
+        <View style={{flex: 1}}>
+            <Button title="Back" onPress={() => router.back()}/>
+            <ResourceDetailsScreen id={id}/> {/* Pass the id parameter correctly */}
+        </View>
     );
-}
+};
+
+export default ResourceDetailsPage;
