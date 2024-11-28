@@ -6,8 +6,10 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from "@/services/api/types";
 import {ListRenderItemInfo} from 'react-native';
 import {useFavorites} from "@/hooks/storage/useFavorites";
+import {useRouter} from "expo-router";
 
 const HomeScreen: React.FC = () => {
+    const router = useRouter();
     const {resources, loading, error} = useCodingResources();
     const {favorites, toggleFavorite} = useFavorites();
 
@@ -22,7 +24,7 @@ const HomeScreen: React.FC = () => {
                 isFavorite={isFavorite}
                 onToggleFavorite={() => toggleFavorite(item.id)}
                 onDetailsPress={() => {
-                    // Placeholder for details press functionality
+                    router.push(`/home/details/${item.id}`);
                 }}
             />
         );
