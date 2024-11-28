@@ -1,41 +1,30 @@
 // screens/details.tsx
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
-import {useCodingResources} from '@/hooks/api/useCodingResources';
 import {useFavorites} from '@/hooks/storage/useFavorites';
-import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import {CodingResource} from '@/services/api/types';
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import ErrorMessage from '@/components/ui/ErrorMessage';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 import {handleOpenURL} from '@/utils/urlUtils';
 import ResourceHeader from '@/components/ui/ResourceHeader';
 import ResourceDetails from '@/components/ui/ResourceDetails';
 import ResourceMap from '@/components/ui/ResourceMap';
-import ErrorMessage from '@/components/ui/ErrorMessage';
+import useDetailResource from "@/hooks/api/useDetailResource";
 
 interface ResourceDetailsScreenProps {
     id: string;
 }
 
 const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
-    const {resources, loading, error} = useCodingResources();
+    const {resource, loading, error} = useDetailResource(id);
     const {favorites, toggleFavorite} = useFavorites();
 
-    const [resource, setResource] = useState<CodingResource | null>(null);
-
-    useEffect(() => {
-        if (Array.isArray(resources) && resources.length > 0) {
-            const foundResource = resources.find((res) => res.id.toString() === id);
-            setResource(foundResource || null);
-        }
-    }, [resources, id]);
-
-    if (loading || !resources) return <LoadingSpinner visible={true}/>;
+    if (loading || !resource) return <LoadingSpinner visible={true}/>;
     if (error) return <ErrorMessage message={`Error loading resources: ${error}`}/>;
     if (!resource) return <ErrorMessage message="Resource not found"/>;
 
     const isFavorite = favorites.includes(resource.id);
-
     const hasEventMetadata = resource.metaData && resource.metaData.date && resource.metaData.location;
 
     return (
