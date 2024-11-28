@@ -9,7 +9,7 @@ const CustomHeader: React.FC = () => {
 
     return (
         <View style={customHeaderStyles.headerContainer}>
-            <Text style={customHeaderStyles.headerText}>Welcome, {displayName}</Text>
+            <Text style={customHeaderStyles.headerText}>Hey, {displayName}!</Text>
         </View>
     );
 };
