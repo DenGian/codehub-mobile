@@ -7,8 +7,8 @@ import ErrorMessage from '@/components/ui/ErrorMessage';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 import {handleOpenURL} from '@/utils/urlUtils';
-import ResourceHeader from '@/components/ui/ResourceHeader';
-import ResourceDetails from '@/components/ui/ResourceDetails';
+import ResourceHeader from '@/components/route/tabs/home/ResourceHeader';
+import ResourceDetails from '@/components/route/tabs/home/ResourceDetails';
 import ResourceMap from '@/components/ui/ResourceMap';
 import useDetailResource from "@/hooks/api/useDetailResource";
 
