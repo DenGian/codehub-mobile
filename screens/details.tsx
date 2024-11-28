@@ -14,6 +14,7 @@ import {CodingResource} from '@/services/api/types';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 import MapView, {Marker} from 'react-native-maps';
+import mapStyles from "@/styles/routes/tabs/home/mapStyles";
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -100,7 +101,7 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                             </Text>
 
                             <MapView
-                                style={{height: 200, marginVertical: 10}}
+                                style={mapStyles.map}
                                 initialRegion={{
                                     latitude: resource?.metaData?.location?.lat || 0,
                                     longitude: resource?.metaData?.location?.long || 0,
