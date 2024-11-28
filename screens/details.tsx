@@ -13,6 +13,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from '@/services/api/types';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
+import MapView, {Marker} from 'react-native-maps';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -56,6 +57,8 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
         }
     };
 
+    const hasEventMetadata = resource.metaData && resource.metaData.date && resource.metaData.location;
+
     return (
         <View style={resourceDetailsStyles.container}>
             <ScrollView contentContainerStyle={resourceDetailsStyles.centeredContent}>
@@ -88,6 +91,34 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                             {resource.levels.join(', ')}
                         </Text>
                     </View>
+
+                    {hasEventMetadata && (
+                        <>
+                            <Text style={resourceDetailsStyles.detailText}>
+                                <Text style={resourceDetailsStyles.label}>Date: </Text>
+                                {resource?.metaData?.date}
+                            </Text>
+
+                            <MapView
+                                style={{height: 200, marginVertical: 10}}
+                                initialRegion={{
+                                    latitude: resource?.metaData?.location?.lat || 0,
+                                    longitude: resource?.metaData?.location?.long || 0,
+                                    latitudeDelta: 0.0922,
+                                    longitudeDelta: 0.0421,
+                                }}
+                            >
+                                <Marker
+                                    coordinate={{
+                                        latitude: resource?.metaData?.location?.lat || 0,
+                                        longitude: resource?.metaData?.location?.long || 0,
+                                    }}
+                                    title="Event Location"
+                                />
+                            </MapView>
+                        </>
+                    )}
+
 
                     <TouchableOpacity
                         style={resourceDetailsStyles.sourceButton}
