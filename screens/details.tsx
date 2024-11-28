@@ -6,10 +6,10 @@ import ErrorMessage from '@/components/ui/ErrorMessage';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 import {handleOpenURL} from '@/utils/urlUtils';
-import ResourceDetails from "@/components/route/tabs/home/ResourceDetails";
 import ResourceMap from '@/components/ui/ResourceMap';
 import useDetailResource from "@/hooks/api/useDetailResource";
 import ResourceHeaderSection from "@/components/route/tabs/home/ResourceHeaderSection";
+import ResourceDetailsSection from '@/components/route/tabs/home/ResourceDetailsSection';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -30,11 +30,7 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                 <View style={resourceDetailsStyles.card}>
                     <ResourceHeaderSection resource={resource}/>
 
-                    <ResourceDetails
-                        types={resource.types}
-                        topics={resource.topics}
-                        levels={resource.levels}
-                    />
+                    <ResourceDetailsSection resource={resource}/>
 
                     {hasEventMetadata && (
                         <ResourceMap
