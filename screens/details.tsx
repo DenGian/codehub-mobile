@@ -3,7 +3,6 @@ import {
     View,
     Text,
     ScrollView,
-    StyleSheet,
     TouchableOpacity,
     Linking,
 } from 'react-native';
@@ -13,6 +12,7 @@ import {useFavorites} from '@/hooks/storage/useFavorites';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from '@/services/api/types';
 import BackButton from '@/components/ui/BackButton';
+import styles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -101,83 +101,5 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f9f9f9',
-    },
-    centeredContent: {
-        flexGrow: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 16,
-    },
-    errorContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    error: {
-        color: 'red',
-        textAlign: 'center',
-        marginTop: 20,
-    },
-    card: {
-        backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 12,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowOffset: {width: 0, height: 2},
-        shadowRadius: 4,
-        elevation: 3,
-        width: '90%',
-        maxWidth: 400,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 16,
-    },
-    title: {
-        fontSize: 26,  // Increased font size
-        fontWeight: 'bold',
-        color: '#333',
-        flex: 1,
-        textTransform: 'uppercase', // Optional: Adds a more modern look
-        textShadowColor: '#aaa',  // Subtle shadow for effect
-        textShadowOffset: {width: 0, height: 2}, // Adds depth
-        textShadowRadius: 4,  // Adjusts shadow intensity
-    },
-    details: {
-        marginBottom: 16,
-    },
-    levels: {
-        marginBottom: 16,
-    },
-    detailText: {
-        fontSize: 16,
-        color: '#555',
-        marginBottom: 8,
-    },
-    label: {
-        fontWeight: 'bold',
-        color: '#444',
-    },
-    sourceButton: {
-        backgroundColor: '#1e90ff',
-        paddingVertical: 12,
-        borderRadius: 8,
-        alignItems: 'center',
-        marginBottom: 16,
-    },
-    buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-});
 
 export default ResourceDetailsScreen;
