@@ -1,3 +1,4 @@
+// screens/details.tsx
 import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
@@ -10,6 +11,7 @@ import {handleOpenURL} from '@/utils/urlUtils';
 import ResourceHeader from '@/components/ui/ResourceHeader';
 import ResourceDetails from '@/components/ui/ResourceDetails';
 import ResourceMap from '@/components/ui/ResourceMap';
+import ErrorMessage from '@/components/ui/ErrorMessage';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -29,18 +31,8 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
     }, [resources, id]);
 
     if (loading || !resources) return <LoadingSpinner visible={true}/>;
-    if (error)
-        return (
-            <View style={resourceDetailsStyles.errorContainer}>
-                <Text style={resourceDetailsStyles.error}>Error loading resources: {error}</Text>
-            </View>
-        );
-    if (!resource)
-        return (
-            <View style={resourceDetailsStyles.errorContainer}>
-                <Text style={resourceDetailsStyles.error}>Resource not found</Text>
-            </View>
-        );
+    if (error) return <ErrorMessage message={`Error loading resources: ${error}`}/>;
+    if (!resource) return <ErrorMessage message="Resource not found"/>;
 
     const isFavorite = favorites.includes(resource.id);
 
