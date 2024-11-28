@@ -12,7 +12,7 @@ import {useFavorites} from '@/hooks/storage/useFavorites';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from '@/services/api/types';
 import BackButton from '@/components/ui/BackButton';
-import styles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
+import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -34,14 +34,14 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
     if (loading || !resources) return <LoadingSpinner visible={true}/>;
     if (error)
         return (
-            <View style={styles.errorContainer}>
-                <Text style={styles.error}>Error loading resources: {error}</Text>
+            <View style={resourceDetailsStyles.errorContainer}>
+                <Text style={resourceDetailsStyles.error}>Error loading resources: {error}</Text>
             </View>
         );
     if (!resource)
         return (
-            <View style={styles.errorContainer}>
-                <Text style={styles.error}>Resource not found</Text>
+            <View style={resourceDetailsStyles.errorContainer}>
+                <Text style={resourceDetailsStyles.error}>Resource not found</Text>
             </View>
         );
 
@@ -57,11 +57,11 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
     };
 
     return (
-        <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.centeredContent}>
-                <View style={styles.card}>
-                    <View style={styles.header}>
-                        <Text style={styles.title}>{resource.description}</Text>
+        <View style={resourceDetailsStyles.container}>
+            <ScrollView contentContainerStyle={resourceDetailsStyles.centeredContent}>
+                <View style={resourceDetailsStyles.card}>
+                    <View style={resourceDetailsStyles.header}>
+                        <Text style={resourceDetailsStyles.title}>{resource.description}</Text>
                         <TouchableOpacity onPress={() => toggleFavorite(resource.id)}>
                             <Ionicons
                                 name={isFavorite ? 'heart' : 'heart-outline'}
@@ -71,29 +71,29 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.details}>
-                        <Text style={styles.detailText}>
-                            <Text style={styles.label}>Types: </Text>
+                    <View style={resourceDetailsStyles.details}>
+                        <Text style={resourceDetailsStyles.detailText}>
+                            <Text style={resourceDetailsStyles.label}>Types: </Text>
                             {resource.types.join(', ')}
                         </Text>
-                        <Text style={styles.detailText}>
-                            <Text style={styles.label}>Topics: </Text>
+                        <Text style={resourceDetailsStyles.detailText}>
+                            <Text style={resourceDetailsStyles.label}>Topics: </Text>
                             {resource.topics.join(', ')}
                         </Text>
                     </View>
 
-                    <View style={styles.levels}>
-                        <Text style={styles.detailText}>
-                            <Text style={styles.label}>Levels: </Text>
+                    <View style={resourceDetailsStyles.levels}>
+                        <Text style={resourceDetailsStyles.detailText}>
+                            <Text style={resourceDetailsStyles.label}>Levels: </Text>
                             {resource.levels.join(', ')}
                         </Text>
                     </View>
 
                     <TouchableOpacity
-                        style={styles.sourceButton}
+                        style={resourceDetailsStyles.sourceButton}
                         onPress={() => handleOpenURL(resource.url)}
                     >
-                        <Text style={styles.buttonText}>Visit Source</Text>
+                        <Text style={resourceDetailsStyles.buttonText}>Visit Source</Text>
                     </TouchableOpacity>
                 </View>
                 <BackButton/>
