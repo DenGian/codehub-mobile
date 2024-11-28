@@ -13,8 +13,11 @@ import {Ionicons} from '@expo/vector-icons';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from '@/services/api/types';
 
-const ResourceDetailsScreen: React.FC = () => {
-    const {id} = useLocalSearchParams<{ id: string }>();
+interface ResourceDetailsScreenProps {
+    id: string;
+}
+
+const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
     const {resources, loading, error} = useCodingResources();
     const {favorites, toggleFavorite} = useFavorites();
 
@@ -23,14 +26,13 @@ const ResourceDetailsScreen: React.FC = () => {
 
     // Effect to find the resource when resources change
     useEffect(() => {
-        // Ensure resources is an array before searching
         if (Array.isArray(resources) && resources.length > 0) {
             const foundResource = resources.find(res => res.id.toString() === id);
             setResource(foundResource || null);
         }
     }, [resources, id]);
 
-    // Handle different loading states
+    // Loading and error handling
     if (loading || !resources) return <LoadingSpinner visible={true}/>;
     if (error) return <Text>Error loading resources: {error}</Text>;
     if (!resource) return <Text>Resource not found</Text>;
