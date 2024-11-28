@@ -1,7 +1,6 @@
 // screens/details.tsx
 import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
 import {useFavorites} from '@/hooks/storage/useFavorites';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
@@ -11,6 +10,7 @@ import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScre
 import MapView, {Marker} from 'react-native-maps';
 import mapStyles from "@/styles/routes/tabs/home/mapStyles";
 import {handleOpenURL} from '@/utils/urlUtils';
+import ResourceHeader from '@/components/ui/ResourceHeader';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -51,16 +51,11 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
         <View style={resourceDetailsStyles.container}>
             <ScrollView contentContainerStyle={resourceDetailsStyles.centeredContent}>
                 <View style={resourceDetailsStyles.card}>
-                    <View style={resourceDetailsStyles.header}>
-                        <Text style={resourceDetailsStyles.title}>{resource.description}</Text>
-                        <TouchableOpacity onPress={() => toggleFavorite(resource.id)}>
-                            <Ionicons
-                                name={isFavorite ? 'heart' : 'heart-outline'}
-                                size={24}
-                                color={isFavorite ? 'red' : 'gray'}
-                            />
-                        </TouchableOpacity>
-                    </View>
+                    <ResourceHeader
+                        title={resource.description}
+                        isFavorite={isFavorite}
+                        onToggleFavorite={() => toggleFavorite(resource.id)}
+                    />
 
                     <View style={resourceDetailsStyles.details}>
                         <Text style={resourceDetailsStyles.detailText}>
