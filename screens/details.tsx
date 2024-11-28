@@ -1,15 +1,14 @@
-// screens/details.tsx
 import React from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorMessage from '@/components/ui/ErrorMessage';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
-import {handleOpenURL} from '@/utils/urlUtils';
 import useDetailResource from "@/hooks/api/useDetailResource";
 import ResourceHeaderSection from "@/components/route/tabs/home/ResourceHeaderSection";
 import ResourceDetailsSection from "@/components/route/tabs/home/ResourceDetailsSection";
 import ResourceMapSection from "@/components/route/tabs/home/ResourseMapSection";
+import VisitSourceButton from '@/components/route/tabs/home/VisitSourceButton';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -36,12 +35,8 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                         <ResourceMapSection metaData={resource.metaData}/>
                     )}
 
-                    <TouchableOpacity
-                        style={resourceDetailsStyles.sourceButton}
-                        onPress={() => handleOpenURL(resource.url)}
-                    >
-                        <Text style={resourceDetailsStyles.buttonText}>Visit Source</Text>
-                    </TouchableOpacity>
+                    <VisitSourceButton url={resource.url}/>
+
                 </View>
                 <BackButton/>
             </ScrollView>
