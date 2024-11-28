@@ -6,10 +6,10 @@ import ErrorMessage from '@/components/ui/ErrorMessage';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 import {handleOpenURL} from '@/utils/urlUtils';
-import ResourceMap from '@/components/ui/ResourceMap';
 import useDetailResource from "@/hooks/api/useDetailResource";
 import ResourceHeaderSection from "@/components/route/tabs/home/ResourceHeaderSection";
-import ResourceDetailsSection from '@/components/route/tabs/home/ResourceDetailsSection';
+import ResourceDetailsSection from "@/components/route/tabs/home/ResourceDetailsSection";
+import ResourceMapSection from "@/components/route/tabs/home/ResourseMapSection";
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -32,11 +32,8 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
 
                     <ResourceDetailsSection resource={resource}/>
 
-                    {hasEventMetadata && (
-                        <ResourceMap
-                            date={resource.metaData?.date || ''}
-                            location={resource.metaData?.location || {lat: 0, long: 0}}
-                        />
+                    {hasEventMetadata && resource.metaData && (
+                        <ResourceMapSection metaData={resource.metaData}/>
                     )}
 
                     <TouchableOpacity
