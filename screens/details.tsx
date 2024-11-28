@@ -12,6 +12,7 @@ import {useFavorites} from '@/hooks/storage/useFavorites';
 import {Ionicons} from '@expo/vector-icons';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from '@/services/api/types';
+import BackButton from "@/components/ui/BackButton";
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -61,6 +62,7 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                 <Text style={styles.sectionTitle}>Topics</Text>
                 <Text>{resource.topics.join(', ')}</Text>
             </View>
+            <BackButton/>
         </ScrollView>
     );
 };
