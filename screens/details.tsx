@@ -1,16 +1,15 @@
 // screens/details.tsx
 import React from 'react';
 import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
-import {useFavorites} from '@/hooks/storage/useFavorites';
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorMessage from '@/components/ui/ErrorMessage';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
 import {handleOpenURL} from '@/utils/urlUtils';
-import ResourceHeader from '@/components/route/tabs/home/ResourceHeader';
-import ResourceDetails from '@/components/route/tabs/home/ResourceDetails';
+import ResourceDetails from "@/components/route/tabs/home/ResourceDetails";
 import ResourceMap from '@/components/ui/ResourceMap';
 import useDetailResource from "@/hooks/api/useDetailResource";
+import ResourceHeaderSection from "@/components/route/tabs/home/ResourceHeaderSection";
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -18,24 +17,18 @@ interface ResourceDetailsScreenProps {
 
 const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
     const {resource, loading, error} = useDetailResource(id);
-    const {favorites, toggleFavorite} = useFavorites();
 
     if (loading || !resource) return <LoadingSpinner visible={true}/>;
     if (error) return <ErrorMessage message={`Error loading resources: ${error}`}/>;
     if (!resource) return <ErrorMessage message="Resource not found"/>;
 
-    const isFavorite = favorites.includes(resource.id);
     const hasEventMetadata = resource.metaData && resource.metaData.date && resource.metaData.location;
 
     return (
         <View style={resourceDetailsStyles.container}>
             <ScrollView contentContainerStyle={resourceDetailsStyles.centeredContent}>
                 <View style={resourceDetailsStyles.card}>
-                    <ResourceHeader
-                        title={resource.description}
-                        isFavorite={isFavorite}
-                        onToggleFavorite={() => toggleFavorite(resource.id)}
-                    />
+                    <ResourceHeaderSection resource={resource}/>
 
                     <ResourceDetails
                         types={resource.types}
