@@ -1,4 +1,3 @@
-// screens/details.tsx
 import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
@@ -7,11 +6,10 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from '@/services/api/types';
 import BackButton from '@/components/ui/BackButton';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
-import MapView, {Marker} from 'react-native-maps';
-import mapStyles from "@/styles/routes/tabs/home/mapStyles";
 import {handleOpenURL} from '@/utils/urlUtils';
 import ResourceHeader from '@/components/ui/ResourceHeader';
 import ResourceDetails from '@/components/ui/ResourceDetails';
+import ResourceMap from '@/components/ui/ResourceMap';
 
 interface ResourceDetailsScreenProps {
     id: string;
@@ -65,30 +63,10 @@ const ResourceDetailsScreen: React.FC<ResourceDetailsScreenProps> = ({id}) => {
                     />
 
                     {hasEventMetadata && (
-                        <>
-                            <Text style={resourceDetailsStyles.detailText}>
-                                <Text style={resourceDetailsStyles.label}>Date: </Text>
-                                {resource?.metaData?.date}
-                            </Text>
-
-                            <MapView
-                                style={mapStyles.map}
-                                initialRegion={{
-                                    latitude: resource?.metaData?.location?.lat || 0,
-                                    longitude: resource?.metaData?.location?.long || 0,
-                                    latitudeDelta: 0.0922,
-                                    longitudeDelta: 0.0421,
-                                }}
-                            >
-                                <Marker
-                                    coordinate={{
-                                        latitude: resource?.metaData?.location?.lat || 0,
-                                        longitude: resource?.metaData?.location?.long || 0,
-                                    }}
-                                    title="Event Location"
-                                />
-                            </MapView>
-                        </>
+                        <ResourceMap
+                            date={resource.metaData?.date || ''}
+                            location={resource.metaData?.location || {lat: 0, long: 0}}
+                        />
                     )}
 
                     <TouchableOpacity
