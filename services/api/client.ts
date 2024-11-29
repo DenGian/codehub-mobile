@@ -1,4 +1,4 @@
-const BASE_URL = process.env.API_URL ?? "https://api.example.com";
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
 if (!BASE_URL) {
     throw new Error("Please provide an API url in the .env file")
