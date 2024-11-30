@@ -1,6 +1,5 @@
-// components/route/tabs/home/eventCard.tsx
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {FontAwesome} from '@expo/vector-icons';
 
 interface EventCardProps {
@@ -14,12 +13,12 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = (
-    {title, types, topics, isFavorite, onToggleFavorite, onDetailsPress,}) => {
+    {title, types, topics, isFavorite, onToggleFavorite, onDetailsPress}) => {
     return (
         <View style={styles.card}>
             <View style={styles.cardHeader}>
                 <Text style={styles.title}>{title}</Text>
-                <TouchableOpacity onPress={onToggleFavorite}>
+                <TouchableOpacity onPress={onToggleFavorite} activeOpacity={0.7}>
                     <FontAwesome
                         name={isFavorite ? 'heart' : 'heart-o'}
                         size={24}
@@ -27,9 +26,13 @@ const EventCard: React.FC<EventCardProps> = (
                     />
                 </TouchableOpacity>
             </View>
-            <Text style={styles.types}>Types: {types}</Text>
-            <Text style={styles.topics}>Topics: {topics}</Text>
-            <TouchableOpacity onPress={onDetailsPress} style={styles.button}>
+            <Text style={styles.types}>
+                <FontAwesome name="tag" size={14} color="#555"/> Types: {types}
+            </Text>
+            <Text style={styles.topics}>
+                <FontAwesome name="list" size={14} color="#777"/> Topics: {topics}
+            </Text>
+            <TouchableOpacity onPress={onDetailsPress} style={styles.button} activeOpacity={0.8}>
                 <Text style={styles.buttonText}>View Details</Text>
             </TouchableOpacity>
         </View>
@@ -40,13 +43,15 @@ const styles = StyleSheet.create({
     card: {
         padding: 15,
         margin: 10,
-        backgroundColor: '#fff',
+        backgroundColor: '#f9f9f9',
         borderRadius: 12,
-        elevation: 5, // for shadow on Android
-        shadowColor: '#000', // for shadow on iOS
+        borderWidth: 1,
+        borderColor: '#ddd',
+        shadowColor: '#000',
         shadowOpacity: 0.1,
         shadowRadius: 6,
         shadowOffset: {width: 0, height: 4},
+        elevation: 5,
     },
     cardHeader: {
         flexDirection: 'row',
@@ -54,6 +59,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
+        flex: 1,
         fontSize: 18,
         fontWeight: 'bold',
         color: '#333',
@@ -61,19 +67,19 @@ const styles = StyleSheet.create({
     types: {
         fontSize: 14,
         color: '#555',
-        marginTop: 5,
+        marginTop: 10,
     },
     topics: {
         fontSize: 14,
-        color: '#555',
+        color: '#777',
         marginTop: 5,
     },
     button: {
-        marginTop: 10,
-        paddingVertical: 8,
+        marginTop: 15,
+        paddingVertical: 10,
         paddingHorizontal: 15,
         backgroundColor: '#007bff',
-        borderRadius: 5,
+        borderRadius: 6,
         alignItems: 'center',
     },
     buttonText: {
