@@ -8,11 +8,20 @@ import {CodingResource} from '@/services/api/types';
 import {useFavorites} from '@/hooks/storage/useFavorites';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
 import SearchBar from '@/components/ui/SearchBar';
+import CheckBox from "@/components/ui/CheckBox";
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
     const {favorites, toggleFavorite} = useFavorites();
-    const {filteredResources, loading, error, search, setSearch} = useFilterResources();
+    const {
+        filteredResources,
+        loading,
+        error,
+        search,
+        setSearch,
+        showFavorites,
+        setShowFavorites
+    } = useFilterResources();
 
     const renderItem = ({item}: ListRenderItemInfo<CodingResource>) => {
         const isFavorite = favorites.includes(item.id);
@@ -35,6 +44,7 @@ const HomeScreen: React.FC = () => {
     return (
         <View style={styles.container}>
             <SearchBar value={search} onChange={setSearch}/>
+            <CheckBox label={"Show favourites"} value={showFavorites} onChange={setShowFavorites}/>
             <FlatList
                 data={filteredResources}
                 renderItem={renderItem}
