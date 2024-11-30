@@ -7,8 +7,7 @@ import {ListRenderItemInfo} from 'react-native';
 import {CodingResource} from '@/services/api/types';
 import {useFavorites} from '@/hooks/storage/useFavorites';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
-import SearchBar from '@/components/ui/SearchBar';
-import CheckBox from "@/components/ui/CheckBox";
+import FilterBar from '@/components/ui/FilterBar';
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
@@ -20,7 +19,7 @@ const HomeScreen: React.FC = () => {
         search,
         setSearch,
         showFavorites,
-        setShowFavorites
+        setShowFavorites,
     } = useFilterResources();
 
     const renderItem = ({item}: ListRenderItemInfo<CodingResource>) => {
@@ -43,8 +42,12 @@ const HomeScreen: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <SearchBar value={search} onChange={setSearch}/>
-            <CheckBox label={"Show favourites"} value={showFavorites} onChange={setShowFavorites}/>
+            <FilterBar
+                searchValue={search}
+                onSearchChange={setSearch}
+                showFavorites={showFavorites}
+                onShowFavoritesChange={setShowFavorites}
+            />
             <FlatList
                 data={filteredResources}
                 renderItem={renderItem}
