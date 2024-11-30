@@ -16,4 +16,5 @@ export interface CodingResource {
     topics: string[];
     levels: string[];
     metaData?: MetaData;
+    isFavorite?: boolean;
 }
