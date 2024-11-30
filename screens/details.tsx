@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorMessage from '@/components/ui/ErrorMessage';
-import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
+import resourceDetailsStyles from '@/styles/routes/tabs/home/resourceDetailsScreenStyles';
 import useDetailResource from "@/hooks/api/useDetailResource";
 import ResourceDetailContent from '@/components/route/tabs/home/ResourceDetailContent';
 
