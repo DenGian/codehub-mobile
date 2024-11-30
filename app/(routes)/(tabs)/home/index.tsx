@@ -1,18 +1,14 @@
 import React from 'react';
 import {FlatList, View, Text} from 'react-native';
-import {useRouter} from 'expo-router';
-import EventCard from '@/components/route/tabs/home/eventCard';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {ListRenderItemInfo} from 'react-native';
 import {CodingResource} from '@/services/api/types';
-import {useFavorites} from '@/hooks/storage/useFavorites';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
 import FilterBar from '@/components/ui/FilterBar';
 import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
+import HomeScreenRenderItem from "@/components/route/tabs/home/HomeScreenRenderItem";
 
 const HomeScreen: React.FC = () => {
-    const router = useRouter();
-    const {favorites, toggleFavorite} = useFavorites();
     const {
         filteredResources,
         loading,
@@ -22,21 +18,6 @@ const HomeScreen: React.FC = () => {
         showFavorites,
         setShowFavorites,
     } = useFilterResources();
-
-    const renderItem = ({item}: ListRenderItemInfo<CodingResource>) => {
-        const isFavorite = favorites.includes(item.id);
-        return (
-            <EventCard
-                id={item.id}
-                title={item.description}
-                types={item.types.join(', ')}
-                topics={item.topics.join(', ')}
-                isFavorite={isFavorite}
-                onToggleFavorite={() => toggleFavorite(item.id)}
-                onDetailsPress={() => router.push(`/home/details/${item.id}`)}
-            />
-        );
-    };
 
     if (loading) return <LoadingSpinner visible/>;
     if (error) return <Text>{error}</Text>;
@@ -51,7 +32,7 @@ const HomeScreen: React.FC = () => {
             />
             <FlatList
                 data={filteredResources}
-                renderItem={renderItem}
+                renderItem={({item}: ListRenderItemInfo<CodingResource>) => <HomeScreenRenderItem item={item}/>}
                 keyExtractor={(item) => item.id.toString()}
             />
         </View>
