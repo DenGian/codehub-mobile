@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import SearchBar from '@/components/ui/SearchBar';
 import CheckBox from '@/components/ui/CheckBox';
+import filterBarStyles from "@/styles/routes/tabs/home/filterBarStyles";
 
 interface FilterBarProps {
     searchValue: string;
@@ -14,13 +15,13 @@ interface FilterBarProps {
 const FilterBar: React.FC<FilterBarProps> = (
     {searchValue, onSearchChange, showFavorites, onShowFavoritesChange,}) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.searchContainer}>
-                <Ionicons name="search" size={23} color="#555" style={styles.icon}/>
-                <SearchBar value={searchValue} onChange={onSearchChange} style={styles.searchBar}/>
+        <View style={filterBarStyles.container}>
+            <View style={filterBarStyles.searchContainer}>
+                <Ionicons name="search" size={23} color="#555" style={filterBarStyles.icon}/>
+                <SearchBar value={searchValue} onChange={onSearchChange} style={filterBarStyles.searchBar}/>
             </View>
 
-            <View style={styles.separator}/>
+            <View style={filterBarStyles.separator}/>
 
             <CheckBox
                 label="Show Favorites"
@@ -30,35 +31,5 @@ const FilterBar: React.FC<FilterBarProps> = (
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#f5f5f5',
-        padding: 10,
-        borderRadius: 8,
-        marginBottom: 10,
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 1},
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        elevation: 2,
-    },
-    searchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 5,
-    },
-    icon: {
-        marginRight: 8,
-    },
-    searchBar: {
-        flex: 1,
-    },
-    separator: {
-        height: 1,
-        backgroundColor: '#ddd',
-        marginBottom: 10,
-    },
-});
 
 export default FilterBar;
