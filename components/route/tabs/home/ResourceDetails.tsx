@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
+import resourceDetailsStyles from '@/styles/routes/tabs/home/resourceDetailsScreenStyles';
 
 interface ResourceDetailsProps {
     types: string[];
