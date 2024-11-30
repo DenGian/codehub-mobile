@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View, Text, StyleSheet} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import {useRouter} from 'expo-router';
 import EventCard from '@/components/route/tabs/home/eventCard';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
@@ -8,6 +8,7 @@ import {CodingResource} from '@/services/api/types';
 import {useFavorites} from '@/hooks/storage/useFavorites';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
 import FilterBar from '@/components/ui/FilterBar';
+import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
@@ -41,7 +42,7 @@ const HomeScreen: React.FC = () => {
     if (error) return <Text>{error}</Text>;
 
     return (
-        <View style={styles.container}>
+        <View style={homeScreenStyles.container}>
             <FilterBar
                 searchValue={search}
                 onSearchChange={setSearch}
@@ -56,9 +57,5 @@ const HomeScreen: React.FC = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {flex: 1, padding: 10},
-});
 
 export default HomeScreen;
