@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
-import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
+import resourceDetailsStyles from '@/styles/routes/tabs/home/resourceDetailsScreenStyles';
 
 interface ResourceHeaderProps {
     title: string;
