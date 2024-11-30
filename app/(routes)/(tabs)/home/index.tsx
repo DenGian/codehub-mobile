@@ -1,17 +1,18 @@
 import React from 'react';
-import {FlatList, View, Text} from 'react-native';
-import EventCard from "@/components/route/tabs/home/eventCard";
-import {useCodingResources} from '@/hooks/api/useCodingResources';
+import {FlatList, View, Text, StyleSheet} from 'react-native';
+import {useRouter} from 'expo-router';
+import EventCard from '@/components/route/tabs/home/eventCard';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import {CodingResource} from "@/services/api/types";
 import {ListRenderItemInfo} from 'react-native';
-import {useFavorites} from "@/hooks/storage/useFavorites";
-import {useRouter} from "expo-router";
+import {CodingResource} from '@/services/api/types';
+import {useFavorites} from '@/hooks/storage/useFavorites';
+import {useFilterResources} from '@/hooks/api/useFilterResources';
+import SearchBar from '@/components/ui/SearchBar';
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
-    const {resources, loading, error} = useCodingResources();
     const {favorites, toggleFavorite} = useFavorites();
+    const {filteredResources, loading, error, search, setSearch} = useFilterResources();
 
     const renderItem = ({item}: ListRenderItemInfo<CodingResource>) => {
         const isFavorite = favorites.includes(item.id);
@@ -23,25 +24,28 @@ const HomeScreen: React.FC = () => {
                 topics={item.topics.join(', ')}
                 isFavorite={isFavorite}
                 onToggleFavorite={() => toggleFavorite(item.id)}
-                onDetailsPress={() => {
-                    router.push(`/home/details/${item.id}`);
-                }}
+                onDetailsPress={() => router.push(`/home/details/${item.id}`)}
             />
         );
     };
 
-    if (loading) return <LoadingSpinner visible={true}/>;
+    if (loading) return <LoadingSpinner visible/>;
     if (error) return <Text>{error}</Text>;
 
     return (
-        <View>
+        <View style={styles.container}>
+            <SearchBar value={search} onChange={setSearch}/>
             <FlatList
-                data={resources}
+                data={filteredResources}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
             />
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {flex: 1, padding: 10},
+});
 
 export default HomeScreen;
