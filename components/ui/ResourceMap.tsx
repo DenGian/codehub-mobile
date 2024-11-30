@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
+import resourceDetailsStyles from '@/styles/routes/tabs/home/resourceDetailsScreenStyles';
 import mapStyles from "@/styles/routes/tabs/home/mapStyles";
 
 interface ResourceMapProps {
