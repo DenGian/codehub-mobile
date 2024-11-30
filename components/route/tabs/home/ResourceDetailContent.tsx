@@ -5,7 +5,7 @@ import ResourceDetailsSection from '@/components/route/tabs/home/ResourceDetails
 import ResourceMapSection from "@/components/route/tabs/home/ResourseMapSection";
 import BackButton from "@/components/ui/BackButton";
 import VisitSourceButton from '@/components/route/tabs/home/VisitSourceButton';
-import resourceDetailsStyles from '@/styles/routes/tabs/home/ResourceDetailsScreen';
+import resourceDetailsStyles from '@/styles/routes/tabs/home/resourceDetailsScreenStyles';
 import {CodingResource} from '@/services/api/types';
 
 interface ResourceDetailContentProps {
