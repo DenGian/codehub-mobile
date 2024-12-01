@@ -7,6 +7,7 @@ import {useFilterResources} from '@/hooks/api/useFilterResources';
 import FilterBar from '@/components/ui/FilterBar';
 import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
 import HomeScreenRenderItem from "@/components/route/tabs/home/HomeScreenRenderItem";
+import {loadMoreItems} from "@/utils/loadMoreItems";
 
 const HomeScreen: React.FC = () => {
     const {
@@ -27,12 +28,6 @@ const HomeScreen: React.FC = () => {
         setVisibleItems(filteredResources.slice(0, 5));
     }, [filteredResources]);
 
-    const loadMoreItems = () => {
-        const currentLength = visibleItems.length;
-        const moreItems = filteredResources.slice(currentLength, currentLength + 5);
-        setVisibleItems([...visibleItems, ...moreItems]);
-    };
-
     if (loading && !refreshing) return <LoadingSpinner visible/>;
     if (error) return <Text>{error}</Text>;
 
@@ -50,7 +45,7 @@ const HomeScreen: React.FC = () => {
                 keyExtractor={(item) => item.id.toString()}
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
-                onEndReached={loadMoreItems}
+                onEndReached={() => loadMoreItems(visibleItems, setVisibleItems, filteredResources)}
                 onEndReachedThreshold={0.5}
             />
         </View>
