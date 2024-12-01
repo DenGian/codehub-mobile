@@ -1,39 +1,13 @@
 import React from 'react';
-import useRegisterForm from '@/hooks/auth/useRegisterForm';
-import RegisterContent from '@/components/auth/RegisterContent';
+import {View} from 'react-native';
+import RegisterScreen from '@/screens/auth/RegisterPage';
 
-const Register = () => {
-    const {
-        emailAddress,
-        setEmailAddress,
-        password,
-        setPassword,
-        username,
-        setUsername,
-        pendingVerification,
-        code,
-        setCode,
-        loading,
-        onSignUpPress,
-        onPressVerify
-    } = useRegisterForm();
-
+const RegisterPage: React.FC = () => {
     return (
-        <RegisterContent
-            emailAddress={emailAddress}
-            setEmailAddress={setEmailAddress}
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
-            pendingVerification={pendingVerification}
-            code={code}
-            setCode={setCode}
-            loading={loading}
-            onSignUpPress={onSignUpPress}
-            onPressVerify={onPressVerify}
-        />
+        <View style={{flex: 1}}>
+            <RegisterScreen/>
+        </View>
     );
 };
 
-export default Register;
+export default RegisterPage;
