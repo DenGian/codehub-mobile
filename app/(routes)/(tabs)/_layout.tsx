@@ -1,8 +1,8 @@
 import React from 'react';
-import TabsPage from '@/screens/route/tabs/TabsPage';
+import TabsNavigator from "@/navigation/TabsNavigator";
 
 const TabsLayout = () => {
-    return <TabsPage/>;
+    return <TabsNavigator/>;
 };
 
 export default TabsLayout;
