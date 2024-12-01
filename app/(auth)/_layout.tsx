@@ -1,8 +1,8 @@
 import React from 'react';
-import AuthPages from "@/screens/auth/AuthPages";
+import AuthNavigator from "@/navigation/AuthNavigator";
 
 const AuthLayout = () => {
-    return <AuthPages/>;
+    return <AuthNavigator/>;
 };
 
 export default AuthLayout;
