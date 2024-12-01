@@ -1,6 +1,6 @@
 import React from 'react';
 import {CodingResource} from '@/services/api/types';
-import EventCard from '@/components/route/tabs/home/eventCard';
+import EventCard from '@/components/route/tabs/home/EventCard';
 import {useRouter} from 'expo-router';
 import {useFavorites} from '@/hooks/storage/useFavorites';
 
