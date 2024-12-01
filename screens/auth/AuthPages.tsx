@@ -1,9 +1,14 @@
 import React from 'react';
-import {Stack} from 'expo-router';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import LoginPage from '@/screens/auth/LoginPage';
+import RegisterPage from '@/screens/auth/RegisterPage';
+import ResetPage from '@/screens/auth/ResetPage';
 
-const AuthLayout = () => {
+const Stack = createNativeStackNavigator();
+
+const AuthPages = () => {
     return (
-        <Stack
+        <Stack.Navigator
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#6c47ff'
@@ -14,24 +19,27 @@ const AuthLayout = () => {
         >
             <Stack.Screen
                 name="login"
+                component={LoginPage}
                 options={{
                     headerTitle: 'Code-Hub'
                 }}
             />
             <Stack.Screen
                 name="register"
+                component={RegisterPage}
                 options={{
                     headerTitle: 'Create Account'
                 }}
             />
             <Stack.Screen
                 name="reset"
+                component={ResetPage}
                 options={{
                     headerTitle: 'Reset Password'
                 }}
             />
-        </Stack>
+        </Stack.Navigator>
     );
 };
 
-export default AuthLayout;
+export default AuthPages;
