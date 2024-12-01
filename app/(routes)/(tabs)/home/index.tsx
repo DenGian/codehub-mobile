@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, View, Text} from 'react-native';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {ListRenderItemInfo} from 'react-native';
@@ -21,6 +21,18 @@ const HomeScreen: React.FC = () => {
         handleRefresh
     } = useFilterResources();
 
+    const [visibleItems, setVisibleItems] = useState<CodingResource[]>([]);
+
+    React.useEffect(() => {
+        setVisibleItems(filteredResources.slice(0, 5));
+    }, [filteredResources]);
+
+    const loadMoreItems = () => {
+        const currentLength = visibleItems.length;
+        const moreItems = filteredResources.slice(currentLength, currentLength + 5);
+        setVisibleItems([...visibleItems, ...moreItems]);
+    };
+
     if (loading && !refreshing) return <LoadingSpinner visible/>;
     if (error) return <Text>{error}</Text>;
 
@@ -33,11 +45,13 @@ const HomeScreen: React.FC = () => {
                 onShowFavoritesChange={setShowFavorites}
             />
             <FlatList
-                data={filteredResources}
+                data={visibleItems}
                 renderItem={({item}: ListRenderItemInfo<CodingResource>) => <HomeScreenRenderItem item={item}/>}
                 keyExtractor={(item) => item.id.toString()}
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
+                onEndReached={loadMoreItems}
+                onEndReachedThreshold={0.5}
             />
         </View>
     );
