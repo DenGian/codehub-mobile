@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import {View} from 'react-native';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
 import FilterBar from '@/components/ui/FilterBar';
-import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
 import FilteredList from '@/components/route/tabs/home/FilteredList';
+import LoadingOrError from '@/components/ui/LoadingOrError';
+import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
 import {useLazyLoading} from "@/hooks/route/tabs/home/useLazyLoading";
 
 const HomeScreen: React.FC = () => {
@@ -22,11 +22,9 @@ const HomeScreen: React.FC = () => {
 
     const {visibleItems, setVisibleItems} = useLazyLoading(filteredResources);
 
-    if (loading && !refreshing) return <LoadingSpinner visible/>;
-    if (error) return <Text>{error}</Text>;
-
     return (
         <View style={homeScreenStyles.container}>
+            <LoadingOrError loading={loading} refreshing={refreshing} error={error}/>
             <FilterBar
                 searchValue={search}
                 onSearchChange={setSearch}
