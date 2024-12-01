@@ -10,7 +10,7 @@ export const useFilterResources = () => {
     const [showFavorites, setShowFavorites] = useState<boolean>(false);
     const [filteredResources, setFilteredResources] = useState<CodingResource[]>([]);
     const [refreshing, setRefreshing] = useState<boolean>(false);
-    
+
     const handleRefresh = useCallback(async () => {
         setRefreshing(true);
         try {
@@ -33,7 +33,7 @@ export const useFilterResources = () => {
             }
 
             if (showFavorites) {
-                filtered = filtered.filter(resource => favorites.includes(resource.id));
+                filtered = filtered.filter(resource => resource.isFavorite);
             }
 
             setFilteredResources(filtered);
