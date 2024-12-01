@@ -25,7 +25,7 @@ export const useCodingResources = () => {
     useEffect(() => {
         getResources().then(() => {
         });
-    }, []);
+    }, [getResources]);
 
     return {
         resources,
