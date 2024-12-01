@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {FlatList, View, Text} from 'react-native';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import {ListRenderItemInfo} from 'react-native';
 import {CodingResource} from '@/services/api/types';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
 import FilterBar from '@/components/ui/FilterBar';
 import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
-import HomeScreenRenderItem from "@/components/route/tabs/home/HomeScreenRenderItem";
-import {loadMoreItems} from "@/utils/loadMoreItems";
+import {loadMoreItems} from '@/utils/loadMoreItems';
+import {renderItem} from "@/components/route/tabs/home/RenderItem";
 
 const HomeScreen: React.FC = () => {
     const {
@@ -41,7 +40,7 @@ const HomeScreen: React.FC = () => {
             />
             <FlatList
                 data={visibleItems}
-                renderItem={({item}: ListRenderItemInfo<CodingResource>) => <HomeScreenRenderItem item={item}/>}
+                renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
