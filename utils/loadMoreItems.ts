@@ -1,4 +1,5 @@
 import {CodingResource} from '@/services/api/types';
+import {LAZY_LOAD_INCREMENT} from '@/config/constants';
 
 export const loadMoreItems = (
     visibleItems: CodingResource[],
@@ -6,6 +7,6 @@ export const loadMoreItems = (
     filteredResources: CodingResource[]
 ) => {
     const currentLength = visibleItems.length;
-    const moreItems = filteredResources.slice(currentLength, currentLength + 10);
+    const moreItems = filteredResources.slice(currentLength, currentLength + LAZY_LOAD_INCREMENT);
     setVisibleItems([...visibleItems, ...moreItems]);
 };
