@@ -1,8 +1,8 @@
 import React from 'react';
-import RootLayoutNav from '@/components/layout/RootLayoutNav';
+import RootNavigator from "@/navigation/RootNavigator";
 
 const AppLayout = () => {
-    return <RootLayoutNav/>;
+    return <RootNavigator/>;
 };
 
 export default AppLayout;
