@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {FlatList, View, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text} from 'react-native';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {CodingResource} from '@/services/api/types';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
 import FilterBar from '@/components/ui/FilterBar';
 import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
-import {loadMoreItems} from '@/utils/loadMoreItems';
-import {renderItem} from "@/components/route/tabs/home/RenderItem";
+import FilteredList from '@/components/route/tabs/home/FilteredList';
 
 const HomeScreen: React.FC = () => {
     const {
@@ -23,7 +22,7 @@ const HomeScreen: React.FC = () => {
 
     const [visibleItems, setVisibleItems] = useState<CodingResource[]>([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         setVisibleItems(filteredResources.slice(0, 5));
     }, [filteredResources]);
 
@@ -38,14 +37,12 @@ const HomeScreen: React.FC = () => {
                 showFavorites={showFavorites}
                 onShowFavoritesChange={setShowFavorites}
             />
-            <FlatList
-                data={visibleItems}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
+            <FilteredList
+                visibleItems={visibleItems}
+                setVisibleItems={setVisibleItems}
+                filteredResources={filteredResources}
                 refreshing={refreshing}
-                onRefresh={handleRefresh}
-                onEndReached={() => loadMoreItems(visibleItems, setVisibleItems, filteredResources)}
-                onEndReachedThreshold={0.5}
+                handleRefresh={handleRefresh}
             />
         </View>
     );
