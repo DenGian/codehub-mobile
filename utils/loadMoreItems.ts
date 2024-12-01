@@ -6,6 +6,6 @@ export const loadMoreItems = (
     filteredResources: CodingResource[]
 ) => {
     const currentLength = visibleItems.length;
-    const moreItems = filteredResources.slice(currentLength, currentLength + 5);
+    const moreItems = filteredResources.slice(currentLength, currentLength + 10);
     setVisibleItems([...visibleItems, ...moreItems]);
 };
