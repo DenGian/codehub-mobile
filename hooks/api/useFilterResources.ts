@@ -1,14 +1,26 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
 import {CodingResource} from '@/services/api/types';
 import {useFavorites} from '@/hooks/storage/useFavorites';
 
 export const useFilterResources = () => {
-    const {resources, loading, error} = useCodingResources();
+    const {resources, loading, error, reFetch} = useCodingResources();
     const {favorites} = useFavorites();
     const [search, setSearch] = useState<string>('');
     const [showFavorites, setShowFavorites] = useState<boolean>(false);
     const [filteredResources, setFilteredResources] = useState<CodingResource[]>([]);
+    const [refreshing, setRefreshing] = useState<boolean>(false);
+    
+    const handleRefresh = useCallback(async () => {
+        setRefreshing(true);
+        try {
+            await reFetch();
+        } catch (err) {
+            console.error('Refresh failed', err);
+        } finally {
+            setRefreshing(false);
+        }
+    }, [reFetch]);
 
     useEffect(() => {
         if (resources) {
@@ -36,5 +48,7 @@ export const useFilterResources = () => {
         setSearch,
         showFavorites,
         setShowFavorites,
+        refreshing,
+        handleRefresh,
     };
 };
