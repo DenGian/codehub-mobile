@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import {CodingResource} from '@/services/api/types';
 import {useFilterResources} from '@/hooks/api/useFilterResources';
 import FilterBar from '@/components/ui/FilterBar';
 import homeScreenStyles from "@/styles/routes/tabs/home/homeScreenStyles";
 import FilteredList from '@/components/route/tabs/home/FilteredList';
+import {useLazyLoading} from "@/hooks/route/tabs/home/useLazyLoading";
 
 const HomeScreen: React.FC = () => {
     const {
@@ -20,11 +20,7 @@ const HomeScreen: React.FC = () => {
         handleRefresh
     } = useFilterResources();
 
-    const [visibleItems, setVisibleItems] = useState<CodingResource[]>([]);
-
-    useEffect(() => {
-        setVisibleItems(filteredResources.slice(0, 5));
-    }, [filteredResources]);
+    const {visibleItems, setVisibleItems} = useLazyLoading(filteredResources);
 
     if (loading && !refreshing) return <LoadingSpinner visible/>;
     if (error) return <Text>{error}</Text>;
