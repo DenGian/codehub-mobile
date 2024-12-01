@@ -17,9 +17,11 @@ const HomeScreen: React.FC = () => {
         setSearch,
         showFavorites,
         setShowFavorites,
+        refreshing,
+        handleRefresh
     } = useFilterResources();
 
-    if (loading) return <LoadingSpinner visible/>;
+    if (loading && !refreshing) return <LoadingSpinner visible/>;
     if (error) return <Text>{error}</Text>;
 
     return (
@@ -34,6 +36,8 @@ const HomeScreen: React.FC = () => {
                 data={filteredResources}
                 renderItem={({item}: ListRenderItemInfo<CodingResource>) => <HomeScreenRenderItem item={item}/>}
                 keyExtractor={(item) => item.id.toString()}
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
             />
         </View>
     );
