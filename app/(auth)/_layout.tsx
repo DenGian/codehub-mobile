@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthPages from '@/screens/AuthPages';
+import AuthPages from "@/screens/auth/AuthPages";
 
 const AuthLayout = () => {
     return <AuthPages/>;
