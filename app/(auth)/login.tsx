@@ -1,31 +1,13 @@
 import React from 'react';
 import {View} from 'react-native';
-import loginStyles from '@/styles/auth/loginStyles';
-import useLoginForm from '@/hooks/auth/useLoginForm';
-import LoginContent from '@/components/auth/LoginContent';
+import LoginScreen from '@/screens/auth/LoginPage';
 
-const login = () => {
-    const {
-        emailAddress,
-        setEmailAddress,
-        password,
-        setPassword,
-        loading,
-        onSignInPress
-    } = useLoginForm();
-
+const LoginPage: React.FC = () => {
     return (
-        <View style={loginStyles.container}>
-            <LoginContent
-                loading={loading}
-                emailAddress={emailAddress}
-                setEmailAddress={setEmailAddress}
-                password={password}
-                setPassword={setPassword}
-                onSignInPress={onSignInPress}
-            />
+        <View style={{flex: 1}}>
+            <LoginScreen/>
         </View>
     );
 };
 
-export default login;
+export default LoginPage;
