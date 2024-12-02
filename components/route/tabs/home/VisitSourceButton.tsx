@@ -1,6 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
 import {handleOpenURL} from '@/utils/urlUtils';
+import visitSourceButtonStyles from "@/styles/routes/tabs/home/visitSourceButtonStyles";
 
 interface VisitSourceButtonProps {
     url: string;
@@ -9,28 +10,12 @@ interface VisitSourceButtonProps {
 const VisitSourceButton: React.FC<VisitSourceButtonProps> = ({url}) => {
     return (
         <TouchableOpacity
-            style={styles.button}
+            style={visitSourceButtonStyles.button}
             onPress={() => handleOpenURL(url)}
         >
-            <Text style={styles.buttonText}>Visit Source</Text>
+            <Text style={visitSourceButtonStyles.buttonText}>Visit Source</Text>
         </TouchableOpacity>
     );
 };
-
-const styles = StyleSheet.create({
-    button: {
-        marginTop: 10,
-        paddingVertical: 8,
-        paddingHorizontal: 15,
-        backgroundColor: '#007bff',
-        borderRadius: 5,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '600',
-    },
-});
 
 export default VisitSourceButton;
