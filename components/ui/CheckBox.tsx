@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, Switch, StyleSheet} from 'react-native';
+import {View, Text, Switch} from 'react-native';
+import checkBoxStyles from '@/styles/ui/checkBoxStyles';
 
 interface CheckBoxProps {
     label: string;
@@ -9,23 +10,11 @@ interface CheckBoxProps {
 
 const CheckBox: React.FC<CheckBoxProps> = ({label, value, onChange}) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.label}>{label}</Text>
+        <View style={checkBoxStyles.container}>
+            <Text style={checkBoxStyles.label}>{label}</Text>
             <Switch value={value} onValueChange={onChange}/>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    label: {
-        marginRight: 10,
-        fontSize: 16,
-    },
-});
 
 export default CheckBox;
