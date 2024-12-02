@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, StyleSheet, View, ActivityIndicator} from 'react-native';
+import {Button, View, ActivityIndicator} from 'react-native';
+import primaryButtonStyles from '@/styles/ui/primaryButtonStyles';
 
 interface PrimaryButtonProps {
     onPress: () => void;
@@ -10,7 +11,7 @@ interface PrimaryButtonProps {
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress, title, color, loading = false}) => {
     return (
-        <View style={styles.buttonContainer}>
+        <View style={primaryButtonStyles.buttonContainer}>
             {loading ? (
                 <ActivityIndicator size="small" color={color}/>
             ) : (
@@ -19,11 +20,5 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress, title, color, loa
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    buttonContainer: {
-        marginVertical: 8,
-    },
-});
 
 export default PrimaryButton;
