@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import GreetingText from '@/components/ui/GreetingText';
+import GreetingText from '@/components/route/tabs/profile/GreetingText';
 import UserInputFields from '@/components/ui/UserInputFields';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import profileStyles from '@/styles/routes/tabs/profile/profileStyles';
