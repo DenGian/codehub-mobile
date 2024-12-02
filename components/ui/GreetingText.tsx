@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text} from 'react-native';
+import greetingTextStyles from '@/styles/ui/greetingTextStyles';
 
 interface GreetingTextProps {
     firstName: string;
@@ -8,16 +9,10 @@ interface GreetingTextProps {
 
 const GreetingText: React.FC<GreetingTextProps> = ({firstName, lastName}) => {
     return (
-        <Text style={styles.greetingText}>
+        <Text style={greetingTextStyles.greetingText}>
             Good morning {firstName} {lastName}!
         </Text>
     );
 };
-
-const styles = StyleSheet.create({
-    greetingText: {
-        textAlign: 'center',
-    },
-});
 
 export default GreetingText;
