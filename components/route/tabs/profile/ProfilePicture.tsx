@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Image, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import {Linking} from 'react-native';
+import {useProfilePicture} from "@/context/ProfilePictureContext";
 
 const ProfilePicture = () => {
-    const [profilePicture, setProfilePicture] = useState<string | null>(null);
+    const {profilePicture, setProfilePicture} = useProfilePicture()
 
     const showImagePickerOptions = () => {
         Alert.alert(
