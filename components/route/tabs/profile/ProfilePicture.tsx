@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Image, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import {Linking} from 'react-native';
 
 const ProfilePicture = () => {
     const [profilePicture, setProfilePicture] = useState<string | null>(null);
@@ -30,7 +31,15 @@ const ProfilePicture = () => {
     const pickImageFromLibrary = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (!permissionResult.granted) {
-            alert('Permission to access the gallery is required!');
+            Alert.alert(
+                'Permission Required',
+                'Permission to access the library is required. Please enable it in the app settings.',
+                [
+                    {text: 'Cancel', style: 'cancel'},
+                    {text: 'Open Settings', onPress: () => Linking.openSettings()},
+                ],
+                {cancelable: true}
+            );
             return;
         }
 
@@ -49,7 +58,15 @@ const ProfilePicture = () => {
     const takePhoto = async () => {
         const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
         if (!permissionResult.granted) {
-            alert('Permission to access the camera is required!');
+            Alert.alert(
+                'Permission Required',
+                'Permission to access the camera is required. Please enable it in the app settings.',
+                [
+                    {text: 'Cancel', style: 'cancel'},
+                    {text: 'Open Settings', onPress: () => Linking.openSettings()},
+                ],
+                {cancelable: true}
+            );
             return;
         }
 
