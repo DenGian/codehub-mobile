@@ -10,7 +10,7 @@ interface GreetingTextProps {
 const GreetingText: React.FC<GreetingTextProps> = ({firstName, lastName}) => {
     return (
         <Text style={greetingTextStyles.greetingText}>
-            Good morning {firstName} {lastName}!
+            Hello, {firstName} {lastName}!
         </Text>
     );
 };
