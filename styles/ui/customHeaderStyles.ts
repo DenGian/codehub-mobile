@@ -5,7 +5,6 @@ const customHeaderStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         padding: 13,
-        backgroundColor: '#6c47ff',
     },
     headerText: {
         color: '#fff',
