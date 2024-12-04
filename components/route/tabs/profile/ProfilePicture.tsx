@@ -3,6 +3,7 @@ import {View, Image, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import {Linking} from 'react-native';
 import {useProfilePicture} from "@/context/ProfilePictureContext";
+import profilePictureStyles from "@/styles/routes/tabs/profile/profilePictureStyles";
 
 const ProfilePicture = () => {
     const {profilePicture, setProfilePicture} = useProfilePicture()
@@ -83,7 +84,7 @@ const ProfilePicture = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={profilePictureStyles.container}>
             <TouchableOpacity onPress={showImagePickerOptions}>
                 <Image
                     source={
@@ -91,26 +92,11 @@ const ProfilePicture = () => {
                             ? {uri: profilePicture}
                             : require('@/assets/images/default-profile.png')
                     }
-                    style={styles.profilePicture}
+                    style={profilePictureStyles.profilePicture}
                 />
             </TouchableOpacity>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-    },
-    profilePicture: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        borderWidth: 1,
-        borderColor: '#6c47ff',
-    },
-});
 
 export default ProfilePicture;
