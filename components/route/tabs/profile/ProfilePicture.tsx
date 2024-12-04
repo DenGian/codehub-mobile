@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {View, Image, TouchableOpacity, Alert} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import {Linking} from 'react-native';
 import {useProfilePicture} from "@/context/ProfilePictureContext";
