@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Calendar} from 'react-native-calendars';
+import {useRouter} from 'expo-router';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
 import {formatDate} from '@/utils/formatDate';
 import LoadingOrError from '@/components/ui/LoadingOrError';
@@ -16,6 +17,7 @@ interface MarkedDates {
 const CustomCalendarScreen = () => {
     const [selectedDate, setSelectedDate] = useState<string>('');
     const {resources: events, loading, error} = useCodingResources();
+    const router = useRouter();
 
     const filteredEvents = events?.filter(event => event.metaData?.date && formatDate(event.metaData.date) === selectedDate);
 
@@ -54,6 +56,12 @@ const CustomCalendarScreen = () => {
                                 <Text style={styles.eventTime}>
                                     Time: {event.metaData?.date && formatDate(event.metaData.date, 'HH:mm')}
                                 </Text>
+                                <TouchableOpacity
+                                    style={styles.button}
+                                    onPress={() => router.push(`/home/details/${event.id}`)}
+                                >
+                                    <Text style={styles.buttonText}>View Details</Text>
+                                </TouchableOpacity>
                             </View>
                         ))
                     ) : (
@@ -104,6 +112,19 @@ const styles = StyleSheet.create({
         color: '#999',
         textAlign: 'center',
         marginTop: 16,
+    },
+    button: {
+        marginTop: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        backgroundColor: '#007bff',
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
     },
 });
 
