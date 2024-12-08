@@ -1,15 +1,9 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Calendar} from 'react-native-calendars';
-
-interface Event {
-    name: string;
-    time: string;
-}
-
-interface Events {
-    [date: string]: Event[];
-}
+import {useCodingResources} from '@/hooks/api/useCodingResources';
+import {formatDate} from '@/utils/formatDate';
+import LoadingOrError from '@/components/ui/LoadingOrError';
 
 interface MarkedDates {
     [date: string]: {
@@ -21,25 +15,20 @@ interface MarkedDates {
 
 const CustomCalendarScreen = () => {
     const [selectedDate, setSelectedDate] = useState<string>('');
+    const {resources: events, loading, error} = useCodingResources();
 
-    // Example events
-    const events: Events = {
-        '2024-12-01': [{name: 'Event 1', time: '10:00 AM'}],
-        '2024-12-03': [
-            {name: 'Event 2', time: '2:00 PM'},
-            {name: 'Event 3', time: '6:00 PM'},
-        ],
-    };
-
-    // Create a markedDates object manually
     const markedDates: MarkedDates = {};
-    for (const date in events) {
-        markedDates[date] = {marked: true};
-    }
+    events?.forEach(event => {
+        if (event.metaData?.date) {
+            const formattedDate = formatDate(event.metaData.date);
+            markedDates[formattedDate] = {marked: true};
+        }
+    });
+
     if (selectedDate) {
         markedDates[selectedDate] = {
             selected: true,
-            marked: !!events[selectedDate], // Mark if it has events
+            marked: !!events?.find(event => event.metaData?.date && formatDate(event.metaData.date) === selectedDate),
             selectedColor: 'blue',
         };
     }
@@ -51,11 +40,15 @@ const CustomCalendarScreen = () => {
                 markedDates={markedDates}
             />
             <View style={styles.eventsContainer}>
-                {events[selectedDate]?.length ? (
-                    events[selectedDate].map((event, index) => (
-                        <Text key={index} style={styles.event}>
-                            {event.name} - {event.time}
-                        </Text>
+                <LoadingOrError loading={loading} refreshing={false} error={error}/>
+                {!loading && !error && events?.filter(event => event.metaData?.date && formatDate(event.metaData.date) === selectedDate).length ? (
+                    events.filter(event => event.metaData?.date && formatDate(event.metaData.date) === selectedDate).map((event, index) => (
+                        <View key={index} style={styles.event}>
+                            <Text style={styles.eventTitle}>{event.description}</Text>
+                            <Text style={styles.eventDetails}>
+                                {event.metaData?.location?.lat}, {event.metaData?.location?.long} - {event.metaData?.date && formatDate(event.metaData.date, 'HH:mm')}
+                            </Text>
+                        </View>
                     ))
                 ) : (
                     <Text style={styles.noEvents}>No events for this date</Text>
@@ -73,14 +66,16 @@ const styles = StyleSheet.create({
     eventsContainer: {
         padding: 16,
     },
-    header: {
-        fontSize: 18,
-        fontWeight: 'bold',
+    event: {
         marginBottom: 8,
     },
-    event: {
+    eventTitle: {
         fontSize: 16,
-        marginVertical: 4,
+        fontWeight: 'bold',
+    },
+    eventDetails: {
+        fontSize: 14,
+        color: '#666',
     },
     noEvents: {
         fontSize: 16,
