@@ -46,10 +46,13 @@ const CustomCalendarScreen = () => {
                 {!loading && !error && (
                     filteredEvents?.length ? (
                         filteredEvents.map((event, index) => (
-                            <View key={index} style={styles.event}>
+                            <View key={index} style={styles.eventCard}>
                                 <Text style={styles.eventTitle}>{event.description}</Text>
                                 <Text style={styles.eventDetails}>
-                                    {event.metaData?.location?.lat}, {event.metaData?.location?.long} - {event.metaData?.date && formatDate(event.metaData.date, 'HH:mm')}
+                                    Location: {event.metaData?.location?.lat}, {event.metaData?.location?.long}
+                                </Text>
+                                <Text style={styles.eventTime}>
+                                    Time: {event.metaData?.date && formatDate(event.metaData.date, 'HH:mm')}
                                 </Text>
                             </View>
                         ))
@@ -70,20 +73,37 @@ const styles = StyleSheet.create({
     eventsContainer: {
         padding: 16,
     },
-    event: {
-        marginBottom: 8,
+    eventCard: {
+        backgroundColor: '#f9f9f9',
+        borderRadius: 8,
+        padding: 16,
+        marginBottom: 12,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        shadowOffset: {width: 0, height: 2},
+        elevation: 3,
     },
     eventTitle: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
+        color: '#333',
     },
     eventDetails: {
         fontSize: 14,
-        color: '#666',
+        color: '#555',
+        marginTop: 8,
+    },
+    eventTime: {
+        fontSize: 14,
+        color: '#777',
+        marginTop: 4,
     },
     noEvents: {
         fontSize: 16,
         color: '#999',
+        textAlign: 'center',
+        marginTop: 16,
     },
 });
 
