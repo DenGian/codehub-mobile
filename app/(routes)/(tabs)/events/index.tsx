@@ -49,7 +49,7 @@ const CustomCalendarScreen = () => {
                             <View key={index} style={styles.event}>
                                 <Text style={styles.eventTitle}>{event.description}</Text>
                                 <Text style={styles.eventDetails}>
-                                    {event.metaData?.location?.lat}, {event.metaData?.location?.long} - {formatDate(event.metaData.date, 'HH:mm')}
+                                    {event.metaData?.location?.lat}, {event.metaData?.location?.long} - {event.metaData?.date && formatDate(event.metaData.date, 'HH:mm')}
                                 </Text>
                             </View>
                         ))
