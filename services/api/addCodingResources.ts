@@ -8,14 +8,21 @@ if (!API_TOKEN) {
 }
 
 export const addCodingResources = async (codingResource: CodingResource): Promise<CodingResource> => {
+    if (!codingResource) {
+        throw new Error('Invalid coding resource data.');
+    }
     try {
-        return await apiClient<CodingResource>('/codingResources', {
+        const response = await apiClient<CodingResource>('/codingResources', {
             method: 'POST',
             headers: {
-                Authorization: `Bearer ${API_TOKEN}`,
+                "Authorization": `Bearer ${API_TOKEN}`,
+                "Content-Type": "application/json",
+                "Accept": "application/json",
             },
             body: JSON.stringify(codingResource),
         });
+        console.log('Resource added successfully:', response);
+        return response;
     } catch (error) {
         console.error('Error adding coding resource:', error);
         throw error;
