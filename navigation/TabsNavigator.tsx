@@ -41,6 +41,17 @@ const TabsPage = () => {
                 redirect={!isSignedIn}
             />
             <Tabs.Screen
+                name="addEvents/index"
+                options={{
+                    headerTitle: 'Add Event',
+                    tabBarIcon: ({color, size}) => (
+                        <Ionicons name="create-outline" size={size} color={color}/>
+                    ),
+                    tabBarLabel: 'Add Event'
+                }}
+                redirect={!isSignedIn}
+            />
+            <Tabs.Screen
                 name="profile/index"
                 options={{
                     headerTitle: 'My Profile',
