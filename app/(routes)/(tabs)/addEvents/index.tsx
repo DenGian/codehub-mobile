@@ -22,6 +22,12 @@ const AddEventForm: React.FC = () => {
             return;
         }
 
+        const urlRegex = /^(https?|ftp):\/\/[^\s\/$.?#].\S*$/i;
+        if (!urlRegex.test(url)) {
+            Alert.alert('Error', 'Invalid URL format.');
+            return;
+        }
+
         if ((date && (!lat || !long)) || (lat && (!date || !long)) || (long && (!date || !lat))) {
             Alert.alert('Error', 'Please provide date, latitude, and longitude together.');
             return;
