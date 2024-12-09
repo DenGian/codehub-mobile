@@ -15,6 +15,8 @@ const AddEventForm: React.FC = () => {
     const [long, setLong] = useState('');
 
     const handleSubmit = async () => {
+        const formattedDate = date ? new Date(date).toISOString() : undefined;
+
         const newResource: CodingResource = {
             id: 0,
             description,
@@ -23,7 +25,7 @@ const AddEventForm: React.FC = () => {
             topics: topics.split(',').map(topic => topic.trim()),
             levels: levels.split(',').map(level => level.trim()),
             metaData: {
-                date: date || undefined,
+                date: formattedDate,
                 location: lat && long ? {lat: parseFloat(lat), long: parseFloat(long)} : undefined,
             },
         };
