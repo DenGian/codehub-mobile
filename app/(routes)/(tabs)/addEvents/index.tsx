@@ -28,6 +28,12 @@ const AddEventForm: React.FC = () => {
             return;
         }
 
+        const commaSeparatedRegex = /,/;
+        if (!commaSeparatedRegex.test(types) || !commaSeparatedRegex.test(topics) || !commaSeparatedRegex.test(levels)) {
+            Alert.alert('Error', 'Types, topics, and levels must be comma-separated.');
+            return;
+        }
+
         if ((date && (!lat || !long)) || (lat && (!date || !long)) || (long && (!date || !lat))) {
             Alert.alert('Error', 'Please provide date, latitude, and longitude together.');
             return;
