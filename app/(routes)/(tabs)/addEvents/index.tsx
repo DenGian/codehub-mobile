@@ -15,6 +15,27 @@ const AddEventForm: React.FC = () => {
     const [long, setLong] = useState('');
 
     const handleSubmit = async () => {
+        if (!description || !url || !types || !topics || !levels) {
+            Alert.alert('Error', 'Please fill in all required fields.');
+            return;
+        }
+
+        if (lat && isNaN(parseFloat(lat))) {
+            Alert.alert('Error', 'Invalid latitude value.');
+            return;
+        }
+
+        if (long && isNaN(parseFloat(long))) {
+            Alert.alert('Error', 'Invalid longitude value.');
+            return;
+        }
+
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (date && !dateRegex.test(date)) {
+            Alert.alert('Error', 'Invalid date format. Please use YYYY-MM-DD.');
+            return;
+        }
+
         const formattedDate = date ? new Date(date).toISOString() : undefined;
 
         const newResource: CodingResource = {
@@ -40,14 +61,14 @@ const AddEventForm: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <InputField placeholder="Description" value={description} onChangeText={setDescription}/>
-            <InputField placeholder="URL" value={url} onChangeText={setUrl}/>
-            <InputField placeholder="Types (comma-separated)" value={types} onChangeText={setTypes}/>
-            <InputField placeholder="Topics (comma-separated)" value={topics} onChangeText={setTopics}/>
-            <InputField placeholder="Levels (comma-separated)" value={levels} onChangeText={setLevels}/>
-            <InputField placeholder="Date (optional, YYYY-MM-DD)" value={date} onChangeText={setDate}/>
-            <InputField placeholder="Latitude (optional)" value={lat} onChangeText={setLat}/>
-            <InputField placeholder="Longitude (optional)" value={long} onChangeText={setLong}/>
+            <InputField placeholder="Description*" value={description} onChangeText={setDescription}/>
+            <InputField placeholder="URL*" value={url} onChangeText={setUrl}/>
+            <InputField placeholder="Types* (comma-separated)" value={types} onChangeText={setTypes}/>
+            <InputField placeholder="Topics* (comma-separated)" value={topics} onChangeText={setTopics}/>
+            <InputField placeholder="Levels* (comma-separated)" value={levels} onChangeText={setLevels}/>
+            <InputField placeholder="Date" value={date} onChangeText={setDate}/>
+            <InputField placeholder="Latitude" value={lat} onChangeText={setLat}/>
+            <InputField placeholder="Longitude" value={long} onChangeText={setLong}/>
             <Button title="Add Resource" onPress={handleSubmit}/>
         </View>
     );
