@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {View, Button, Alert, StyleSheet} from 'react-native';
+import {View, Alert, StyleSheet} from 'react-native';
 import InputField from '@/components/ui/InputField';
+import PrimaryButton from '@/components/ui/PrimaryButton';
 import {addCodingResources} from '@/services/api/addCodingResources';
 import {CodingResource} from '@/services/api/types';
 
@@ -13,6 +14,7 @@ const AddEventForm: React.FC = () => {
     const [date, setDate] = useState('');
     const [lat, setLat] = useState('');
     const [long, setLong] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async () => {
         if (!description || !url || !types || !topics || !levels) {
@@ -52,6 +54,7 @@ const AddEventForm: React.FC = () => {
         };
 
         try {
+            setLoading(true);
             const addedResource = await addCodingResources(newResource);
             Alert.alert('Success', `Resource added with ID: ${addedResource.id}`);
             setDescription('');
@@ -64,6 +67,8 @@ const AddEventForm: React.FC = () => {
             setLong('');
         } catch (error) {
             Alert.alert('Error', 'Failed to add resource');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -79,7 +84,7 @@ const AddEventForm: React.FC = () => {
                         keyboardType="numbers-and-punctuation"/>
             <InputField placeholder="Longitude" value={long} onChangeText={setLong}
                         keyboardType="numbers-and-punctuation"/>
-            <Button title="Add Resource" onPress={handleSubmit}/>
+            <PrimaryButton onPress={handleSubmit} title="Add Resource" color={'#6c47ff'} loading={loading}/>
         </View>
     );
 };
