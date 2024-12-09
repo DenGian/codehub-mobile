@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 import {useRouter} from 'expo-router';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
@@ -43,7 +43,7 @@ const CustomCalendarScreen = () => {
                 onDayPress={(day: { dateString: string }) => setSelectedDate(day.dateString)}
                 markedDates={markedDates}
             />
-            <View style={styles.eventsContainer}>
+            <ScrollView style={styles.eventsContainer}>
                 <LoadingOrError loading={loading} refreshing={false} error={error}/>
                 {!loading && !error && (
                     filteredEvents?.length ? (
@@ -68,7 +68,7 @@ const CustomCalendarScreen = () => {
                         <Text style={styles.noEvents}>No events for this date</Text>
                     )
                 )}
-            </View>
+            </ScrollView>
         </View>
     );
 };
