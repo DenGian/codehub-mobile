@@ -54,6 +54,14 @@ const AddEventForm: React.FC = () => {
         try {
             const addedResource = await addCodingResources(newResource);
             Alert.alert('Success', `Resource added with ID: ${addedResource.id}`);
+            setDescription('');
+            setUrl('');
+            setTypes('');
+            setTopics('');
+            setLevels('');
+            setDate('');
+            setLat('');
+            setLong('');
         } catch (error) {
             Alert.alert('Error', 'Failed to add resource');
         }
