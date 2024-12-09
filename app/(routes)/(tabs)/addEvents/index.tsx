@@ -10,6 +10,9 @@ const AddEventForm: React.FC = () => {
     const [types, setTypes] = useState('');
     const [topics, setTopics] = useState('');
     const [levels, setLevels] = useState('');
+    const [date, setDate] = useState('');
+    const [lat, setLat] = useState('');
+    const [long, setLong] = useState('');
 
     const handleSubmit = async () => {
         const newResource: CodingResource = {
@@ -19,6 +22,10 @@ const AddEventForm: React.FC = () => {
             types: types.split(',').map(type => type.trim()),
             topics: topics.split(',').map(topic => topic.trim()),
             levels: levels.split(',').map(level => level.trim()),
+            metaData: {
+                date: date || undefined,
+                location: lat && long ? {lat: parseFloat(lat), long: parseFloat(long)} : undefined,
+            },
         };
 
         try {
@@ -36,6 +43,9 @@ const AddEventForm: React.FC = () => {
             <InputField placeholder="Types (comma-separated)" value={types} onChangeText={setTypes}/>
             <InputField placeholder="Topics (comma-separated)" value={topics} onChangeText={setTopics}/>
             <InputField placeholder="Levels (comma-separated)" value={levels} onChangeText={setLevels}/>
+            <InputField placeholder="Date (optional, YYYY-MM-DD)" value={date} onChangeText={setDate}/>
+            <InputField placeholder="Latitude (optional)" value={lat} onChangeText={setLat}/>
+            <InputField placeholder="Longitude (optional)" value={long} onChangeText={setLong}/>
             <Button title="Add Resource" onPress={handleSubmit}/>
         </View>
     );
