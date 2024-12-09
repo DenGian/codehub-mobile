@@ -22,6 +22,11 @@ const AddEventForm: React.FC = () => {
             return;
         }
 
+        if ((date && (!lat || !long)) || (lat && (!date || !long)) || (long && (!date || !lat))) {
+            Alert.alert('Error', 'Please provide date, latitude, and longitude together.');
+            return;
+        }
+
         if (lat && isNaN(parseFloat(lat))) {
             Alert.alert('Error', 'Invalid latitude value.');
             return;
