@@ -1,36 +1,50 @@
-import React from 'react';
-import {View, Text, Button, TextInput, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, Button, Alert, StyleSheet} from 'react-native';
+import InputField from '@/components/ui/InputField';
+import {addCodingResources} from '@/services/api/addCodingResources';
+import {CodingResource} from '@/services/api/types';
 
-const AddEvent: React.FC = () => {
+const AddEventForm: React.FC = () => {
+    const [description, setDescription] = useState('');
+    const [url, setUrl] = useState('');
+    const [types, setTypes] = useState('');
+    const [topics, setTopics] = useState('');
+    const [levels, setLevels] = useState('');
+
+    const handleSubmit = async () => {
+        const newResource: CodingResource = {
+            id: 0,
+            description,
+            url,
+            types: types.split(',').map(type => type.trim()),
+            topics: topics.split(',').map(topic => topic.trim()),
+            levels: levels.split(',').map(level => level.trim()),
+        };
+
+        try {
+            const addedResource = await addCodingResources(newResource);
+            Alert.alert('Success', `Resource added with ID: ${addedResource.id}`);
+        } catch (error) {
+            Alert.alert('Error', 'Failed to add resource');
+        }
+    };
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Add Event</Text>
-            <TextInput style={styles.input} placeholder="Event Title"/>
-            <TextInput style={styles.input} placeholder="Event Description"/>
-            <Button title="Save Event" onPress={() => {
-            }}/>
+            <InputField placeholder="Description" value={description} onChangeText={setDescription}/>
+            <InputField placeholder="URL" value={url} onChangeText={setUrl}/>
+            <InputField placeholder="Types (comma-separated)" value={types} onChangeText={setTypes}/>
+            <InputField placeholder="Topics (comma-separated)" value={topics} onChangeText={setTopics}/>
+            <InputField placeholder="Levels (comma-separated)" value={levels} onChangeText={setLevels}/>
+            <Button title="Add Resource" onPress={handleSubmit}/>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: '#fff'
+        padding: 20,
     },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 16
-    },
-    input: {
-        height: 40,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        marginBottom: 16,
-        paddingHorizontal: 8
-    }
 });
 
-export default AddEvent;
+export default AddEventForm;
