@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import resourceDetailsStyles from '@/styles/routes/tabs/home/resourceDetailsScreenStyles';
 import mapStyles from "@/styles/routes/tabs/home/mapStyles";
+import {formatDate} from '@/utils/formatDate';
 
 interface ResourceMapProps {
     date: string;
@@ -13,11 +14,13 @@ interface ResourceMapProps {
 }
 
 const ResourceMap: React.FC<ResourceMapProps> = ({date, location}) => {
+    const formattedDate = formatDate(date);
+
     return (
         <>
             <Text style={resourceDetailsStyles.detailText}>
                 <Text style={resourceDetailsStyles.label}>Date: </Text>
-                {date}
+                {formattedDate}
             </Text>
 
             <MapView
