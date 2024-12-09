@@ -16,6 +16,6 @@ export const addCodingResources = async (codingResource: CodingResource): Promis
         console.error("Error adding coding resource:", error);
         throw error;
     } finally {
-        console.log("Request completed");
+        console.log("Post Request completed");
     }
 };
