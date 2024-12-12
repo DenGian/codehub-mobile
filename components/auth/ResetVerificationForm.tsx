@@ -2,6 +2,7 @@ import React from 'react';
 import {View, TextInput} from 'react-native';
 import resetStyles from '@/styles/auth/resetStyles';
 import PrimaryButton from '@/components/ui/PrimaryButton';
+import LoginInput from "@/components/auth/LoginInput";
 
 interface ResetVerificationFormProps {
     code: string;
@@ -16,20 +17,18 @@ const ResetVerificationForm: React.FC<ResetVerificationFormProps> = (
     {code, setCode, password, setPassword, onReset, loading}) => {
     return (
         <View>
-            <TextInput
+            <LoginInput
                 value={code}
                 placeholder="Code..."
                 placeholderTextColor="black"
-                style={resetStyles.inputField}
                 onChangeText={setCode}
             />
-            <TextInput
+            <LoginInput
                 placeholder="New password"
                 placeholderTextColor="black"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
-                style={resetStyles.inputField}
             />
             <PrimaryButton onPress={onReset} title="Set new Password" color={'#6c47ff'} loading={loading}/>
         </View>
