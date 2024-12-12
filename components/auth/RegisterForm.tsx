@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import {View} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
-import registerStyles from '@/styles/auth/registerStyles';
 import LoginInput from "@/components/auth/LoginInput";
 
 interface RegisterFormProps {
