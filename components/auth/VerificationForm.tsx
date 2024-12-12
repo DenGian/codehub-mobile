@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import {View} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import RegisterStyles from "@/styles/auth/registerStyles";
+import LoginInput from "@/components/auth/LoginInput";
 
 interface VerificationFormProps {
     code: string;
@@ -12,7 +13,7 @@ interface VerificationFormProps {
 const VerificationForm: React.FC<VerificationFormProps> = ({code, setCode, onPressVerify}) => {
     return (
         <View>
-            <TextInput
+            <LoginInput
                 value={code}
                 placeholder="Code..."
                 placeholderTextColor="black"
