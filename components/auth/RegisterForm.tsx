@@ -2,6 +2,7 @@ import React from 'react';
 import {View, TextInput} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import registerStyles from '@/styles/auth/registerStyles';
+import LoginInput from "@/components/auth/LoginInput";
 
 interface RegisterFormProps {
     emailAddress: string;
@@ -17,28 +18,25 @@ const RegisterForm: React.FC<RegisterFormProps> = (
     {emailAddress, setEmailAddress, username, setUsername, password, setPassword, onSignUpPress}) => {
     return (
         <View>
-            <TextInput
+            <LoginInput
                 autoCapitalize="none"
                 placeholderTextColor="black"
                 placeholder="email@example.com"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
-                style={registerStyles.inputField}
             />
-            <TextInput
+            <LoginInput
                 placeholder="username"
                 placeholderTextColor="black"
                 value={username}
                 onChangeText={setUsername}
-                style={registerStyles.inputField}
             />
-            <TextInput
+            <LoginInput
                 placeholder="password"
                 placeholderTextColor="black"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
-                style={registerStyles.inputField}
             />
             <PrimaryButton onPress={onSignUpPress} title="Sign up" color={'#6c47ff'}/>
         </View>
