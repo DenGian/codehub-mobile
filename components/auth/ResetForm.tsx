@@ -19,6 +19,7 @@ const ResetForm: React.FC<ResetFormProps> = ({emailAddress, setEmailAddress, onR
                 placeholderTextColor="black"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
+                keyboardType="email-address"
             />
             <PrimaryButton onPress={onRequestReset} title="Send Reset Email" color={'#007FFF'} loading={loading}/>
         </View>
