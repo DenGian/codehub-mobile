@@ -19,7 +19,7 @@ const loginStyles = StyleSheet.create({
     },
     inputField: {
         borderBottomWidth: 1,
-        borderColor: '#6c47ff',
+        borderColor: '#007FFF',
         paddingVertical: 8,
         paddingHorizontal: 10,
         fontSize: 16,
