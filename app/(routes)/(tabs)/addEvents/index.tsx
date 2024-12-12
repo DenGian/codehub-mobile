@@ -93,9 +93,9 @@ const AddEventForm: React.FC = () => {
         <View style={styles.container}>
             <InputField placeholder="Description*" value={description} onChangeText={setDescription}/>
             <InputField placeholder="URL*" value={url} onChangeText={setUrl} keyboardType="url"/>
-            <InputField placeholder="Types* (comma-separated)" value={types} onChangeText={setTypes}/>
-            <InputField placeholder="Topics* (comma-separated)" value={topics} onChangeText={setTopics}/>
-            <InputField placeholder="Levels* (comma-separated)" value={levels} onChangeText={setLevels}/>
+            <InputField placeholder="Types*" value={types} onChangeText={setTypes}/>
+            <InputField placeholder="Topics*" value={topics} onChangeText={setTopics}/>
+            <InputField placeholder="Levels*" value={levels} onChangeText={setLevels}/>
             <InputField placeholder="Date" value={date} onChangeText={setDate} keyboardType="numbers-and-punctuation"/>
             <InputField placeholder="Latitude" value={lat} onChangeText={setLat}
                         keyboardType="numbers-and-punctuation"/>
