@@ -15,15 +15,17 @@ const LoginForm: React.FC<LoginFormProps> = ({emailAddress, setEmailAddress, pas
     return (
         <View>
             <LoginInput
-                placeholder="code@hub.dev"
+                placeholder="E-Mail"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
+                placeholderTextColor="black"
             />
             <LoginInput
                 placeholder="password"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
+                placeholderTextColor="black"
             />
             <PrimaryButton onPress={onSignInPress} title="Login" color={'#6c47ff'}/>
         </View>
