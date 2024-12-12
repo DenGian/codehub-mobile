@@ -12,7 +12,7 @@ const TabsPage = () => {
         <Tabs
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: '#6c47ff'
+                    backgroundColor: '#007FFF'
                 },
                 headerTintColor: '#fff',
                 headerRight: () => <CustomHeader/>
