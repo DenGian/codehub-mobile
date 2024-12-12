@@ -37,7 +37,7 @@ const RegisterForm: React.FC<RegisterFormProps> = (
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <PrimaryButton onPress={onSignUpPress} title="Sign up" color={'#6c47ff'}/>
+            <PrimaryButton onPress={onSignUpPress} title="Sign up" color={'#007FFF'}/>
         </View>
     );
 };
