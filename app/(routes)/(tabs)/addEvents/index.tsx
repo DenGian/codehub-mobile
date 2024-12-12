@@ -114,7 +114,7 @@ const AddEventForm: React.FC = () => {
                                     style={styles.inputSmall}
                                     keyboardType="numbers-and-punctuation"/>
                     </View>
-                    <PrimaryButton onPress={handleSubmit} title="Add Event" color="#6c47ff" loading={loading}/>
+                    <PrimaryButton onPress={handleSubmit} title="Add Event" color="#007FFF" loading={loading}/>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
