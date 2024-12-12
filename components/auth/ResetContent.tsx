@@ -43,7 +43,7 @@ const ResetContent: React.FC<ResetContentProps> = (
                     <PrimaryButton
                         onPress={onRequestReset}
                         title="Send Reset Email"
-                        color={'#6c47ff'}
+                        color={'#007FFF'}
                         loading={loading}/>
                 </>
             ) : (
@@ -61,7 +61,7 @@ const ResetContent: React.FC<ResetContentProps> = (
                         onChangeText={setPassword}
                         secureTextEntry
                     />
-                    <PrimaryButton onPress={onReset} title="Set new Password" color={'#6c47ff'} loading={loading}/>
+                    <PrimaryButton onPress={onReset} title="Set new Password" color={'#007FFF'} loading={loading}/>
                 </>
             )}
         </View>
