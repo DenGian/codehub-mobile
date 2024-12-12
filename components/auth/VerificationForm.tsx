@@ -1,7 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
-import RegisterStyles from "@/styles/auth/registerStyles";
 import LoginInput from "@/components/auth/LoginInput";
 
 interface VerificationFormProps {
@@ -17,8 +16,8 @@ const VerificationForm: React.FC<VerificationFormProps> = ({code, setCode, onPre
                 value={code}
                 placeholder="Code..."
                 placeholderTextColor="black"
-                style={RegisterStyles.inputField}
                 onChangeText={setCode}
+                keyboardType="numeric"
             />
             <PrimaryButton onPress={onPressVerify} title="Verify Email" color={'#007FFF'}/>
         </View>
