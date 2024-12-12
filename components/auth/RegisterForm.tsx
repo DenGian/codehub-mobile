@@ -20,7 +20,7 @@ const RegisterForm: React.FC<RegisterFormProps> = (
             <LoginInput
                 autoCapitalize="none"
                 placeholderTextColor="black"
-                placeholder="email@example.com"
+                placeholder="E-Mail"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
             />
