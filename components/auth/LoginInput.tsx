@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextInput, View, Text, StyleSheet} from 'react-native';
+import {TextInput, View, Text, ViewStyle} from 'react-native';
 import loginStyles from '@/styles/auth/loginStyles';
 
 interface LoginInputProps {
@@ -7,18 +7,30 @@ interface LoginInputProps {
     value: string;
     onChangeText: (text: string) => void;
     secureTextEntry?: boolean;
+    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+    placeholderTextColor?: string;
+    style?: ViewStyle;
 }
 
-const LoginInput: React.FC<LoginInputProps> = ({placeholder, value, onChangeText, secureTextEntry = false}) => {
+const LoginInput: React.FC<LoginInputProps> = (
+    {
+        placeholder,
+        value,
+        onChangeText,
+        secureTextEntry = false,
+        autoCapitalize = 'none',
+        placeholderTextColor = 'grey',
+        style
+    }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
-        <View style={loginStyles.inputContainer}>
+        <View style={[loginStyles.inputContainer, style]}>
             {(isFocused || value) && <Text style={loginStyles.label}>{placeholder}</Text>}
             <TextInput
-                autoCapitalize="none"
+                autoCapitalize={autoCapitalize}
                 placeholder={!isFocused ? placeholder : ''}
-                placeholderTextColor="grey"
+                placeholderTextColor={placeholderTextColor}
                 value={value}
                 onChangeText={onChangeText}
                 secureTextEntry={secureTextEntry}
