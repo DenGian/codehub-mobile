@@ -27,7 +27,7 @@ const ProfileContent: React.FC<ProfileContentProps> = (
                 lastName={lastName}
                 setLastName={setLastName}
             />
-            <PrimaryButton onPress={onSaveUser} title="Update account" color="#6c47ff" loading={loading}/>
+            <PrimaryButton onPress={onSaveUser} title="Update account" color="#007FFF" loading={loading}/>
         </View>
     );
 };
