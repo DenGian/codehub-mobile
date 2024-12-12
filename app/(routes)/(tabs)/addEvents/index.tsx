@@ -114,8 +114,8 @@ const AddEventForm: React.FC = () => {
                                     style={styles.inputSmall}
                                     keyboardType="numbers-and-punctuation"/>
                     </View>
+                    <PrimaryButton onPress={handleSubmit} title="Add Resource" color="#6c47ff" loading={loading}/>
                 </View>
-                <PrimaryButton onPress={handleSubmit} title="Add Resource" color="#6c47ff" loading={loading}/>
             </ScrollView>
         </KeyboardAvoidingView>
     );
@@ -136,10 +136,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 10,
         padding: 20,
-        shadowColor: '#000',
+        shadowColor: Platform.OS === 'ios' ? '#000' : '#aaa',
         shadowOpacity: 0.1,
         shadowRadius: 10,
         shadowOffset: {width: 0, height: 5},
+        elevation: 5,
     },
     section: {
         fontSize: 16,
