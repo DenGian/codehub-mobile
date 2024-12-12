@@ -33,7 +33,7 @@ const CustomCalendarScreen = () => {
         markedDates[selectedDate] = {
             selected: true,
             marked: !!filteredEvents?.length,
-            selectedColor: 'blue',
+            selectedColor: '#89CFF0',
         };
     }
 
