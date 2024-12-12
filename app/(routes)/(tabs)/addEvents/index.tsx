@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Alert, StyleSheet} from 'react-native';
+import {View, Alert, StyleSheet, Text, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import InputField from '@/components/ui/InputField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import {addCodingResources} from '@/services/api/addCodingResources';
@@ -90,25 +90,71 @@ const AddEventForm: React.FC = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <InputField placeholder="Description*" value={description} onChangeText={setDescription}/>
-            <InputField placeholder="URL*" value={url} onChangeText={setUrl} keyboardType="url"/>
-            <InputField placeholder="Types*" value={types} onChangeText={setTypes}/>
-            <InputField placeholder="Topics*" value={topics} onChangeText={setTopics}/>
-            <InputField placeholder="Levels*" value={levels} onChangeText={setLevels}/>
-            <InputField placeholder="Date" value={date} onChangeText={setDate} keyboardType="numbers-and-punctuation"/>
-            <InputField placeholder="Latitude" value={lat} onChangeText={setLat}
-                        keyboardType="numbers-and-punctuation"/>
-            <InputField placeholder="Longitude" value={long} onChangeText={setLong}
-                        keyboardType="numbers-and-punctuation"/>
-            <PrimaryButton onPress={handleSubmit} title="Add Resource" color={'#6c47ff'} loading={loading}/>
-        </View>
+        <KeyboardAvoidingView
+            style={styles.screen}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={100}
+        >
+            <ScrollView contentContainerStyle={styles.container}>
+                <View style={styles.card}>
+                    <Text style={styles.section}>Required Information</Text>
+                    <InputField placeholder="Description*" value={description} onChangeText={setDescription}/>
+                    <InputField placeholder="URL*" value={url} onChangeText={setUrl} keyboardType="url"/>
+                    <InputField placeholder="Types (comma-separated)*" value={types} onChangeText={setTypes}/>
+                    <InputField placeholder="Topics (comma-separated)*" value={topics} onChangeText={setTopics}/>
+                    <InputField placeholder="Levels (comma-separated)*" value={levels} onChangeText={setLevels}/>
+
+                    <Text style={styles.section}>Optional Details</Text>
+                    <InputField placeholder="Date (YYYY-MM-DD)" value={date} onChangeText={setDate}
+                                keyboardType="numbers-and-punctuation"/>
+                    <View style={styles.row}>
+                        <InputField placeholder="Latitude" value={lat} onChangeText={setLat} style={styles.inputSmall}
+                                    keyboardType="numbers-and-punctuation"/>
+                        <InputField placeholder="Longitude" value={long} onChangeText={setLong}
+                                    style={styles.inputSmall}
+                                    keyboardType="numbers-and-punctuation"/>
+                    </View>
+                </View>
+                <PrimaryButton onPress={handleSubmit} title="Add Resource" color="#6c47ff" loading={loading}/>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 };
 
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+    },
     container: {
         padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    card: {
+        width: '100%',
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 20,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        shadowOffset: {width: 0, height: 5},
+    },
+    section: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#555',
+        marginTop: 20,
+        marginBottom: 10,
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    inputSmall: {
+        flex: 1,
+        marginHorizontal: 5,
     },
 });
 
