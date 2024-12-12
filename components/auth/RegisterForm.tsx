@@ -23,6 +23,7 @@ const RegisterForm: React.FC<RegisterFormProps> = (
                 placeholder="E-Mail"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
+                keyboardType="email-address"
             />
             <LoginInput
                 placeholder="username"
