@@ -29,7 +29,7 @@ const ResetVerificationForm: React.FC<ResetVerificationFormProps> = (
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <PrimaryButton onPress={onReset} title="Set new Password" color={'#6c47ff'} loading={loading}/>
+            <PrimaryButton onPress={onReset} title="Set new Password" color={'#007FFF'} loading={loading}/>
         </View>
     );
 };
