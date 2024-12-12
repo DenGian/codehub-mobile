@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
-import resetStyles from '@/styles/auth/resetStyles';
+import {View} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import LoginInput from "@/components/auth/LoginInput";
 
