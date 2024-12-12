@@ -27,7 +27,7 @@ const LoginForm: React.FC<LoginFormProps> = ({emailAddress, setEmailAddress, pas
                 secureTextEntry
                 placeholderTextColor="black"
             />
-            <PrimaryButton onPress={onSignInPress} title="Login" color={'#6c47ff'}/>
+            <PrimaryButton onPress={onSignInPress} title="Login" color={'#007FFF'}/>
         </View>
     );
 };
