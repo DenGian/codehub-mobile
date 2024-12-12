@@ -20,7 +20,7 @@ const VerificationForm: React.FC<VerificationFormProps> = ({code, setCode, onPre
                 style={RegisterStyles.inputField}
                 onChangeText={setCode}
             />
-            <PrimaryButton onPress={onPressVerify} title="Verify Email" color={'#6c47ff'}/>
+            <PrimaryButton onPress={onPressVerify} title="Verify Email" color={'#007FFF'}/>
         </View>
     );
 };
