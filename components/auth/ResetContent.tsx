@@ -39,10 +39,11 @@ const ResetContent: React.FC<ResetContentProps> = (
                         placeholderTextColor="black"
                         value={emailAddress}
                         onChangeText={setEmailAddress}
+                        keyboardType="email-address"
                     />
                     <PrimaryButton
                         onPress={onRequestReset}
-                        title="Send Reset Email"
+                        title="Send Reset E-Mail"
                         color={'#007FFF'}
                         loading={loading}/>
                 </>
@@ -53,6 +54,7 @@ const ResetContent: React.FC<ResetContentProps> = (
                         placeholder="Code..."
                         placeholderTextColor="black"
                         onChangeText={setCode}
+                        keyboardType="numeric"
                     />
                     <LoginInput
                         placeholder="New password"
