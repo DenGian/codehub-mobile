@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextInput, View, Text, ViewStyle} from 'react-native';
+import {TextInput, View, Text, ViewStyle, KeyboardTypeOptions} from 'react-native';
 import loginStyles from '@/styles/auth/loginStyles';
 
 interface LoginInputProps {
@@ -10,6 +10,7 @@ interface LoginInputProps {
     autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
     placeholderTextColor?: string;
     style?: ViewStyle;
+    keyboardType?: KeyboardTypeOptions;
 }
 
 const LoginInput: React.FC<LoginInputProps> = (
@@ -20,7 +21,8 @@ const LoginInput: React.FC<LoginInputProps> = (
         secureTextEntry = false,
         autoCapitalize = 'none',
         placeholderTextColor = 'grey',
-        style
+        style,
+        keyboardType = 'default'
     }) => {
     const [isFocused, setIsFocused] = useState(false);
 
@@ -37,6 +39,7 @@ const LoginInput: React.FC<LoginInputProps> = (
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 style={loginStyles.inputField}
+                keyboardType={keyboardType}
             />
         </View>
     );
