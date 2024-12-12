@@ -4,21 +4,31 @@ const loginStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        padding: 20
+        padding: 20,
+    },
+    inputContainer: {
+        marginBottom: 16,
+        position: 'relative',
+    },
+    label: {
+        position: 'absolute',
+        top: -10,
+        left: 10,
+        fontSize: 12,
+        color: 'grey',
     },
     inputField: {
-        marginVertical: 4,
-        height: 50,
-        borderWidth: 1,
+        borderBottomWidth: 1,
         borderColor: '#6c47ff',
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff'
+        paddingVertical: 8,
+        paddingHorizontal: 10,
+        fontSize: 16,
+        color: 'black',
     },
     button: {
         margin: 8,
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
 });
 
 export default loginStyles;
