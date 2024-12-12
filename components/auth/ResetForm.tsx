@@ -2,6 +2,7 @@ import React from 'react';
 import {View, TextInput} from 'react-native';
 import resetStyles from '@/styles/auth/resetStyles';
 import PrimaryButton from '@/components/ui/PrimaryButton';
+import LoginInput from "@/components/auth/LoginInput";
 
 interface ResetFormProps {
     emailAddress: string;
@@ -13,13 +14,12 @@ interface ResetFormProps {
 const ResetForm: React.FC<ResetFormProps> = ({emailAddress, setEmailAddress, onRequestReset, loading}) => {
     return (
         <View>
-            <TextInput
+            <LoginInput
                 autoCapitalize="none"
-                placeholder="code@hub.dev"
+                placeholder="E-Mail"
                 placeholderTextColor="black"
                 value={emailAddress}
                 onChangeText={setEmailAddress}
-                style={resetStyles.inputField}
             />
             <PrimaryButton onPress={onRequestReset} title="Send Reset Email" color={'#6c47ff'} loading={loading}/>
         </View>
