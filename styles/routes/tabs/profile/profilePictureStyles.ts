@@ -11,7 +11,7 @@ const profilePictureStyles = StyleSheet.create({
         height: 120,
         borderRadius: 60,
         borderWidth: 1,
-        borderColor: '#6c47ff',
+        borderColor: '#007FFF',
     },
 });
 
