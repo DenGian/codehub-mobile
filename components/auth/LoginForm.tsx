@@ -19,6 +19,7 @@ const LoginForm: React.FC<LoginFormProps> = ({emailAddress, setEmailAddress, pas
                 value={emailAddress}
                 onChangeText={setEmailAddress}
                 placeholderTextColor="black"
+                keyboardType="email-address"
             />
             <LoginInput
                 placeholder="password"
