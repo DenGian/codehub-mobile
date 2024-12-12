@@ -1,18 +1,19 @@
 import React, {useState} from 'react';
-import {TextInput, View, Text, StyleSheet, KeyboardTypeOptions} from 'react-native';
+import {TextInput, View, Text, StyleSheet, KeyboardTypeOptions, ViewStyle} from 'react-native';
 
 interface InputFieldProps {
     placeholder: string;
     value: string;
     onChangeText: (text: string) => void;
     keyboardType?: KeyboardTypeOptions;
+    style?: ViewStyle;
 }
 
-const InputField: React.FC<InputFieldProps> = ({placeholder, value, onChangeText, keyboardType}) => {
+const InputField: React.FC<InputFieldProps> = ({placeholder, value, onChangeText, keyboardType, style}) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
-        <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, style]}>
             {(isFocused || value) && <Text style={styles.label}>{placeholder}</Text>}
             <TextInput
                 style={styles.inputField}
