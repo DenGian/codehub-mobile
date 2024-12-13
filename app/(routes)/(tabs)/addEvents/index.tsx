@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {View, Alert, StyleSheet, Text, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+import {View, Alert, Text, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import InputField from '@/components/ui/InputField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import {addCodingResources} from '@/services/api/addCodingResources';
 import {CodingResource} from '@/services/api/types';
+import addEventsStyles from '@/styles/routes/tabs/addEventsStyles';
 
 const AddEventForm: React.FC = () => {
     const [description, setDescription] = useState('');
@@ -91,27 +92,28 @@ const AddEventForm: React.FC = () => {
 
     return (
         <KeyboardAvoidingView
-            style={styles.screen}
+            style={addEventsStyles.screen}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             keyboardVerticalOffset={100}
         >
-            <ScrollView contentContainerStyle={styles.container}>
-                <View style={styles.card}>
-                    <Text style={styles.section}>Required Information</Text>
+            <ScrollView contentContainerStyle={addEventsStyles.container}>
+                <View style={addEventsStyles.card}>
+                    <Text style={addEventsStyles.section}>Required Information</Text>
                     <InputField placeholder="Description*" value={description} onChangeText={setDescription}/>
                     <InputField placeholder="URL*" value={url} onChangeText={setUrl} keyboardType="url"/>
                     <InputField placeholder="Types (comma-separated)*" value={types} onChangeText={setTypes}/>
                     <InputField placeholder="Topics (comma-separated)*" value={topics} onChangeText={setTopics}/>
                     <InputField placeholder="Levels (comma-separated)*" value={levels} onChangeText={setLevels}/>
 
-                    <Text style={styles.section}>Optional Details</Text>
+                    <Text style={addEventsStyles.section}>Optional Details</Text>
                     <InputField placeholder="Date (YYYY-MM-DD)" value={date} onChangeText={setDate}
                                 keyboardType="numbers-and-punctuation"/>
-                    <View style={styles.row}>
-                        <InputField placeholder="Latitude" value={lat} onChangeText={setLat} style={styles.inputSmall}
+                    <View style={addEventsStyles.row}>
+                        <InputField placeholder="Latitude" value={lat} onChangeText={setLat}
+                                    style={addEventsStyles.inputSmall}
                                     keyboardType="numbers-and-punctuation"/>
                         <InputField placeholder="Longitude" value={long} onChangeText={setLong}
-                                    style={styles.inputSmall}
+                                    style={addEventsStyles.inputSmall}
                                     keyboardType="numbers-and-punctuation"/>
                     </View>
                     <PrimaryButton onPress={handleSubmit} title="Add Event" color="#007FFF" loading={loading}/>
@@ -120,44 +122,5 @@ const AddEventForm: React.FC = () => {
         </KeyboardAvoidingView>
     );
 };
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 15,
-    },
-    card: {
-        width: '100%',
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        padding: 20,
-        shadowColor: Platform.OS === 'ios' ? '#000' : '#aaa',
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-        shadowOffset: {width: 0, height: 5},
-        elevation: 5,
-    },
-    section: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#555',
-        marginTop: 20,
-        marginBottom: 10,
-    },
-    row: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    inputSmall: {
-        flex: 1,
-        marginHorizontal: 5,
-    },
-});
 
 export default AddEventForm;
