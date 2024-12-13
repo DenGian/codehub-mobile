@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {View, Alert, KeyboardAvoidingView, Platform, ScrollView, Text} from 'react-native';
 import InputField from '@/components/ui/InputField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
-import {addCodingResources} from '@/services/api/addCodingResources';
 import {CodingResource} from '@/services/api/types';
 import addEventsStyles from '@/styles/routes/tabs/addEventsStyles';
-import {validateForm} from "@/utils/addEventsValidation";
+import {validateForm} from '@/utils/addEventsValidation';
+import {addEvents} from "@/services/api/addEvents";
 
 const AddEventForm: React.FC = () => {
     const [description, setDescription] = useState('');
@@ -40,7 +40,7 @@ const AddEventForm: React.FC = () => {
 
         try {
             setLoading(true);
-            const addedResource = await addCodingResources(newResource);
+            const addedResource = await addEvents(newResource);
             Alert.alert('Success', `Resource added with ID: ${addedResource.id}`);
             setDescription('');
             setUrl('');
