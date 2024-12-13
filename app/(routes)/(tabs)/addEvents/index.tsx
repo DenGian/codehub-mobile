@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, KeyboardAvoidingView, Platform, ScrollView, Text} from 'react-native';
-import InputField from '@/components/ui/InputField';
+import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import addEventsStyles from '@/styles/routes/tabs/addEventsStyles';
-import useAddEventsForm from "@/hooks/route/tabs/addEvents/useAddEventsForm";
+import useAddEventsForm from '@/hooks/route/tabs/addEvents/useAddEventsForm';
+import AddEventsFormFields from "@/components/route/tabs/addEvents/AddEventsFormFields";
 
 const AddEventForm: React.FC = () => {
     const {
@@ -34,27 +34,25 @@ const AddEventForm: React.FC = () => {
             keyboardVerticalOffset={100}
         >
             <ScrollView contentContainerStyle={addEventsStyles.container}>
-                <View style={addEventsStyles.card}>
-                    <Text style={addEventsStyles.section}>Required Information</Text>
-                    <InputField placeholder="Description*" value={description} onChangeText={setDescription}/>
-                    <InputField placeholder="URL*" value={url} onChangeText={setUrl} keyboardType="url"/>
-                    <InputField placeholder="Types (comma-separated)*" value={types} onChangeText={setTypes}/>
-                    <InputField placeholder="Topics (comma-separated)*" value={topics} onChangeText={setTopics}/>
-                    <InputField placeholder="Levels (comma-separated)*" value={levels} onChangeText={setLevels}/>
-
-                    <Text style={addEventsStyles.section}>Optional Details</Text>
-                    <InputField placeholder="Date (YYYY-MM-DD)" value={date} onChangeText={setDate}
-                                keyboardType="numbers-and-punctuation"/>
-                    <View style={addEventsStyles.row}>
-                        <InputField placeholder="Latitude" value={lat} onChangeText={setLat}
-                                    style={addEventsStyles.inputSmall}
-                                    keyboardType="numbers-and-punctuation"/>
-                        <InputField placeholder="Longitude" value={long} onChangeText={setLong}
-                                    style={addEventsStyles.inputSmall}
-                                    keyboardType="numbers-and-punctuation"/>
-                    </View>
-                    <PrimaryButton onPress={handleSubmit} title="Add Event" color="#007FFF" loading={loading}/>
-                </View>
+                <AddEventsFormFields
+                    description={description}
+                    setDescription={setDescription}
+                    url={url}
+                    setUrl={setUrl}
+                    types={types}
+                    setTypes={setTypes}
+                    topics={topics}
+                    setTopics={setTopics}
+                    levels={levels}
+                    setLevels={setLevels}
+                    date={date}
+                    setDate={setDate}
+                    lat={lat}
+                    setLat={setLat}
+                    long={long}
+                    setLong={setLong}
+                />
+                <PrimaryButton onPress={handleSubmit} title="Add Event" color="#007FFF" loading={loading}/>
             </ScrollView>
         </KeyboardAvoidingView>
     );
