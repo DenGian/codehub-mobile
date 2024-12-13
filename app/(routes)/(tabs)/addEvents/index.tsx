@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {View, Alert, Text, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+import {View, Alert, KeyboardAvoidingView, Platform, ScrollView, Text} from 'react-native';
 import InputField from '@/components/ui/InputField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import {addCodingResources} from '@/services/api/addCodingResources';
 import {CodingResource} from '@/services/api/types';
 import addEventsStyles from '@/styles/routes/tabs/addEventsStyles';
+import {validateForm} from "@/utils/addEventsValidation";
 
 const AddEventForm: React.FC = () => {
     const [description, setDescription] = useState('');
@@ -18,41 +19,7 @@ const AddEventForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async () => {
-        if (!description || !url || !types || !topics || !levels) {
-            Alert.alert('Error', 'Please fill in all required fields.');
-            return;
-        }
-
-        const urlRegex = /^(https?|ftp):\/\/[^\s\/$.?#].\S*$/i;
-        if (!urlRegex.test(url)) {
-            Alert.alert('Error', 'Invalid URL format.');
-            return;
-        }
-
-        const commaSeparatedRegex = /,/;
-        if (!commaSeparatedRegex.test(types) || !commaSeparatedRegex.test(topics) || !commaSeparatedRegex.test(levels)) {
-            Alert.alert('Error', 'Types, topics, and levels must be comma-separated.');
-            return;
-        }
-
-        if ((date && (!lat || !long)) || (lat && (!date || !long)) || (long && (!date || !lat))) {
-            Alert.alert('Error', 'Please provide date, latitude, and longitude together.');
-            return;
-        }
-
-        if (lat && isNaN(parseFloat(lat))) {
-            Alert.alert('Error', 'Invalid latitude value.');
-            return;
-        }
-
-        if (long && isNaN(parseFloat(long))) {
-            Alert.alert('Error', 'Invalid longitude value.');
-            return;
-        }
-
-        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-        if (date && !dateRegex.test(date)) {
-            Alert.alert('Error', 'Invalid date format. Please use YYYY-MM-DD.');
+        if (!validateForm(description, url, types, topics, levels, date, lat, long)) {
             return;
         }
 
