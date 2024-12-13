@@ -1,61 +1,31 @@
-import React, {useState} from 'react';
-import {View, Alert, KeyboardAvoidingView, Platform, ScrollView, Text} from 'react-native';
+import React from 'react';
+import {View, KeyboardAvoidingView, Platform, ScrollView, Text} from 'react-native';
 import InputField from '@/components/ui/InputField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
-import {CodingResource} from '@/services/api/types';
 import addEventsStyles from '@/styles/routes/tabs/addEventsStyles';
-import {validateForm} from '@/utils/addEventsValidation';
-import {addEvents} from "@/services/api/addEvents";
+import useAddEventsForm from "@/hooks/route/tabs/addEvents/useAddEventsForm";
 
 const AddEventForm: React.FC = () => {
-    const [description, setDescription] = useState('');
-    const [url, setUrl] = useState('');
-    const [types, setTypes] = useState('');
-    const [topics, setTopics] = useState('');
-    const [levels, setLevels] = useState('');
-    const [date, setDate] = useState('');
-    const [lat, setLat] = useState('');
-    const [long, setLong] = useState('');
-    const [loading, setLoading] = useState(false);
-
-    const handleSubmit = async () => {
-        if (!validateForm(description, url, types, topics, levels, date, lat, long)) {
-            return;
-        }
-
-        const formattedDate = date ? new Date(date).toISOString() : undefined;
-
-        const newResource: CodingResource = {
-            id: 0,
-            description,
-            url,
-            types: types.split(',').map(type => type.trim()),
-            topics: topics.split(',').map(topic => topic.trim()),
-            levels: levels.split(',').map(level => level.trim()),
-            metaData: {
-                date: formattedDate,
-                location: lat && long ? {lat: parseFloat(lat), long: parseFloat(long)} : undefined,
-            },
-        };
-
-        try {
-            setLoading(true);
-            const addedResource = await addEvents(newResource);
-            Alert.alert('Success', `Resource added with ID: ${addedResource.id}`);
-            setDescription('');
-            setUrl('');
-            setTypes('');
-            setTopics('');
-            setLevels('');
-            setDate('');
-            setLat('');
-            setLong('');
-        } catch (error) {
-            Alert.alert('Error', 'Failed to add resource');
-        } finally {
-            setLoading(false);
-        }
-    };
+    const {
+        description,
+        setDescription,
+        url,
+        setUrl,
+        types,
+        setTypes,
+        topics,
+        setTopics,
+        levels,
+        setLevels,
+        date,
+        setDate,
+        lat,
+        setLat,
+        long,
+        setLong,
+        loading,
+        handleSubmit,
+    } = useAddEventsForm();
 
     return (
         <KeyboardAvoidingView
