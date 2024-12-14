@@ -21,9 +21,9 @@ export const validateForm = (
         return false;
     }
 
-    const commaSeparatedRegex = /,/;
+    const commaSeparatedRegex = /^([^,\s]+(,[^,\s]+)*)?$/;
     if (!commaSeparatedRegex.test(types) || !commaSeparatedRegex.test(topics) || !commaSeparatedRegex.test(levels)) {
-        Alert.alert('Error', 'Types, topics, and levels must be comma-separated.');
+        Alert.alert('Error', 'Types, topics, and levels must be comma-separated with no spaces.');
         return false;
     }
 
