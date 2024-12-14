@@ -1,23 +1,13 @@
 import React from 'react';
 import {View} from 'react-native';
-import useUpdateUser from '@/hooks/route/tabs/profile/useUpdateUser';
-import ProfileContent from "@/components/route/tabs/profile/ProfileContent";
+import ProfileScreen from "@/screens/route/tabs/profile/ProfilePage";
 
-const index = () => {
-    const {firstName, setFirstName, lastName, setLastName, loading, onSaveUser} = useUpdateUser();
-
+const ProfilePage: React.FC = () => {
     return (
-        <View>
-            <ProfileContent
-                firstName={firstName || ''}
-                setFirstName={setFirstName}
-                lastName={lastName || ''}
-                setLastName={setLastName}
-                loading={loading}
-                onSaveUser={onSaveUser}
-            />
+        <View style={{flex: 1}}>
+            <ProfileScreen/>
         </View>
     );
 };
 
-export default index;
+export default ProfilePage;
