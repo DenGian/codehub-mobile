@@ -9,7 +9,7 @@ interface ResourceHeaderProps {
     onToggleFavorite: () => void;
 }
 
-const ResourceHeader: React.FC<ResourceHeaderProps> = ({title, isFavorite, onToggleFavorite}) => {
+const ResourceHeader = ({title, isFavorite, onToggleFavorite}: ResourceHeaderProps) => {
     return (
         <View style={resourceDetailsStyles.header}>
             <Text style={resourceDetailsStyles.title}>{title}</Text>
