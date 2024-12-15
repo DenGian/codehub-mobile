@@ -2,7 +2,7 @@ import React from 'react';
 import useRegisterForm from '@/hooks/auth/useRegisterForm';
 import RegisterContent from '@/components/auth/RegisterContent';
 
-const Register = () => {
+const RegisterScreen = () => {
     const {
         emailAddress,
         setEmailAddress,
@@ -36,4 +36,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default RegisterScreen;

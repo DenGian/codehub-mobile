@@ -5,7 +5,7 @@ import usePasswordReset from '@/hooks/auth/usePasswordReset';
 import HeaderBack from '@/components/ui/HeaderBack';
 import ResetContent from '@/components/auth/ResetContent';
 
-const PwReset = () => {
+const ResetScreen = () => {
     const {
         emailAddress,
         setEmailAddress,
@@ -38,4 +38,4 @@ const PwReset = () => {
     );
 };
 
-export default PwReset;
+export default ResetScreen;
