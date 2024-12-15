@@ -9,7 +9,7 @@ interface LoadingOrErrorProps {
     error: string | null;
 }
 
-const LoadingOrError: React.FC<LoadingOrErrorProps> = ({loading, refreshing, error}) => {
+const LoadingOrError = ({loading, refreshing, error}: LoadingOrErrorProps) => {
     if (loading && !refreshing) {
         return <LoadingSpinner visible/>;
     }
