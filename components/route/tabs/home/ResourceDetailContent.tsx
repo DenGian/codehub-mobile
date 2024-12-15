@@ -13,7 +13,7 @@ interface ResourceDetailContentProps {
     hasEventMetadata: boolean;
 }
 
-const ResourceDetailContent: React.FC<ResourceDetailContentProps> = ({resource, hasEventMetadata}) => {
+const ResourceDetailContent = ({resource, hasEventMetadata}: ResourceDetailContentProps) => {
     return (
         <ScrollView contentContainerStyle={resourceDetailsStyles.centeredContent}>
             <View style={resourceDetailsStyles.card}>
