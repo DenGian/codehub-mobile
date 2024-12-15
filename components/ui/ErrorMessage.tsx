@@ -6,7 +6,7 @@ interface ErrorMessageProps {
     message: string;
 }
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({message}) => {
+const ErrorMessage = ({message}: ErrorMessageProps) => {
     return (
         <View style={resourceDetailsStyles.errorContainer}>
             <Text style={resourceDetailsStyles.error}>{message}</Text>
