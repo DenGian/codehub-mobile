@@ -8,7 +8,7 @@ interface RenderItemProps {
     item: CodingResource;
 }
 
-const HomeScreenRenderItem: React.FC<RenderItemProps> = ({item}) => {
+const HomeScreenRenderItem = ({item}: RenderItemProps) => {
     const router = useRouter();
     const {favorites, toggleFavorite} = useFavorites();
     const isFavorite = favorites.includes(item.id);
