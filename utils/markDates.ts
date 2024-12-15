@@ -14,7 +14,7 @@ interface MarkedDates {
     };
 }
 
-export const markDates = (events: Event[] | undefined, selectedDate: string, selectedColor: string = '#89CFF0'): MarkedDates => {
+const markDates = (events: Event[] | undefined, selectedDate: string, selectedColor: string = '#89CFF0'): MarkedDates => {
     const markedDates: MarkedDates = {};
 
     events?.forEach(event => {
@@ -34,3 +34,5 @@ export const markDates = (events: Event[] | undefined, selectedDate: string, sel
 
     return markedDates;
 };
+
+export {markDates};
