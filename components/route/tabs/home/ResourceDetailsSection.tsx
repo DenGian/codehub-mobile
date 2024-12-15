@@ -7,7 +7,7 @@ interface ResourceDetailsSectionProps {
     resource: CodingResource;
 }
 
-const ResourceDetailsSection: React.FC<ResourceDetailsSectionProps> = ({resource}) => {
+const ResourceDetailsSection = ({resource}: ResourceDetailsSectionProps) => {
     return (
         <View>
             <ResourceDetails
