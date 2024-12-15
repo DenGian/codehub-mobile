@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const useFavorites = () => {
+const useFavorites = () => {
     const [favorites, setFavorites] = useState<number[]>([]);
 
     useEffect(() => {
@@ -37,3 +37,5 @@ export const useFavorites = () => {
 
     return {favorites, toggleFavorite};
 };
+
+export {useFavorites};
