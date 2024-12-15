@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {CodingResource} from '@/services/api/types';
 import {loadMoreItems} from '@/utils/loadMoreItems';
-import {renderItem} from '@/components/route/tabs/home/RenderItem';
+import RenderItem from "@/components/route/tabs/home/RenderItem";
 
 interface FilteredListProps {
     visibleItems: CodingResource[];
@@ -23,7 +23,7 @@ const FilteredList = (
     return (
         <FlatList
             data={visibleItems}
-            renderItem={renderItem}
+            renderItem={RenderItem}
             keyExtractor={(item) => item.id.toString()}
             refreshing={refreshing}
             onRefresh={handleRefresh}
