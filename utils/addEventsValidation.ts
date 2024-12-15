@@ -1,6 +1,6 @@
 import {Alert} from 'react-native';
 
-export const validateForm = (
+const validateForm = (
     description: string,
     url: string,
     types: string,
@@ -50,3 +50,5 @@ export const validateForm = (
 
     return true;
 };
+
+export {validateForm};
