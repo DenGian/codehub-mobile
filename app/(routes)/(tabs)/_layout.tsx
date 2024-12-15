@@ -2,7 +2,7 @@ import React from 'react';
 import TabsNavigator from "@/navigation/TabsNavigator";
 import {ProfilePictureProvider} from "@/context/ProfilePictureContext";
 
-const TabsLayout = () => {
+const TabsLayout: React.FC = () => {
     return (
         <ProfilePictureProvider>
             <TabsNavigator/>
