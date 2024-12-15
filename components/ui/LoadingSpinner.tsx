@@ -5,7 +5,7 @@ interface LoadingSpinnerProps {
     visible: boolean;
 }
 
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({visible}) => {
+const LoadingSpinner = ({visible}: LoadingSpinnerProps) => {
     return <Spinner visible={visible}/>;
 };
 
