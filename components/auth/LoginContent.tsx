@@ -13,8 +13,15 @@ interface LoginContentProps {
     onSignInPress: () => void;
 }
 
-const LoginContent: React.FC<LoginContentProps> = (
-    {loading, emailAddress, setEmailAddress, password, setPassword, onSignInPress}) => {
+const LoginContent = (
+    {
+        loading,
+        emailAddress,
+        setEmailAddress,
+        password,
+        setPassword,
+        onSignInPress
+    }: LoginContentProps) => {
     return (
         <View>
             <LoadingSpinner visible={loading}/>
