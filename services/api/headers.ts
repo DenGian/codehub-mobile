@@ -4,8 +4,10 @@ if (!API_TOKEN) {
     throw new Error("API token is missing in .env!");
 }
 
-export const getHeaders = () => ({
+const getHeaders = () => ({
     "Authorization": `Bearer ${API_TOKEN}`,
     "Content-Type": "application/json",
     "Accept": "application/json",
 });
+
+export {getHeaders};
