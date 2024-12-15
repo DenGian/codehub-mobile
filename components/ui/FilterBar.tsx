@@ -12,8 +12,13 @@ interface FilterBarProps {
     onShowFavoritesChange: (value: boolean) => void;
 }
 
-const FilterBar: React.FC<FilterBarProps> = (
-    {searchValue, onSearchChange, showFavorites, onShowFavoritesChange,}) => {
+const FilterBar = (
+    {
+        searchValue,
+        onSearchChange,
+        showFavorites,
+        onShowFavoritesChange
+    }: FilterBarProps) => {
     return (
         <View style={filterBarStyles.container}>
             <View style={filterBarStyles.searchContainer}>
