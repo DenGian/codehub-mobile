@@ -14,7 +14,7 @@ interface EventCardProps {
     };
 }
 
-const EventCard: React.FC<EventCardProps> = ({event}) => {
+const EventCard = ({event}: EventCardProps) => {
     const router = useRouter();
 
     return (
