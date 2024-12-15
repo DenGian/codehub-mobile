@@ -13,7 +13,7 @@ interface LoginInputProps {
     keyboardType?: KeyboardTypeOptions;
 }
 
-const LoginInput: React.FC<LoginInputProps> = (
+const LoginInput = (
     {
         placeholder,
         value,
@@ -23,7 +23,7 @@ const LoginInput: React.FC<LoginInputProps> = (
         placeholderTextColor = 'grey',
         style,
         keyboardType = 'default'
-    }) => {
+    }: LoginInputProps) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
