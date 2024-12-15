@@ -12,8 +12,15 @@ interface ResetVerificationFormProps {
     loading: boolean;
 }
 
-const ResetVerificationForm: React.FC<ResetVerificationFormProps> = (
-    {code, setCode, password, setPassword, onReset, loading}) => {
+const ResetVerificationForm = (
+    {
+        code,
+        setCode,
+        password,
+        setPassword,
+        onReset,
+        loading
+    }: ResetVerificationFormProps) => {
     return (
         <View>
             <LoginInput
