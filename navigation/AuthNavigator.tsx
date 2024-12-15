@@ -30,6 +30,12 @@ const AuthLayout = () => {
                     headerTitle: 'Reset Password'
                 }}
             />
+            <Stack.Screen
+                name="TOS"
+                options={{
+                    headerTitle: 'Terms Of Service'
+                }}
+            />
         </Stack>
     );
 };
