@@ -13,8 +13,15 @@ interface EventCardProps {
     onDetailsPress: () => void;
 }
 
-const EventCard: React.FC<EventCardProps> = (
-    {title, types, topics, isFavorite, onToggleFavorite, onDetailsPress}) => {
+const EventCard = (
+    {
+        title,
+        types,
+        topics,
+        isFavorite,
+        onToggleFavorite,
+        onDetailsPress
+    }: EventCardProps) => {
     return (
         <View style={eventCardStyles.card}>
             <View style={eventCardStyles.cardHeader}>
