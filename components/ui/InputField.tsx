@@ -9,7 +9,7 @@ interface InputFieldProps {
     style?: ViewStyle;
 }
 
-const InputField: React.FC<InputFieldProps> = ({placeholder, value, onChangeText, keyboardType, style}) => {
+const InputField = ({placeholder, value, onChangeText, keyboardType, style}: InputFieldProps) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
