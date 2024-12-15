@@ -13,7 +13,7 @@ interface CustomCalendarContentProps {
     setSelectedDate: (date: string) => void;
 }
 
-const EventsContent: React.FC<CustomCalendarContentProps> = ({selectedDate, setSelectedDate}) => {
+const EventsContent = ({selectedDate, setSelectedDate}: CustomCalendarContentProps) => {
     const {resources: events, loading, error} = useCodingResources();
 
     const filteredEvents = events?.filter(event => event.metaData?.date && formatDate(event.metaData.date) === selectedDate);
