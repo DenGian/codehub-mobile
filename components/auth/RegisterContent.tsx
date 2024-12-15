@@ -21,7 +21,7 @@ interface RegisterContentProps {
     onPressVerify: () => void;
 }
 
-const RegisterContent: React.FC<RegisterContentProps> = (
+const RegisterContent = (
     {
         emailAddress,
         setEmailAddress,
@@ -35,7 +35,7 @@ const RegisterContent: React.FC<RegisterContentProps> = (
         loading,
         onSignUpPress,
         onPressVerify
-    }) => {
+    }: RegisterContentProps) => {
     return (
         <View style={registerStyles.container}>
             <HeaderBack visible={!pendingVerification}/>
