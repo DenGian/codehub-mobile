@@ -22,7 +22,7 @@ interface AddEventsFormFieldsProps {
     setLong: (text: string) => void;
 }
 
-const AddEventsFormFields: React.FC<AddEventsFormFieldsProps> = (
+const AddEventsFormFields = (
     {
         description,
         setDescription,
@@ -40,7 +40,7 @@ const AddEventsFormFields: React.FC<AddEventsFormFieldsProps> = (
         setLat,
         long,
         setLong,
-    }) => {
+    }: AddEventsFormFieldsProps) => {
     return (
         <View style={addEventsStyles.card}>
             <Text style={addEventsStyles.section}>Required Information</Text>
