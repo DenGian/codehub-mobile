@@ -1,7 +1,7 @@
 import React from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
-import addEventsStyles from '@/styles/routes/tabs/addEventsStyles';
+import addEventsStyles from '@/styles/routes/tabs/addEvents/addEventsStyles';
 import useAddEventsForm from '@/hooks/route/tabs/addEvents/useAddEventsForm';
 import AddEventsFormFields from "@/components/route/tabs/addEvents/AddEventsFormFields";
 
