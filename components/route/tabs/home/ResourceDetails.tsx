@@ -8,7 +8,7 @@ interface ResourceDetailsProps {
     levels: string[];
 }
 
-const ResourceDetails: React.FC<ResourceDetailsProps> = ({types, topics, levels}) => {
+const ResourceDetails = ({types, topics, levels}: ResourceDetailsProps) => {
     return (
         <>
             <View style={resourceDetailsStyles.details}>
