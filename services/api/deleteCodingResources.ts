@@ -1,6 +1,6 @@
 import {apiClient} from "@/services/api/client";
 
-export const deleteCodingResource = async (id: number): Promise<void> => {
+const deleteCodingResource = async (id: number): Promise<void> => {
     if (!id || id <= 0) {
         throw new Error("Invalid resource ID.");
     }
@@ -16,3 +16,5 @@ export const deleteCodingResource = async (id: number): Promise<void> => {
         console.log("Delete request completed");
     }
 };
+
+export {deleteCodingResource};
