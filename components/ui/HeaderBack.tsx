@@ -5,7 +5,7 @@ interface HeaderBackProps {
     visible: boolean;
 }
 
-const HeaderBack: React.FC<HeaderBackProps> = ({visible}) => {
+const HeaderBack = ({visible}: HeaderBackProps) => {
     return <Stack.Screen options={{headerBackVisible: visible}}/>;
 };
 
