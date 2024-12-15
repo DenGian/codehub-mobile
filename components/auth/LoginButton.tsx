@@ -8,7 +8,7 @@ interface LoginButtonProps {
     text: string;
 }
 
-const LoginButton: React.FC<LoginButtonProps> = ({href, text}) => {
+const LoginButton = ({href, text}: LoginButtonProps) => {
     return (
         <Link href={href} asChild>
             <Pressable style={loginStyles.button}>
