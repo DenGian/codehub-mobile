@@ -2,7 +2,7 @@ import {apiClient} from "./client";
 import {CodingResource} from "./types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const fetchCodingResources = async (): Promise<CodingResource[]> => {
+const fetchCodingResources = async (): Promise<CodingResource[]> => {
     try {
         const apiResources = await apiClient<CodingResource[]>("/codingResources");
 
@@ -20,3 +20,5 @@ export const fetchCodingResources = async (): Promise<CodingResource[]> => {
         console.log("Request completed");
     }
 };
+
+export {fetchCodingResources};
