@@ -11,7 +11,14 @@ interface LoginFormProps {
     onSignInPress: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({emailAddress, setEmailAddress, password, setPassword, onSignInPress}) => {
+const LoginForm = (
+    {
+        emailAddress,
+        setEmailAddress,
+        password,
+        setPassword,
+        onSignInPress
+    }: LoginFormProps) => {
     return (
         <View>
             <LoginInput
