@@ -9,7 +9,7 @@ interface UserInputFieldsProps {
     setLastName: (text: string) => void;
 }
 
-const UserInputFields: React.FC<UserInputFieldsProps> = ({firstName, setFirstName, lastName, setLastName}) => {
+const UserInputFields = ({firstName, setFirstName, lastName, setLastName}: UserInputFieldsProps) => {
     return (
         <View>
             <InputField
