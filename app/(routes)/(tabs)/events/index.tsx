@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
-import EventsContent from "@/components/route/tabs/events/EventsContent";
+import React from 'react';
+import {View} from "react-native";
+import EventsScreen from '@/screens/route/tabs/events/EventsPage';
 
-const CustomCalendarScreen = () => {
-    const [selectedDate, setSelectedDate] = useState<string>('');
-
+const EventsPage = () => {
     return (
-        <EventsContent selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
+        <View style={{flex: 1}}>
+            <EventsScreen/>
+        </View>
     );
 };
 
-export default CustomCalendarScreen;
+export default EventsPage;
