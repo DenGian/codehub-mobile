@@ -7,7 +7,7 @@ interface ProfilePictureContextProps {
 
 const ProfilePictureContext = createContext<ProfilePictureContextProps | undefined>(undefined);
 
-export const ProfilePictureProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+const ProfilePictureProvider = ({children}: { children: ReactNode }) => {
     const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
     return (
@@ -17,10 +17,12 @@ export const ProfilePictureProvider: React.FC<{ children: ReactNode }> = ({child
     );
 };
 
-export const useProfilePicture = (): ProfilePictureContextProps => {
+const useProfilePicture = (): ProfilePictureContextProps => {
     const context = useContext(ProfilePictureContext);
     if (!context) {
         throw new Error('useProfilePicture must be used within a ProfilePictureProvider');
     }
     return context;
 };
+
+export {ProfilePictureProvider, useProfilePicture};
