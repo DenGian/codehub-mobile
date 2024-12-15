@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import InputField from '@/components/ui/InputField';
-import addEventsStyles from '@/styles/routes/tabs/addEventsStyles';
+import addEventsStyles from '@/styles/routes/tabs/addEvents/addEventsStyles';
 
 interface AddEventsFormFieldsProps {
     description: string;
