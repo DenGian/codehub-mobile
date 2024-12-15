@@ -2,7 +2,7 @@ import {useEffect, useState, useCallback} from 'react';
 import {fetchCodingResources} from "@/services/api/codingResources";
 import {CodingResource} from "@/services/api/types";
 
-export const useCodingResources = () => {
+const useCodingResources = () => {
     const [resources, setResources] = useState<CodingResource[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -34,3 +34,5 @@ export const useCodingResources = () => {
         reFetch: getResources
     };
 };
+
+export {useCodingResources};
