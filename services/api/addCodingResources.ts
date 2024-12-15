@@ -1,7 +1,7 @@
 import {CodingResource} from "@/services/api/types";
 import {apiClient} from "@/services/api/client";
 
-export const addCodingResources = async (codingResource: CodingResource): Promise<CodingResource> => {
+const addCodingResources = async (codingResource: CodingResource): Promise<CodingResource> => {
     if (!codingResource) {
         throw new Error("Invalid coding resource data.");
     }
@@ -19,3 +19,5 @@ export const addCodingResources = async (codingResource: CodingResource): Promis
         console.log("Post Request completed");
     }
 };
+
+export {addCodingResources};
