@@ -2,18 +2,11 @@ import React, {useState} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 import {useCodingResources} from '@/hooks/api/useCodingResources';
-import {formatDate} from '@/utils/formatDate';
 import LoadingOrError from '@/components/ui/LoadingOrError';
 import calendarStyles from '@/styles/routes/tabs/events/calendarStyles';
 import EventCard from "@/components/route/tabs/events/EventCard";
-
-interface MarkedDates {
-    [date: string]: {
-        marked?: boolean;
-        selected?: boolean;
-        selectedColor?: string;
-    };
-}
+import {markDates} from '@/utils/markDates';
+import {formatDate} from '@/utils/formatDate';
 
 const CustomCalendarScreen = () => {
     const [selectedDate, setSelectedDate] = useState<string>('');
@@ -21,21 +14,7 @@ const CustomCalendarScreen = () => {
 
     const filteredEvents = events?.filter(event => event.metaData?.date && formatDate(event.metaData.date) === selectedDate);
 
-    const markedDates: MarkedDates = {};
-    events?.forEach(event => {
-        if (event.metaData?.date) {
-            const formattedDate = formatDate(event.metaData.date);
-            markedDates[formattedDate] = {marked: true};
-        }
-    });
-
-    if (selectedDate) {
-        markedDates[selectedDate] = {
-            selected: true,
-            marked: !!filteredEvents?.length,
-            selectedColor: '#89CFF0',
-        };
-    }
+    const markedDates = markDates(events || undefined, selectedDate);
 
     return (
         <View style={calendarStyles.container}>
