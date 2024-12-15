@@ -9,7 +9,7 @@ interface VerificationFormProps {
     onPressVerify: () => void;
 }
 
-const VerificationForm: React.FC<VerificationFormProps> = ({code, setCode, onPressVerify}) => {
+const VerificationForm = ({code, setCode, onPressVerify}: VerificationFormProps) => {
     return (
         <View>
             <LoginInput
