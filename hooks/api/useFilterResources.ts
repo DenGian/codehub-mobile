@@ -3,7 +3,7 @@ import {useCodingResources} from '@/hooks/api/useCodingResources';
 import {CodingResource} from '@/services/api/types';
 import {useFavorites} from '@/hooks/storage/useFavorites';
 
-export const useFilterResources = () => {
+const useFilterResources = () => {
     const {resources, loading, error, reFetch} = useCodingResources();
     const {favorites} = useFavorites();
     const [search, setSearch] = useState<string>('');
@@ -52,3 +52,5 @@ export const useFilterResources = () => {
         handleRefresh,
     };
 };
+
+export {useFilterResources};
