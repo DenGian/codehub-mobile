@@ -13,8 +13,16 @@ interface RegisterFormProps {
     onSignUpPress: () => void;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = (
-    {emailAddress, setEmailAddress, username, setUsername, password, setPassword, onSignUpPress}) => {
+const RegisterForm = (
+    {
+        emailAddress,
+        setEmailAddress,
+        username,
+        setUsername,
+        password,
+        setPassword,
+        onSignUpPress
+    }: RegisterFormProps) => {
     return (
         <View>
             <LoginInput
