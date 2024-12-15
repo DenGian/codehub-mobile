@@ -7,7 +7,7 @@ interface GreetingTextProps {
     lastName: string;
 }
 
-const GreetingText: React.FC<GreetingTextProps> = ({firstName, lastName}) => {
+const GreetingText = ({firstName, lastName}: GreetingTextProps) => {
     const name = [firstName, lastName].filter(Boolean).join(' ');
     return (
         <Text style={greetingTextStyles.greetingText}>
