@@ -15,8 +15,15 @@ interface ProfileContentProps {
     onSaveUser: () => void;
 }
 
-const ProfileContent: React.FC<ProfileContentProps> = (
-    {firstName, setFirstName, lastName, setLastName, loading, onSaveUser}) => {
+const ProfileContent = (
+    {
+        firstName,
+        setFirstName,
+        lastName,
+        setLastName,
+        loading,
+        onSaveUser
+    }: ProfileContentProps) => {
     return (
         <View style={profileStyles.container}>
             <ProfilePicture/>
