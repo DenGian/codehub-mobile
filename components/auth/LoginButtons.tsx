@@ -7,6 +7,7 @@ const LoginButtons: React.FC = () => {
         <View>
             <LoginButton href="/reset" text="Forgot password?"/>
             <LoginButton href="/register" text="Create Account"/>
+            <LoginButton href="/TOS" text="Terms Of Service"/>
         </View>
     );
 };
