@@ -12,8 +12,14 @@ interface FilteredListProps {
     handleRefresh: () => void;
 }
 
-const FilteredList: React.FC<FilteredListProps> = (
-    {visibleItems, setVisibleItems, filteredResources, refreshing, handleRefresh}) => {
+const FilteredList = (
+    {
+        visibleItems,
+        setVisibleItems,
+        filteredResources,
+        refreshing,
+        handleRefresh
+    }: FilteredListProps) => {
     return (
         <FlatList
             data={visibleItems}
