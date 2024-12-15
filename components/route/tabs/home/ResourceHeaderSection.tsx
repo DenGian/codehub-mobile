@@ -9,7 +9,7 @@ interface ResourceHeaderSectionProps {
     resource: CodingResource;
 }
 
-const ResourceHeaderSection: React.FC<ResourceHeaderSectionProps> = ({resource}) => {
+const ResourceHeaderSection = ({resource}: ResourceHeaderSectionProps) => {
     const {favorites, toggleFavorite} = useFavorites();
     const isFavorite = favorites.includes(resource.id);
 
