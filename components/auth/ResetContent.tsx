@@ -16,7 +16,7 @@ interface ResetContentProps {
     loading: boolean;
 }
 
-const ResetContent: React.FC<ResetContentProps> = (
+const ResetContent = (
     {
         emailAddress,
         setEmailAddress,
@@ -28,7 +28,7 @@ const ResetContent: React.FC<ResetContentProps> = (
         onReset,
         successfulCreation,
         loading,
-    }) => {
+    }: ResetContentProps) => {
     return (
         <View>
             {!successfulCreation ? (
