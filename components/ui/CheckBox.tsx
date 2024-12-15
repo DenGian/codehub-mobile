@@ -8,7 +8,7 @@ interface CheckBoxProps {
     onChange: (value: boolean) => void;
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({label, value, onChange}) => {
+const CheckBox = ({label, value, onChange}: CheckBoxProps) => {
     return (
         <View style={checkBoxStyles.container}>
             <Text style={checkBoxStyles.label}>{label}</Text>
