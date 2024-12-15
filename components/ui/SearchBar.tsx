@@ -8,7 +8,7 @@ interface SearchBarProps {
     style?: ViewStyle;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({value, onChange, style}) => {
+const SearchBar = ({value, onChange, style}: SearchBarProps) => {
     return (
         <View style={[searchBarStyles.container, style]}>
             <TextInput
