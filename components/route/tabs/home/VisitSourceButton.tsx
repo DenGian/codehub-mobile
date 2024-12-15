@@ -7,7 +7,7 @@ interface VisitSourceButtonProps {
     url: string;
 }
 
-const VisitSourceButton: React.FC<VisitSourceButtonProps> = ({url}) => {
+const VisitSourceButton = ({url}: VisitSourceButtonProps) => {
     return (
         <TouchableOpacity
             style={visitSourceButtonStyles.button}
