@@ -13,7 +13,7 @@ interface ResourceMapProps {
     };
 }
 
-const ResourceMap: React.FC<ResourceMapProps> = ({date, location}) => {
+const ResourceMap = ({date, location}: ResourceMapProps) => {
     const formattedDate = formatDate(date);
 
     return (
