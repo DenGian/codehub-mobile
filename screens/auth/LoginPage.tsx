@@ -4,7 +4,7 @@ import loginStyles from '@/styles/auth/loginStyles';
 import useLoginForm from '@/hooks/auth/useLoginForm';
 import LoginContent from '@/components/auth/LoginContent';
 
-const login = () => {
+const LoginScreen = () => {
     const {
         emailAddress,
         setEmailAddress,
@@ -28,4 +28,4 @@ const login = () => {
     );
 };
 
-export default login;
+export default LoginScreen;
