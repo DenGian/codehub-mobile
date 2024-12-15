@@ -10,7 +10,7 @@ interface ResetFormProps {
     loading: boolean;
 }
 
-const ResetForm: React.FC<ResetFormProps> = ({emailAddress, setEmailAddress, onRequestReset, loading}) => {
+const ResetForm = ({emailAddress, setEmailAddress, onRequestReset, loading}: ResetFormProps) => {
     return (
         <View>
             <LoginInput
