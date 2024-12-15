@@ -9,7 +9,7 @@ interface PrimaryButtonProps {
     loading?: boolean;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({onPress, title, color, loading = false}) => {
+const PrimaryButton = ({onPress, title, color, loading = false}: PrimaryButtonProps) => {
     return (
         <View style={primaryButtonStyles.buttonContainer}>
             {loading ? (
