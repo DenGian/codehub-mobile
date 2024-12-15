@@ -7,7 +7,7 @@ interface ResourceMapSectionProps {
     metaData: MetaData;
 }
 
-const ResourceMapSection: React.FC<ResourceMapSectionProps> = ({metaData}) => {
+const ResourceMapSection = ({metaData}: ResourceMapSectionProps) => {
     return (
         <View>
             <ResourceMap
