@@ -1,50 +1,133 @@
-# Welcome to your Expo app 👋
+# CodeHub Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+CodeHub is a React Native mobile application built with Expo and TypeScript as part of the Associate Degree in Computer Programming at AP Hogeschool Antwerpen. It helps authenticated users discover, filter, save, view, and submit programming resources and events.
 
-## Get started
+## Core features
 
-1. Install dependencies
+- Email/password registration, verification, sign-in, sign-out, and password recovery through Clerk.
+- Auth-aware routing with protected tabs and public authentication screens.
+- Programming-resource feed with text search, favorites filtering, pull-to-refresh, and incremental loading.
+- Device-local favorites persisted with AsyncStorage.
+- Resource detail pages with topics, levels, source links, and event metadata.
+- Calendar view that groups resources with event dates.
+- Native map markers for resources that include coordinates.
+- Resource and event submission with client-side form validation.
+- Profile name updates through Clerk and profile-image selection from the camera or photo library.
+- Clerk session-token caching through Expo SecureStore.
 
-   ```bash
-   npm install
-   ```
+## Technical highlights
 
-2. Start the app
+- Expo Router provides file-based routes, nested authentication/tabs groups, and a modal detail route.
+- Custom hooks isolate authentication workflows, API state, filtering, pagination, favorites, and form handling.
+- A typed API client centralizes the configured base URL, bearer token, JSON headers, and response validation.
+- Reusable presentational components keep screens focused on orchestration.
+- TypeScript strict mode is enabled, with the `@/` alias for project-root imports.
 
-   ```bash
-    npx expo start
-   ```
+## Architecture
 
-In the output, you'll find options to open the app in a
+```text
+Expo Router routes
+  -> Screen containers
+    -> Presentational components
+      -> Feature hooks and ProfilePictureContext
+        -> API services / AsyncStorage / Clerk hooks
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+RootNavigator
+  -> ClerkProvider
+    -> Expo SecureStore token cache
+    -> Authentication redirect hook
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The route files delegate to screen containers. Screens compose UI components and feature hooks; hooks own state and workflows, while services handle network requests. Clerk provides authentication and remote profile data, AsyncStorage persists favorites, and SecureStore caches Clerk session tokens.
 
-## Learn more
+## Screenshots / Demo
 
-To learn more about developing your project with Expo, look at the following resources:
+Add four current screenshots to `docs/screenshots/` using the filenames below. Replace these placeholders before publishing the portfolio project.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 1. Login / Onboarding
 
-## Join the community
+![Login and onboarding placeholder](docs/screenshots/login-onboarding.png)
 
-Join our community of developers creating universal apps.
+### 2. Home Screen
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+![Home screen placeholder](docs/screenshots/home.png)
+
+### 3. Resource Details and Map
+
+![Resource details and map placeholder](docs/screenshots/resource-details-map.png)
+
+### 4. Events Calendar
+
+![Events calendar placeholder](docs/screenshots/events-calendar.png)
+
+## Local setup
+
+### Prerequisites
+
+- Node.js 20 or newer
+- npm
+- Expo-compatible Android or iOS development environment, or Expo Go where supported
+- A Clerk application with email/password authentication enabled
+- A compatible REST API for coding resources
+
+### Installation
+
+1. Clone the repository and enter it:
+
+   ```bash
+   git clone git@github.com:DenGian/codehub-mobile.git
+   cd codehub-mobile
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm ci
+   ```
+
+3. Create the local environment file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Set all values in `.env`:
+
+   ```dotenv
+   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   EXPO_PUBLIC_API_URL=https://api.example.com
+   EXPO_PUBLIC_API_TOKEN=your_api_token
+   ```
+
+   The API base URL must support `GET /codingResources` and `POST /codingResources`. Resource records must match the interface in `services/api/types.ts`.
+
+5. Start Expo:
+
+   ```bash
+   npm start
+   ```
+
+Use `npm run android` or `npm run ios` to target a specific mobile platform.
+
+## Quality checks
+
+```bash
+npm run typecheck
+npm run lint
+```
+
+Automated tests are not currently included. The former test files were empty placeholders and were removed rather than represented as meaningful coverage.
+
+## Known limitations
+
+- The application depends on separately managed Clerk and REST API services; it does not include a backend.
+- Profile-picture changes are held in application state for the current session and are not uploaded or persisted.
+- Favorites are local to one device and are not synchronized with the authenticated account.
+- Event creation depends on the configured API accepting write requests and the supplied bearer token having permission.
+- Browser builds are not supported because the resource map uses the native `react-native-maps` implementation.
+- The project remains on Expo SDK 52 and Clerk Core 2; migrating to Expo SDK 53 or newer is required before adopting the current `@clerk/expo` package.
+- Automated test coverage has not yet been implemented.
+
+## License
+
+This project is available under the [MIT License](LICENSE).
