@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {useUser} from '@clerk/clerk-expo';
+import {Alert} from 'react-native';
 
 const useUpdateUser = () => {
     const {user} = useUser();
@@ -14,8 +15,8 @@ const useUpdateUser = () => {
                 firstName: firstName!,
                 lastName: lastName!,
             });
-        } catch (error) {
-            console.log(error);
+        } catch {
+            Alert.alert('Update failed', 'Your profile could not be updated. Please try again.');
         } finally {
             setLoading(false);
         }
