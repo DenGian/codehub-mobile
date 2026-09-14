@@ -17,7 +17,7 @@ const useAuthRedirect = () => {
         } else if (!isSignedIn && !inAuthGroup) {
             router.replace('/(auth)/login');
         }
-    }, [isLoaded, isSignedIn, segments]);
+    }, [isLoaded, isSignedIn, router, segments]);
 };
 
 export default useAuthRedirect;
