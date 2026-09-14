@@ -2,61 +2,42 @@ import React from 'react';
 import {Text, ScrollView} from 'react-native';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import tosStyles from '@/styles/auth/tosStyles';
+import {useRouter} from 'expo-router';
 
 const TosContent: React.FC = () => {
+    const router = useRouter();
+
     return (
         <ScrollView contentContainerStyle={tosStyles.container}>
-            <Text style={tosStyles.header}>📜 Terms of Service for Code-Hub</Text>
+            <Text style={tosStyles.header}>CodeHub Terms of Use</Text>
 
-            <Text style={tosStyles.sectionTitle}>1. Acceptance of the Ridiculous</Text>
+            <Text style={tosStyles.sectionTitle}>1. Purpose</Text>
             <Text style={tosStyles.text}>
-                By using Code-Hub, you acknowledge that you have read, laughed at, and probably ignored these terms.
-                Your continued use implies your agreement to everything here, including the jokes.
+                CodeHub is an educational portfolio application for discovering and managing programming resources and
+                events.
             </Text>
 
-            <Text style={tosStyles.sectionTitle}>2. Usage of the App</Text>
+            <Text style={tosStyles.sectionTitle}>2. Accounts and data</Text>
             <Text style={tosStyles.text}>
-                Code-Hub is intended for:
-                {'\n'}• Developers, wannabe developers, and developers' pets.
-                {'\n'}• Copy-pasting code like a true programmer.
-                {'\n'}• Complaining about bugs that are clearly your fault.
+                Authentication is provided by Clerk. CodeHub stores favorites on your device and sends resource data to
+                the API configured by the person running this project.
             </Text>
 
-            <Text style={tosStyles.sectionTitle}>3. Liability Disclaimer</Text>
+            <Text style={tosStyles.sectionTitle}>3. Acceptable use</Text>
             <Text style={tosStyles.text}>
-                If Code-Hub:
-                {'\n'}• Explodes your laptop: not our fault.
-                {'\n'}• Deletes your files: also not our fault.
-                {'\n'}• Steals your cat: actually, that one might be on us.
+                Do not submit unlawful, harmful, or misleading content. Only add resources that you are authorized to
+                share.
             </Text>
 
-            <Text style={tosStyles.sectionTitle}>4. Privacy Policy</Text>
+            <Text style={tosStyles.sectionTitle}>4. Availability</Text>
             <Text style={tosStyles.text}>
-                We promise not to sell your data... unless someone offers us a really good deal. Just kidding. Probably.
-            </Text>
-
-            <Text style={tosStyles.sectionTitle}>5. The Golden Rule</Text>
-            <Text style={tosStyles.text}>
-                Be nice. Seriously, don't be a jerk. Code-Hub is a judgment-free zone (except for your variable names).
-            </Text>
-
-            <Text style={tosStyles.sectionTitle}>6. Termination Clause</Text>
-            <Text style={tosStyles.text}>
-                We reserve the right to terminate your access if you:
-                {'\n'}• Write spaghetti code.
-                {'\n'}• Claim JavaScript is "Java."
-                {'\n'}• Use Comic Sans in your IDE.
-            </Text>
-
-            <Text style={tosStyles.sectionTitle}>7. Updates to These Terms</Text>
-            <Text style={tosStyles.text}>
-                These terms may change whenever we feel like it. No, we won't tell you.
-                It's your job to keep up.
+                This software is provided as-is without a guarantee of availability, data retention, or fitness for a
+                particular purpose.
             </Text>
 
             <PrimaryButton
-                title="I Accept These Totally Reasonable Terms"
-                onPress={() => alert('Welcome to Code-Hub!')}
+                title="Back to sign in"
+                onPress={() => router.back()}
                 color="#6c47ff"
             />
         </ScrollView>
