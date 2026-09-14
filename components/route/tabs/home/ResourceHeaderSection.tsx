@@ -1,4 +1,3 @@
-// components/ui/ResourceHeaderSection.tsx
 import React from 'react';
 import {View} from 'react-native';
 import ResourceHeader from "@/components/route/tabs/home/ResourceHeader";
