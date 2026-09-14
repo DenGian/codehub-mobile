@@ -32,7 +32,6 @@ const usePasswordReset = () => {
                 code,
                 password,
             });
-            console.log(result);
             alert('Password reset successfully');
             await setActive!({session: result.createdSessionId});
         } catch (err: any) {
