@@ -15,8 +15,6 @@ const useFilterResources = () => {
         setRefreshing(true);
         try {
             await reFetch();
-        } catch (err) {
-            console.error('Refresh failed', err);
         } finally {
             setRefreshing(false);
         }
