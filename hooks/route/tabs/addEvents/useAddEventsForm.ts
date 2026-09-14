@@ -47,7 +47,7 @@ const useAddEventsForm = () => {
             setDate('');
             setLat('');
             setLong('');
-        } catch (error) {
+        } catch {
             Alert.alert('Error', 'Failed to add resource');
         } finally {
             setLoading(false);
