@@ -18,7 +18,6 @@ const useLoginForm = () => {
                 password
             });
 
-            // This indicates the user is signed in
             await setActive({session: completeSignIn.createdSessionId});
         } catch (err: any) {
             alert(err.errors[0].message);
