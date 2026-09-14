@@ -11,11 +11,9 @@ const useCodingResources = () => {
         try {
             setLoading(true);
             const data = await fetchCodingResources();
-            console.log('Fetched coding resources:', data);
             setResources(data);
             setError(null);
         } catch (err: any) {
-            console.error('Error fetching coding resources:', err.message || 'Failed to fetch data');
             setError(err.message || 'Failed to fetch data');
         } finally {
             setLoading(false);
@@ -23,8 +21,7 @@ const useCodingResources = () => {
     }, []);
 
     useEffect(() => {
-        getResources().then(() => {
-        });
+        void getResources();
     }, [getResources]);
 
     return {
