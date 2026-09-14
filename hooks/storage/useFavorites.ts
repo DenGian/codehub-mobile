@@ -11,13 +11,12 @@ const useFavorites = () => {
                 if (storedFavorites) {
                     setFavorites(JSON.parse(storedFavorites));
                 }
-            } catch (error) {
-                console.error('Failed to load favorites from AsyncStorage:', error);
+            } catch {
+                setFavorites([]);
             }
         };
 
-        loadFavorites().then(() => {
-        });
+        void loadFavorites();
     }, []);
 
     const toggleFavorite = async (id: number) => {
@@ -30,8 +29,8 @@ const useFavorites = () => {
             }
             setFavorites(updatedFavorites);
             await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-        } catch (error) {
-            console.error('Failed to update favorites in AsyncStorage:', error);
+        } catch {
+            setFavorites(favorites);
         }
     };
 
