@@ -40,26 +40,6 @@ RootNavigator
 
 The route files delegate to screen containers. Screens compose UI components and feature hooks; hooks own state and workflows, while services handle network requests. Clerk provides authentication and remote profile data, AsyncStorage persists favorites, and SecureStore caches Clerk session tokens.
 
-## Screenshots / Demo
-
-Add four current screenshots to `docs/screenshots/` using the filenames below. Replace these placeholders before publishing the portfolio project.
-
-### 1. Login / Onboarding
-
-![Login and onboarding placeholder](docs/screenshots/login-onboarding.png)
-
-### 2. Home Screen
-
-![Home screen placeholder](docs/screenshots/home.png)
-
-### 3. Resource Details and Map
-
-![Resource details and map placeholder](docs/screenshots/resource-details-map.png)
-
-### 4. Events Calendar
-
-![Events calendar placeholder](docs/screenshots/events-calendar.png)
-
 ## Local setup
 
 ### Prerequisites
