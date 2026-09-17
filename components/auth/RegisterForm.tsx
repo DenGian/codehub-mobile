@@ -46,6 +46,7 @@ const RegisterForm = (
                 onChangeText={setPassword}
                 secureTextEntry
             />
+            <View nativeID="clerk-captcha"/>
             <PrimaryButton onPress={onSignUpPress} title="Sign up" color={'#007FFF'}/>
         </View>
     );

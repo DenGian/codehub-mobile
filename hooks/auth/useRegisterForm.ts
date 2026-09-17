@@ -1,8 +1,9 @@
 import {useState} from 'react';
-import {useSignUp} from '@clerk/clerk-expo';
+import {useSignUp} from '@clerk/expo';
+import getClerkErrorMessage from '@/utils/getClerkErrorMessage';
 
 const useRegisterForm = () => {
-    const {isLoaded, signUp, setActive} = useSignUp();
+    const {signUp} = useSignUp();
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -11,39 +12,56 @@ const useRegisterForm = () => {
     const [loading, setLoading] = useState(false);
 
     const onSignUpPress = async () => {
-        if (!isLoaded) {
+        if (!signUp) {
             return;
         }
         setLoading(true);
 
         try {
-            await signUp.create({
+            const {error} = await signUp.password({
                 emailAddress,
                 password,
                 username,
             });
 
-            await signUp.prepareEmailAddressVerification({strategy: 'email_code'});
+            if (error) {
+                alert(getClerkErrorMessage(error));
+                return;
+            }
+
+            const {error: verificationError} = await signUp.verifications.sendEmailCode();
+            if (verificationError) {
+                alert(getClerkErrorMessage(verificationError));
+                return;
+            }
 
             setPendingVerification(true);
-        } catch (err: any) {
-            alert(err.errors[0].message);
+        } catch (error: unknown) {
+            alert(getClerkErrorMessage(error));
         } finally {
             setLoading(false);
         }
     };
 
     const onPressVerify = async () => {
-        if (!isLoaded) {
+        if (!signUp) {
             return;
         }
         setLoading(true);
 
         try {
-            const completeSignUp = await signUp.attemptEmailAddressVerification({code});
-            await setActive({session: completeSignUp.createdSessionId});
-        } catch (err: any) {
-            alert(err.errors[0].message);
+            const {error} = await signUp.verifications.verifyEmailCode({code});
+            if (error) {
+                alert(getClerkErrorMessage(error));
+                return;
+            }
+
+            const {error: finalizeError} = await signUp.finalize();
+            if (finalizeError) {
+                alert(getClerkErrorMessage(finalizeError));
+            }
+        } catch (error: unknown) {
+            alert(getClerkErrorMessage(error));
         } finally {
             setLoading(false);
         }

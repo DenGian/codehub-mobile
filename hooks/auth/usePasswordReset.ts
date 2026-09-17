@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import {useSignIn} from '@clerk/clerk-expo';
+import {useSignIn} from '@clerk/expo';
+import getClerkErrorMessage from '@/utils/getClerkErrorMessage';
 
 const usePasswordReset = () => {
     const [emailAddress, setEmailAddress] = useState('');
@@ -7,35 +8,66 @@ const usePasswordReset = () => {
     const [code, setCode] = useState('');
     const [successfulCreation, setSuccessfulCreation] = useState(false);
     const [loading, setLoading] = useState(false);
-    const {signIn, setActive} = useSignIn();
+    const {signIn} = useSignIn();
 
     const onRequestReset = async () => {
+        if (!signIn) {
+            return;
+        }
+
         setLoading(true);
         try {
-            await signIn!.create({
-                strategy: 'reset_password_email_code',
+            const {error} = await signIn.create({
                 identifier: emailAddress,
             });
+
+            if (error) {
+                alert(getClerkErrorMessage(error));
+                return;
+            }
+
+            const {error: sendError} = await signIn.resetPasswordEmailCode.sendCode();
+            if (sendError) {
+                alert(getClerkErrorMessage(sendError));
+                return;
+            }
+
             setSuccessfulCreation(true);
-        } catch (err: any) {
-            alert(err.errors[0].message);
+        } catch (error: unknown) {
+            alert(getClerkErrorMessage(error));
         } finally {
             setLoading(false);
         }
     };
 
     const onReset = async () => {
+        if (!signIn) {
+            return;
+        }
+
         setLoading(true);
         try {
-            const result = await signIn!.attemptFirstFactor({
-                strategy: 'reset_password_email_code',
-                code,
-                password,
-            });
+            const {error} = await signIn.resetPasswordEmailCode.verifyCode({code});
+            if (error) {
+                alert(getClerkErrorMessage(error));
+                return;
+            }
+
+            const {error: passwordError} = await signIn.resetPasswordEmailCode.submitPassword({password});
+            if (passwordError) {
+                alert(getClerkErrorMessage(passwordError));
+                return;
+            }
+
+            const {error: finalizeError} = await signIn.finalize();
+            if (finalizeError) {
+                alert(getClerkErrorMessage(finalizeError));
+                return;
+            }
+
             alert('Password reset successfully');
-            await setActive!({session: result.createdSessionId});
-        } catch (err: any) {
-            alert(err.errors[0].message);
+        } catch (error: unknown) {
+            alert(getClerkErrorMessage(error));
         } finally {
             setLoading(false);
         }

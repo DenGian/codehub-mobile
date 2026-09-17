@@ -1,26 +1,40 @@
-import {useSignIn} from '@clerk/clerk-expo';
+import {useSignIn} from '@clerk/expo';
 import {useState} from 'react';
+import getClerkErrorMessage from '@/utils/getClerkErrorMessage';
 
 const useLoginForm = () => {
-    const {signIn, setActive, isLoaded} = useSignIn();
+    const {signIn} = useSignIn();
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     const onSignInPress = async () => {
-        if (!isLoaded) {
+        if (!signIn) {
             return;
         }
         setLoading(true);
         try {
-            const completeSignIn = await signIn.create({
-                identifier: emailAddress,
+            const {error} = await signIn.password({
+                emailAddress,
                 password
             });
 
-            await setActive({session: completeSignIn.createdSessionId});
-        } catch (err: any) {
-            alert(err.errors[0].message);
+            if (error) {
+                alert(getClerkErrorMessage(error));
+                return;
+            }
+
+            if (signIn.status !== 'complete') {
+                alert('Additional verification is required to finish signing in.');
+                return;
+            }
+
+            const {error: finalizeError} = await signIn.finalize();
+            if (finalizeError) {
+                alert(getClerkErrorMessage(finalizeError));
+            }
+        } catch (error: unknown) {
+            alert(getClerkErrorMessage(error));
         } finally {
             setLoading(false);
         }

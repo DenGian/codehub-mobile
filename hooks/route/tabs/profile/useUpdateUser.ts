@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useUser} from '@clerk/clerk-expo';
+import {useUser} from '@clerk/expo';
 import {Alert} from 'react-native';
 
 const useUpdateUser = () => {

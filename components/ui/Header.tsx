@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
-import {useUser} from '@clerk/clerk-expo';
+import {useUser} from '@clerk/expo';
 import {useProfilePicture} from '@/context/ProfilePictureContext';
 import customHeaderStyles from '@/styles/ui/customHeaderStyles';
 

@@ -1,17 +1,30 @@
 import React from 'react';
-import {ClerkProvider} from '@clerk/clerk-expo';
-import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
-import useTokenCache from '@/hooks/auth/useTokenCache';
+import {ClerkProvider, useAuth} from '@clerk/expo';
+import {tokenCache} from '@clerk/expo/token-cache';
 import getClerkPublishableKey from '@/utils/getClerkPublishableKey';
-import {Slot} from 'expo-router';
+import {Stack} from 'expo-router';
 
 const InitialLayout = () => {
-    useAuthRedirect();
-    return <Slot/>;
+    const {isLoaded, isSignedIn} = useAuth();
+
+    if (!isLoaded) {
+        return null;
+    }
+
+    return (
+        <Stack screenOptions={{headerShown: false}}>
+            <Stack.Screen name="index"/>
+            <Stack.Protected guard={!isSignedIn}>
+                <Stack.Screen name="(auth)"/>
+            </Stack.Protected>
+            <Stack.Protected guard={Boolean(isSignedIn)}>
+                <Stack.Screen name="(routes)"/>
+            </Stack.Protected>
+        </Stack>
+    );
 };
 
 const RootLayoutNav = () => {
-    const tokenCache = useTokenCache();
     const CLERK_PUBLISHABLE_KEY = getClerkPublishableKey();
 
     return (

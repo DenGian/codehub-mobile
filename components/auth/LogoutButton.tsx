@@ -1,14 +1,13 @@
 import React from 'react';
 import {Pressable} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
-import {useAuth} from '@clerk/clerk-expo';
+import {useClerk} from '@clerk/expo';
 
 const LogoutButton = () => {
-    const {signOut} = useAuth();
+    const {signOut} = useClerk();
 
-    const doLogout = () => {
-        signOut().then(() => {
-        });
+    const doLogout = async () => {
+        await signOut();
     };
 
     return (

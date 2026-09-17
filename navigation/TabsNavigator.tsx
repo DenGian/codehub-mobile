@@ -1,13 +1,10 @@
 import React from 'react';
 import {Tabs} from 'expo-router';
 import {Ionicons} from '@expo/vector-icons';
-import {useAuth} from '@clerk/clerk-expo';
 import LogoutButton from '@/components/auth/LogoutButton';
 import CustomHeader from '@/components/ui/Header';
 
 const TabsPage = () => {
-    const {isSignedIn} = useAuth();
-
     return (
         <Tabs
             screenOptions={{
@@ -27,7 +24,6 @@ const TabsPage = () => {
                     ),
                     tabBarLabel: 'Home'
                 }}
-                redirect={!isSignedIn}
             />
             <Tabs.Screen
                 name="events/index"
@@ -38,7 +34,6 @@ const TabsPage = () => {
                     ),
                     tabBarLabel: 'Events'
                 }}
-                redirect={!isSignedIn}
             />
             <Tabs.Screen
                 name="addEvents/index"
@@ -49,7 +44,6 @@ const TabsPage = () => {
                     ),
                     tabBarLabel: 'Add Event'
                 }}
-                redirect={!isSignedIn}
             />
             <Tabs.Screen
                 name="profile/index"
@@ -66,7 +60,6 @@ const TabsPage = () => {
                         </>
                     )
                 }}
-                redirect={!isSignedIn}
             />
         </Tabs>
     );
